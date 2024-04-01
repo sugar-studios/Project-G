@@ -1113,6 +1113,7 @@ MonoBehaviour:
   biestro13: {fileID: 563940649}
   adminOffice: {fileID: 2102274907}
   UIManager: {fileID: 629176043}
+  GameUI: {fileID: 629176038}
 --- !u!4 &1696576244
 Transform:
   m_ObjectHideFlags: 0

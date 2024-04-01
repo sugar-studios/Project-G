@@ -7,13 +7,6 @@ public class GameUIManager : MonoBehaviour
 {
     public TMP_Text tmpText; // Assign your TMP_Text component in the inspector
 
-    /*
-    private void Start()
-    {
-        TypeText(tmpText, "Hello World", 5f);
-    }
-    */
-
     public void TypeText(TMP_Text textBox, string textToType, float displayTime)
     {
         StartCoroutine(TypeTextRoutine(textBox, textToType, displayTime));

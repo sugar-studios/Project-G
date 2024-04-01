@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -6,6 +7,8 @@ public class GameManager : MonoBehaviour
     public GameObject biestro13;
     public GameObject adminOffice;
     public GameUIManager UIManager;
+
+    public GameObject GameUI;
 
     private GameObject mealReceiveTrigger;
     private GameObject mealDeliverTrigger;
@@ -20,6 +23,8 @@ public class GameManager : MonoBehaviour
         mealDeliverTrigger = adminOffice.transform.GetChild(1).gameObject;
 
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+
+        UIManager.TypeText(GameUI.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>(), "Administrion ordered their lunch! Go!", 2.5f);
     }
 
     public void HandleTriggerEnter(string triggerName)
