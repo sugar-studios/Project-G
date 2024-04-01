@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             shouldJump = false;
         }
 
-        //ApplyGravity();
+        ApplyGravity();
     }
 
     void Move()
