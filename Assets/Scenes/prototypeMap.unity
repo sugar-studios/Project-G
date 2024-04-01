@@ -459,6 +459,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8a84ae92601d1d84cae262a63dd7c12b, type: 2}
+    - target: {fileID: 882129737928793925, guid: 67a571414403c9b4d8d940e06ef8e247, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8532bf2ef44fabd4fbb169bb00789a95, type: 2}
+    - target: {fileID: 882129737928793925, guid: 67a571414403c9b4d8d940e06ef8e247, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8fa89bd979c194a43a14e7a2caa11175, type: 2}
     - target: {fileID: 919132149155446097, guid: 67a571414403c9b4d8d940e06ef8e247, type: 3}
       propertyPath: m_Name
       value: mapOutline
