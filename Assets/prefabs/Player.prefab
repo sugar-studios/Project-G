@@ -451,15 +451,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerGraphics: {fileID: 2202675537469494296}
   camera: {fileID: 3847259838933462017}
-  speed: 5
+  crouchSpeed: 5
+  speed: 10
+  sprintSpeed: 20
   turnSmoothTime: 0.1
   jumpHeight: 2
-  gravityValue: -9.81
+  gravityValue: -19.62
   groundMask:
     serializedVersion: 2
     m_Bits: 64
   groundDistance: 0.4
   groundCheck: {fileID: 536364721881955455}
+  crouchScale: 0.5
+  scaleTransitionSpeed: 5
 --- !u!143 &3669239721250750521
 CharacterController:
   m_ObjectHideFlags: 0

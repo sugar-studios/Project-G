@@ -5,7 +5,12 @@ using TMPro;
 
 public class GameUIManager : MonoBehaviour
 {
-    public TMP_Text tmpText; // Assign your TMP_Text component in the inspector
+    public TMP_Text scoreText;
+
+    public void UpdateScore(int score)
+    { 
+        scoreText.text = score.ToString();
+    }
 
     public void TypeText(TMP_Text textBox, string textToType, float displayTime)
     {
