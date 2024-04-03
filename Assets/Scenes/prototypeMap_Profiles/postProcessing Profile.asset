@@ -70,7 +70,7 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 1
+    overrideState: 0
     value: 0.3
   contrast:
     overrideState: 1
@@ -1329,13 +1329,13 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 69.287544, y: 95}
+    value: {x: 64.110565, y: 99}
   minLuminance:
     overrideState: 1
-    value: -1.34
+    value: -8.27
   maxLuminance:
     overrideState: 1
-    value: 6.49
+    value: 9
   keyValue:
     overrideState: 1
     value: 1
