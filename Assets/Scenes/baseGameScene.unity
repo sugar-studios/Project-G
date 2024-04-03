@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 563940652}
   - component: {fileID: 563940651}
   - component: {fileID: 563940650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bestro 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1177,7 @@ GameObject:
   - component: {fileID: 713931915}
   - component: {fileID: 713931914}
   - component: {fileID: 713931917}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2160,7 +2160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1375404598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2797,7 +2797,7 @@ GameObject:
   - component: {fileID: 1700695590}
   - component: {fileID: 1700695589}
   - component: {fileID: 1700695588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3350,7 +3350,7 @@ GameObject:
   - component: {fileID: 1871772108}
   - component: {fileID: 1871772107}
   - component: {fileID: 1871772110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3628,7 +3628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2102274908}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Admin office
   m_TagString: Untagged
   m_Icon: {fileID: 0}
