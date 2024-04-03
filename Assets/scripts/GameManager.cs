@@ -20,7 +20,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GameObject player = Instantiate(playerPrefab, biestro13.transform.GetChild(0).transform.position, Quaternion.identity);
+        try
+        {
+            GameObject player = Instantiate(playerPrefab, biestro13.transform.GetChild(0).transform.position, Quaternion.identity);
+        }
+        catch { }
 
         mealReceiveTrigger = biestro13.transform.GetChild(1).gameObject;
         mealDeliverTrigger = adminOffice.transform.GetChild(1).gameObject;
