@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         catch { }
 
         mealReceiveTrigger = biestro13.transform.GetChild(1).gameObject;
-        mealDeliverTrigger = adminOffice.transform.GetChild(1).gameObject;
+        mealDeliverTrigger = adminOffice.transform.GetChild(0).gameObject;
 
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
 
