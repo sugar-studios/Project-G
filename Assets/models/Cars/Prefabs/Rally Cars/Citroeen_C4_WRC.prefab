@@ -405,6 +405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8771153249775851283}
+  - component: {fileID: 2046912779150954650}
   m_Layer: 0
   m_Name: Citroeen_C4_WRC
   m_TagString: Untagged
@@ -429,6 +430,35 @@ Transform:
   - {fileID: 8276582308493193714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &2046912779150954650
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3740975248759405317}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6360332517486684058}
+    - renderer: {fileID: 5008500873811365789}
+    - renderer: {fileID: 3803816590495313462}
+    - renderer: {fileID: 7885074933259710171}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 1913663862770541991}
+  m_Enabled: 1
 --- !u!1 &3768958407521560860
 GameObject:
   m_ObjectHideFlags: 0

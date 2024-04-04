@@ -306,6 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3570467722899339742}
+  - component: {fileID: 6287823242099221505}
   m_Layer: 0
   m_Name: Fiatt_131
   m_TagString: Untagged
@@ -330,6 +331,35 @@ Transform:
   - {fileID: 287100652901213859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &6287823242099221505
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6096161435309845058}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7282005092233912105}
+    - renderer: {fileID: 5013593816670981890}
+    - renderer: {fileID: 7439534703603979325}
+    - renderer: {fileID: 7135131188542580866}
+  - screenRelativeHeight: 0.3
+    fadeTransitionWidth: 0
+    renderers: []
+  - screenRelativeHeight: 0.1
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 7654432738368263365}
+  m_Enabled: 1
 --- !u!1 &6372374355204457269
 GameObject:
   m_ObjectHideFlags: 0
