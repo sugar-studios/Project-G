@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform target; // The object to follow
-    public float distance = 5.0f; // Distance from the target object
-    public float yOffset = 1.0f; // Vertical offset from the target object
-    public LayerMask collisionMask; // Collision mask to prevent clipping through objects
+    public Transform target; 
+    public float distance = 5.0f;
+    public float yOffset = 1.0f; 
+    public float xSens = 5.0f; 
+    public float ySens = 1.0f;
+    public LayerMask collisionMask;
 
     private Vector3 currentRotation;
     private float yaw;
@@ -15,37 +17,35 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private void Start()
     {
-        // Initialize the rotation of the camera
+
         currentRotation = transform.eulerAngles;
         yaw = currentRotation.y;
         pitch = currentRotation.x;
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
     private void LateUpdate()
     {
-        // Handle the orbiting effect around the target
-        yaw += Input.GetAxis("Mouse X");
-        pitch -= Input.GetAxis("Mouse Y");
-        pitch = Mathf.Clamp(pitch, -5, 85); // Clamp the pitch to prevent flipping
 
-        // Calculate the new rotation and apply it to the camera
+        yaw += Input.GetAxis("Mouse X") * xSens;
+        pitch -= Input.GetAxis("Mouse Y") * ySens;
+        pitch = Mathf.Clamp(pitch, -5, 85); 
+
+
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
         Vector3 negDistance = new Vector3(0.0f, yOffset, -distance);
         Vector3 position = rotation * negDistance + target.position;
 
-        // Adjust the camera position using raycasting to prevent clipping through objects
+
         RaycastHit hit;
         if (Physics.Raycast(target.position, (position - target.position).normalized, out hit, distance, collisionMask))
         {
-            position = hit.point - (target.position - position).normalized * 0.5f; // Offset slightly to prevent clipping into the collider
+            position = hit.point - (target.position - position).normalized * 0.5f; 
         }
 
-        // Set the calculated position and rotation
         transform.rotation = rotation;
         transform.position = position;
 
-        // Reset camera distance and position
         if (Input.GetKeyDown(KeyCode.R))
         {
             yaw = target.eulerAngles.y;
