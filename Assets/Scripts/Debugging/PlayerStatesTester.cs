@@ -6,16 +6,11 @@ namespace ProjectG.Debugging
 {
     public class PlayerStatesTester : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public bool makingNoise;
+        public float noiseRadius;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public bool alertedSecurity;
+
+
     }
 }
