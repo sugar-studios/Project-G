@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ namespace ProjectG.Enemies.Handler
 {
     public class SpawnHandler : MonoBehaviour
     {
+        [Header ("Spawn parameters")]
         public int totalEnemies;
         public bool alerted;
         public int initialEnemyCount = 5;
@@ -50,7 +52,7 @@ namespace ProjectG.Enemies.Handler
         public void SpawnEnemy(Vector3 spawnPoint)
         {
             Instantiate(guardPrefab, spawnPoint, Quaternion.identity, transform);
-            totalEnemies++;
+            totalEnemies = transform.childCount;
         }
 
 #if UNITY_EDITOR
