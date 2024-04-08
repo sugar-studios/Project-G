@@ -78,7 +78,6 @@ GameObject:
   - component: {fileID: 2879658919092231729}
   - component: {fileID: 760412286351972394}
   - component: {fileID: 102345102579935966}
-  - component: {fileID: 9050974395706821011}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -151,27 +150,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9050974395706821011
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2472835142226872521}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3515996584039379409
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +544,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.17163888
+  - screenRelativeHeight: 0.28767055
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5267673503095892585}
@@ -574,15 +552,11 @@ LODGroup:
     - renderer: {fileID: 3598021237518778}
     - renderer: {fileID: 6868127478861991382}
     - renderer: {fileID: 7641421597004344126}
-  - screenRelativeHeight: 0.13757269
+  - screenRelativeHeight: 0.08557898
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 2965877109977122014}
-    - renderer: {fileID: 3598021237518778}
-    - renderer: {fileID: 6868127478861991382}
-    - renderer: {fileID: 7641421597004344126}
     - renderer: {fileID: 5267673503095892585}
-  - screenRelativeHeight: 0.10325852
+  - screenRelativeHeight: 0.050081786
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 102345102579935966}
