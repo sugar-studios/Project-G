@@ -4,8 +4,6 @@ using UnityEngine;
 public class BirdAttack : MonoBehaviour
 {
     public bool interrupt = false;
-    public float initialY = 4f;
-    public float finalY = 1f;
     private int score = 20;
     public MeterGauge meterGaugeScript;
 
@@ -16,7 +14,6 @@ public class BirdAttack : MonoBehaviour
 
     public void Activate()
     {
-        transform.position = new Vector3(transform.position.x, initialY, transform.position.z);
         score = 20;
         Debug.Log("Initial Score: " + score);
         interrupt = false;
@@ -34,13 +31,9 @@ public class BirdAttack : MonoBehaviour
             {
                 yield break;
             }
-            float t = (Time.time - startTime) / (endTime - startTime);
-            float newY = Mathf.Lerp(initialY, finalY, t);
-            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
             yield return null;
         }
 
-        transform.position = new Vector3(transform.position.x, finalY, transform.position.z);
 
         if (!interrupt)
         {
