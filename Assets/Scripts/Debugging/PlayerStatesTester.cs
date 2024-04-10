@@ -7,10 +7,14 @@ namespace ProjectG.Debugging
     public class PlayerStatesTester : MonoBehaviour
     {
         public bool makingNoise;
-        public float noiseRadius;
+        public static float PlayerNoiseRadius;
 
         public bool alertedSecurity;
 
-
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, PlayerNoiseRadius);
+        }
     }
+   
 }
