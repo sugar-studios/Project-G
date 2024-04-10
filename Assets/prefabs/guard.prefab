@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7101389311663141347}
   - component: {fileID: 8198411236097484671}
   - component: {fileID: 6973762983029916441}
+  - component: {fileID: 4999884794129627018}
   m_Layer: 0
   m_Name: guard
   m_TagString: Untagged
@@ -178,4 +179,22 @@ MonoBehaviour:
   seePlayer: 0
   inView: 0
   inHearing: 0
+  overrideHeardingOff: 0
+  overrideSeePlayer: 0
+  inRange: 0
+  enemyPlayerRange: {x: 3, y: 20}
   player: {fileID: 0}
+--- !u!114 &4999884794129627018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009427248159093725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748c434d6fb90a149aa5f1f27c765562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roamingDistance: 30
+  roamingRange: 30

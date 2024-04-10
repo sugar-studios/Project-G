@@ -13,8 +13,13 @@ namespace ProjectG.Enemies.Enemy
         public bool inHearing;
         public bool overrideHeardingOff;
         public bool overrideSeePlayer;
+        public bool inRange;
+
+        [Tooltip("x value is the closer value, y is the futher value")]
+        public Vector2 enemyPlayerRange;
         private float angle;
         private Vector3 enemyToPlayer;
+
 
         public Transform player;
 
@@ -25,6 +30,15 @@ namespace ProjectG.Enemies.Enemy
 
         private void Update()
         {
+            if (Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y || Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x)
+            {
+                inRange = true;
+            }
+            else
+            {
+                inRange = false;
+            }
+
             enemyToPlayer = player.position - transform.position;
 
             if (overrideHeardingOff)
