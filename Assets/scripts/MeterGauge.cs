@@ -13,6 +13,8 @@ public class MeterGauge : MonoBehaviour
 
     public float fillDuration = 18f; // Customizable fill-up duration
 
+    public bool paused = false; // Variable to control pausing
+
     private void Start()
     {
         if (fillImage == null)
@@ -30,11 +32,22 @@ public class MeterGauge : MonoBehaviour
         StartCoroutine(AnimateMeterAndPulse());
     }
 
+    public void PauseTimer(bool pauseState)
+    {
+        paused = pauseState;
+    }
+
     public IEnumerator AnimateMeterAndPulse()
     {
         float startTime = Time.time;
         while (Time.time < startTime + fillDuration)
         {
+            // Check if paused, if paused, wait until unpaused
+            while (paused)
+            {
+                yield return null;
+            }
+
             // Dynamically calculate the value based on elapsed time
             value = (int)Mathf.Lerp(0, -100, (Time.time - startTime) / fillDuration);
             SetYPosition(value);

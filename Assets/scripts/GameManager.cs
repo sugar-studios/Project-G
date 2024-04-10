@@ -4,43 +4,79 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    //public GameObject playerPrefab;
+    public GameObject player;
     public GameObject biestro13;
     public GameObject adminOffice;
-    public GameUIManager UIManager;
+    public GameObject GameUI;
+    public GameObject mainSpawnPoints;
+
+    public MeterGauge birdMeter;
+
+    public bool inBiestro = false;
 
     public int score = 0;
 
-    public GameObject GameUI;
+    public GameUIManager UIManager;
 
+
+
+    private Transform BiestroSpawn;
+
+    private GameObject exitBiestroTrigger;
     private GameObject mealReceiveTrigger;
     private GameObject mealDeliverTrigger;
+
+    private TextMeshProUGUI console;
 
     private bool isReceiveTriggerActive = true;
 
     void Start()
     {
+        /*
         try
         {
             GameObject player = Instantiate(playerPrefab, biestro13.transform.GetChild(0).transform.position, Quaternion.identity);
         }
         catch { }
+        */
 
-        mealReceiveTrigger = biestro13.transform.GetChild(1).gameObject;
+        //get triggers
+        exitBiestroTrigger = biestro13.transform.GetChild(1).gameObject;
+        mealReceiveTrigger = biestro13.transform.GetChild(0).gameObject;
         mealDeliverTrigger = adminOffice.transform.GetChild(0).gameObject;
 
+        //get spawn point
+        BiestroSpawn = biestro13.transform.GetChild(2).transform;
+        player.transform.position = BiestroSpawn.transform.position;
+
+        //deactivate the deleiver trigger
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
 
-        UIManager.TypeText(GameUI.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>(), "Administrion ordered their lunch! Go!", 2.5f);
+        //Enital message
+        console = GameUI.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        UIManager.TypeText(console, "Administrion ordered their lunch! Go!", 2.5f);
 
         UIManager.UpdateScore(score);
+    }
+
+    private void Update()
+    {
+        if (inBiestro)
+        {
+            birdMeter.paused = true;
+        }
+        else
+        {
+            birdMeter.paused = false;
+        }
     }
 
     public void HandleTriggerEnter(string triggerName)
     {
         if (triggerName == mealReceiveTrigger.name && isReceiveTriggerActive)
         {
-            UIManager.TypeText(GameUI.transform.GetChild(2).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>(), "Recieved Meal", 2.5f);
+            UIManager.TypeText(console, "Recieved Meal", 2.5f);
             isReceiveTriggerActive = false;
 
             mealReceiveTrigger.GetComponent<Collider>().enabled = false;
@@ -48,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
         else if (triggerName == mealDeliverTrigger.name && !isReceiveTriggerActive)
         {
-            UIManager.TypeText(GameUI.transform.GetChild(2).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>(), "Delivered Meal", 2.5f);
+            UIManager.TypeText(console, "Delivered Meal", 2.5f);
 
             score ++;
 
@@ -58,6 +94,11 @@ public class GameManager : MonoBehaviour
 
             mealReceiveTrigger.GetComponent<Collider>().enabled = true;
             mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+        }
+        else if (triggerName == exitBiestroTrigger.name)
+        {
+            Debug.Log("Exit Biestro");
+            player.transform.position = mainSpawnPoints.transform.GetChild(Random.Range(0, mainSpawnPoints.transform.childCount)).transform.position;
         }
     }
 

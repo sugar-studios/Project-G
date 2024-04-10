@@ -48,8 +48,8 @@ public class ThirdPersonCamera : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            yaw = target.eulerAngles.y;
-            pitch = target.eulerAngles.x;
+            yaw = target.transform.GetChild(0).eulerAngles.y;
+            pitch = target.transform.GetChild(0).eulerAngles.x;
         }
     }
 }
