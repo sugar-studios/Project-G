@@ -41,9 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        GameObject[] rootObjects = currentScene.GetRootGameObjects();
-        manager = rootObjects[0].GetComponent<GameManager>();
+        manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         manager.SetMaxStamina(maxStamina, 0f);
 
         controller = GetComponent<CharacterController>();
