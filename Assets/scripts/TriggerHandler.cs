@@ -11,21 +11,26 @@ public class TriggerHandler : MonoBehaviour
         {
             GameManager.HandleTriggerEnter(gameObject.name);
         }
+        if (other.CompareTag("Player") && enableStay && this.gameObject.name == "Biestro Trigger")
+        {
+            GameManager.inBiestro = true;
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && enableStay)
+        if (other.CompareTag("Player") && enableStay && this.gameObject.name == "Biestro Trigger")
         {
-            GameManager.inBiestro = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && (this.gameObject.name == "Biestro HUB"))
+        if (other.CompareTag("Player") && (this.gameObject.name == "Biestro Trigger"))
         {
-            GameManager.inBiestro = true;
+            GameManager.inBiestro = false;
         }
+        Debug.Log(gameObject.name);
+        Debug.Log("HEY!");
     }
 }

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject biestro13;
     public GameObject adminOffice;
     public GameObject GameUI;
-    public GameObject mainSpawnPoints;
+    public Transform[] mainSpawnPoints;
 
     public MeterGauge birdMeter;
 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
 
         //deactivate the deleiver trigger
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+        exitBiestroTrigger.SetActive(false);
 
         //Enital message
         console = GameUI.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
@@ -76,14 +78,19 @@ public class GameManager : MonoBehaviour
     {
         if (triggerName == mealReceiveTrigger.name && isReceiveTriggerActive)
         {
+            UIManager.ClearAndStopTyping(console);
             UIManager.TypeText(console, "Recieved Meal", 2.5f);
             isReceiveTriggerActive = false;
 
             mealReceiveTrigger.GetComponent<Collider>().enabled = false;
             mealDeliverTrigger.GetComponent<Collider>().enabled = true;
+            mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = false;
+            mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+            exitBiestroTrigger.SetActive(true);
         }
         else if (triggerName == mealDeliverTrigger.name && !isReceiveTriggerActive)
         {
+            UIManager.ClearAndStopTyping(console);
             UIManager.TypeText(console, "Delivered Meal", 2.5f);
 
             score ++;
@@ -93,12 +100,28 @@ public class GameManager : MonoBehaviour
             isReceiveTriggerActive = true;
 
             mealReceiveTrigger.GetComponent<Collider>().enabled = true;
+            mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = true;
+            mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             mealDeliverTrigger.GetComponent<Collider>().enabled = false;
         }
-        else if (triggerName == exitBiestroTrigger.name)
+        else if (triggerName == exitBiestroTrigger.name && !isReceiveTriggerActive)
         {
             Debug.Log("Exit Biestro");
-            player.transform.position = mainSpawnPoints.transform.GetChild(Random.Range(0, mainSpawnPoints.transform.childCount)).transform.position;
+            Debug.Log("Player 1: " + player.transform.position);
+
+            Transform selectedPoint = mainSpawnPoints[Random.Range(0, mainSpawnPoints.Length)];
+            Vector3 spawnPosition = selectedPoint.position;
+
+            Debug.Log("New spawn position: " + spawnPosition);
+
+            player.SetActive(false);
+            player.transform.position = spawnPosition;
+            player.SetActive(true);
+
+            Debug.Log("Player 2: " + player.transform.position);
+
+            inBiestro = false;
+            exitBiestroTrigger.SetActive(false);
         }
     }
 
