@@ -6,7 +6,7 @@ public class MeterGauge : MonoBehaviour
 {
     [SerializeField]
     [Range(-100, 0)]
-    private int value = 0;
+    public int value = 0;
     public GameObject fillArea;
     public RawImage fillImage; // Ensure this is a RawImage component in the Unity Editor
     public BirdAttack birdAttackScript; // Assign the BirdAttack component in the Unity Editor

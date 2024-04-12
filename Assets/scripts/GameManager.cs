@@ -1,28 +1,27 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    //public GameObject playerPrefab;
     public GameObject player;
+    public GameObject map;
     public GameObject biestro13;
     public GameObject adminOffice;
     public GameObject GameUI;
     public Transform[] mainSpawnPoints;
+    public GameObject[] exitPoints;
+    public GameObject Transition;
 
     public MeterGauge birdMeter;
 
-    public bool inBiestro = false;
-
     public int score = 0;
+
+    public bool isInBiestro = true;
 
     public GameUIManager UIManager;
 
-
-
-    private Transform BiestroSpawn;
+    private Transform biestroSpawn;
 
     private GameObject exitBiestroTrigger;
     private GameObject mealReceiveTrigger;
@@ -34,105 +33,134 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        /*
-        try
-        {
-            GameObject player = Instantiate(playerPrefab, biestro13.transform.GetChild(0).transform.position, Quaternion.identity);
-        }
-        catch { }
-        */
-
-        //get triggers
         exitBiestroTrigger = biestro13.transform.GetChild(1).gameObject;
         mealReceiveTrigger = biestro13.transform.GetChild(0).gameObject;
         mealDeliverTrigger = adminOffice.transform.GetChild(0).gameObject;
 
-        //get spawn point
-        BiestroSpawn = biestro13.transform.GetChild(2).transform;
-        player.transform.position = BiestroSpawn.transform.position;
+        biestroSpawn = biestro13.transform.GetChild(2);
 
-        //deactivate the deleiver trigger
+        player.transform.position = biestroSpawn.position;
+
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
         exitBiestroTrigger.SetActive(false);
 
-        //Enital message
-        console = GameUI.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        console = GameUI.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         UIManager.TypeText(console, "Administrion ordered their lunch! Go!", 2.5f);
 
         UIManager.UpdateScore(score);
+
+        isInBiestro = true;
+        unpauseBirds();
     }
 
-    private void Update()
+    void unpauseBirds()
     {
-        if (inBiestro)
-        {
-            birdMeter.paused = true;
-        }
-        else
-        {
-            birdMeter.paused = false;
-        }
+        birdMeter.paused = isInBiestro;
+        birdMeter.value = isInBiestro ? -100 : 0;
     }
 
     public void HandleTriggerEnter(string triggerName)
     {
         if (triggerName == mealReceiveTrigger.name && isReceiveTriggerActive)
         {
-            UIManager.ClearAndStopTyping(console);
-            UIManager.TypeText(console, "Recieved Meal", 2.5f);
-            isReceiveTriggerActive = false;
-
-            mealReceiveTrigger.GetComponent<Collider>().enabled = false;
-            mealDeliverTrigger.GetComponent<Collider>().enabled = true;
-            mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = false;
-            mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-            exitBiestroTrigger.SetActive(true);
+            HandleMealReceived();
         }
         else if (triggerName == mealDeliverTrigger.name && !isReceiveTriggerActive)
         {
-            UIManager.ClearAndStopTyping(console);
-            UIManager.TypeText(console, "Delivered Meal", 2.5f);
-
-            score ++;
-
-            UIManager.UpdateScore(score);
-
-            isReceiveTriggerActive = true;
-
-            mealReceiveTrigger.GetComponent<Collider>().enabled = true;
-            mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = true;
-            mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
-            mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+            HandleMealDelivered();
         }
         else if (triggerName == exitBiestroTrigger.name && !isReceiveTriggerActive)
         {
-            Debug.Log("Exit Biestro");
-            Debug.Log("Player 1: " + player.transform.position);
+            HandleExitBiestro();
+        }
+        else if (triggerName.StartsWith("returnPoint"))
+        {
+            SendPlayerToBiestro();
+            turnOffAllExits();
+        }
+        else if (triggerName == "biestroEntrance") // Assuming this is the trigger for entering Biestro
+        {
+            ResetBirdTimer();
+        }
+    }
 
-            Transform selectedPoint = mainSpawnPoints[Random.Range(0, mainSpawnPoints.Length)];
-            Vector3 spawnPosition = selectedPoint.position;
+    void HandleMealReceived()
+    {
+        UIManager.ClearAndStopTyping(console);
+        UIManager.TypeText(console, "Recieved Meal!", 2.5f);
+        isReceiveTriggerActive = false;
 
-            Debug.Log("New spawn position: " + spawnPosition);
+        mealReceiveTrigger.GetComponent<Collider>().enabled = false;
+        mealDeliverTrigger.GetComponent<Collider>().enabled = true;
+        mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = false;
+        mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        exitBiestroTrigger.SetActive(true);
+    }
 
-            player.SetActive(false);
-            player.transform.position = spawnPosition;
-            player.SetActive(true);
+    void HandleMealDelivered()
+    {
+        UIManager.ClearAndStopTyping(console);
+        UIManager.TypeText(console, "Delivered Meal! Go to exit point!", 2.5f);
 
-            Debug.Log("Player 2: " + player.transform.position);
+        turnOffAllExits();
+        exitPoints[Random.Range(0, exitPoints.Length)].SetActive(true);
 
-            inBiestro = false;
-            exitBiestroTrigger.SetActive(false);
+        score++;
+        UIManager.UpdateScore(score);
+
+        isReceiveTriggerActive = true;
+
+        mealReceiveTrigger.GetComponent<Collider>().enabled = true;
+        mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = true;
+        mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+        mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+    }
+
+    void HandleExitBiestro()
+    {
+        map.SetActive(true);
+
+        Transform selectedPoint = mainSpawnPoints[Random.Range(0, mainSpawnPoints.Length)];
+        Vector3 spawnPosition = selectedPoint.position;
+
+        player.SetActive(false);
+        player.transform.position = spawnPosition;
+        player.SetActive(true);
+
+        exitBiestroTrigger.SetActive(false);
+        isInBiestro = false;
+        unpauseBirds();
+        Transition.GetComponent<Animation>().Play();
+    }
+
+    public void SendPlayerToBiestro()
+    {
+        player.SetActive(false);
+        player.transform.position = biestroSpawn.position;
+        player.transform.rotation = Quaternion.identity;
+        player.SetActive(true);
+        isInBiestro = true;
+        unpauseBirds();
+        Transition.GetComponent<Animation>().Play();
+    }
+
+    void turnOffAllExits()
+    {
+        foreach (var exitPoint in exitPoints)
+        {
+            exitPoint.SetActive(false);
         }
     }
 
     public void UpdateStamina(float num)
     {
-        Slider slider = GameUI.transform.GetChild(3).transform.GetChild(0).GetComponent<Slider>();
-        Image sliderFill = slider.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+        Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
         slider.value = num;
 
+        Image sliderFill = slider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+
         Color green = new Color(15f / 255, 108f / 255, 2f / 255);
-        Color yellow = Color.yellow; 
+        Color yellow = Color.yellow;
         Color red = new Color(193f / 255, 22f / 255, 0f / 255);
 
         float minValue = slider.minValue;
@@ -153,7 +181,13 @@ public class GameManager : MonoBehaviour
 
     public void SetMaxStamina(float num, float num2)
     {
-        GameUI.transform.GetChild(3).transform.GetChild(0).GetComponent<Slider>().maxValue = num;
-        GameUI.transform.GetChild(3).transform.GetChild(0).GetComponent<Slider>().minValue = num2;
+        Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
+        slider.maxValue = num;
+        slider.minValue = num2;
+    }
+
+    void ResetBirdTimer()
+    {
+        birdMeter.value = -100;
     }
 }

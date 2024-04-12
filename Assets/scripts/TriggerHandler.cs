@@ -13,24 +13,7 @@ public class TriggerHandler : MonoBehaviour
         }
         if (other.CompareTag("Player") && enableStay && this.gameObject.name == "Biestro Trigger")
         {
-            GameManager.inBiestro = true;
+            GameManager.isInBiestro = true;
         }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && enableStay && this.gameObject.name == "Biestro Trigger")
-        {
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && (this.gameObject.name == "Biestro Trigger"))
-        {
-            GameManager.inBiestro = false;
-        }
-        Debug.Log(gameObject.name);
-        Debug.Log("HEY!");
     }
 }

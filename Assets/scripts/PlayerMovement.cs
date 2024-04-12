@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isCrouching && currentStamina >= maxStamina * 0.15f)
         {
             shouldJump = true;
-            currentStamina -= maxStamina * 0.15f;
+            currentStamina -= maxStamina * 0.05f;
             timeSinceLastStaminaDepletion = 0f;
         }
 
