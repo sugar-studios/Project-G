@@ -5,11 +5,6 @@ public class TriggerHandler : MonoBehaviour
     public GameManager GameManager;
 
     [SerializeField] bool enableStay = false;
-
-    private void Start()
-    {
-        GameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
