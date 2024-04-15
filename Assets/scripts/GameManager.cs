@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
         biestroSpawn = biestro13.transform.GetChild(2);
 
         player.transform.position = biestroSpawn.position;
+
+        Debug.Log(biestroSpawn.position);
 
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
         exitBiestroTrigger.SetActive(false);
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
 
         mealReceiveTrigger.GetComponent<Collider>().enabled = false;
         mealDeliverTrigger.GetComponent<Collider>().enabled = true;
+        mealDeliverTrigger.GetComponent<Renderer>().enabled = false;
         mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = false;
         mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         exitBiestroTrigger.SetActive(true);
@@ -114,34 +118,38 @@ public class GameManager : MonoBehaviour
         mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = true;
         mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
         mealDeliverTrigger.GetComponent<Collider>().enabled = false;
+        mealDeliverTrigger.GetComponent<Renderer>().enabled = false;
     }
 
     void HandleExitBiestro()
     {
-        map.SetActive(true);
+        Transition.SetActive(true);
 
         Transform selectedPoint = mainSpawnPoints[Random.Range(0, mainSpawnPoints.Length)];
         Vector3 spawnPosition = selectedPoint.position;
 
         player.SetActive(false);
         player.transform.position = spawnPosition;
-        player.SetActive(true);
 
         exitBiestroTrigger.SetActive(false);
         isInBiestro = false;
+
+        WaitForVariableToBeTrue(Transition.GetComponent<DeActivateTrans>().sceneLoad);
+        player.SetActive(true);
+
         unpauseBirds();
-        Transition.GetComponent<Animation>().Play();
     }
 
     public void SendPlayerToBiestro()
     {
+        Transition.SetActive(true);
         player.SetActive(false);
         player.transform.position = biestroSpawn.position;
         player.transform.rotation = Quaternion.identity;
-        player.SetActive(true);
         isInBiestro = true;
         unpauseBirds();
-        Transition.GetComponent<Animation>().Play();
+        WaitForVariableToBeTrue(Transition.GetComponent<DeActivateTrans>().sceneLoad);
+        player.SetActive(true);
     }
 
     void turnOffAllExits()
@@ -150,6 +158,15 @@ public class GameManager : MonoBehaviour
         {
             exitPoint.SetActive(false);
         }
+    }
+
+    IEnumerator WaitForVariableToBeTrue(bool waitForThisVariable)
+    {
+        while (!waitForThisVariable)
+        {
+            yield return null;
+        }
+
     }
 
     public void UpdateStamina(float num)
