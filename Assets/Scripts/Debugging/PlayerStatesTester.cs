@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace ProjectG.Debugging
 {
-    public class PlayerStatesTester : MonoBehaviour
+    public static class PlayerStatesTester
     {
-        public bool makingNoise;
-        public static float PlayerNoiseRadius;
+        public static bool makingNoise;
+        public static float PlayerNoiseRadius = 30;
 
-        public bool alertedSecurity;
+        public static bool alertedSecurity;
 
-        private void OnDrawGizmos()
+        /*private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, PlayerNoiseRadius);
-        }
+        }*/
     }
    
 }

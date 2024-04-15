@@ -30,7 +30,7 @@ namespace ProjectG.Enemies.Enemy
 
         private void Update()
         {
-            if (Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y || Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x)
+            if (Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y && Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x)
             {
                 inRange = true;
             }
@@ -43,7 +43,7 @@ namespace ProjectG.Enemies.Enemy
 
             if (overrideHeardingOff)
             {
-                inHearing = false;
+                //inHearing = false;
             }
             else if (Vector3.Distance(transform.position, player.position) < PlayerStatesTester.PlayerNoiseRadius)
             {
