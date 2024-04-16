@@ -5,12 +5,13 @@ using TMPro;
 
 public class GameUIManager : MonoBehaviour
 {
+    public TMP_Text totalScoreText;
     public TMP_Text scoreText;
     private Coroutine typingCoroutine;
 
     public void UpdateScore(int score)
     {
-        scoreText.text = score.ToString();
+        totalScoreText.text = score.ToString();
     }
 
     public void TypeText(TMP_Text textBox, string textToType, float displayTime)
