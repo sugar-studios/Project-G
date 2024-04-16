@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
         mealReceiveTrigger.GetComponent<Collider>().enabled = false;
         mealDeliverTrigger.GetComponent<Collider>().enabled = true;
-        mealDeliverTrigger.GetComponent<Renderer>().enabled = false;
+        mealDeliverTrigger.GetComponent<MeshRenderer>().enabled = true;
         mealReceiveTrigger.GetComponent<MeshRenderer>().enabled = false;
         mealReceiveTrigger.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         exitBiestroTrigger.SetActive(true);

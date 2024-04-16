@@ -6,7 +6,8 @@ public class PlayerGraphics : MonoBehaviour
 {
     public PlayerMovement pm;
 
-    public Animator anim;
+    public Animator modelAnim;
+    public Animator itemAnim;
 
     private float sp;
 
@@ -20,12 +21,13 @@ public class PlayerGraphics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Speed", pm.playerVelo);
+        modelAnim.SetFloat("Speed", pm.playerVelo);
+        itemAnim.SetFloat("Speed", pm.playerVelo);
     }
 
     public void PlayerHit()
     {
-        anim.SetTrigger("Hit");
+        modelAnim.SetTrigger("Hit");
     }
 
 }
