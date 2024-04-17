@@ -5,21 +5,37 @@ using TMPro;
 
 public class GameUIManager : MonoBehaviour
 {
+    public TMP_Text totalScoreText;
     public TMP_Text scoreText;
+    private Coroutine typingCoroutine;
 
     public void UpdateScore(int score)
-    { 
-        scoreText.text = score.ToString();
+    {
+        totalScoreText.text = score.ToString();
     }
 
     public void TypeText(TMP_Text textBox, string textToType, float displayTime)
     {
-        StartCoroutine(TypeTextRoutine(textBox, textToType, displayTime));
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+
+        typingCoroutine = StartCoroutine(TypeTextRoutine(textBox, textToType, displayTime));
+    }
+
+    public void ClearAndStopTyping(TMP_Text textBox)
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+        }
+        textBox.text = "";
     }
 
     private IEnumerator TypeTextRoutine(TMP_Text textBox, string textToType, float displayTime)
     {
-        textBox.text = ""; // Clear the text field before starting
+        textBox.text = ""; 
         float typeSpeed = 0.05f;
 
         for (int i = 0; i <= textToType.Length; i++)
@@ -33,4 +49,3 @@ public class GameUIManager : MonoBehaviour
         textBox.text = "";
     }
 }
-

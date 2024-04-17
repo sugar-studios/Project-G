@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public float crouchScale = 0.5f;
     public float scaleTransitionSpeed = 5f;
 
+    public float playerVelo;
+
     [SerializeField] private float currentStamina;
     public float maxStamina = 100f;
     private float staminaDepletionRate = 10f;
@@ -66,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isCrouching && currentStamina >= maxStamina * 0.15f)
         {
             shouldJump = true;
-            currentStamina -= maxStamina * 0.15f;
+            currentStamina -= maxStamina * 0.05f;
             timeSinceLastStaminaDepletion = 0f;
         }
 
@@ -162,6 +164,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
         }
+        playerVelo = Mathf.Sqrt(Mathf.Pow(horizontal, 2) + Mathf.Pow(vertical, 2)) * moveSpeed;
+
     }
 
     void ApplyGravity()
