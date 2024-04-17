@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: New Material 1
   m_Shader: {fileID: 4800000, guid: 76a3501b6f96f874abe72562d44fcceb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - FINALPASS
+  - POI_CLEARCOAT
   - POI_MATCAP0
   - VIGNETTE_MASKED
   - _LIGHTINGMODE_MULTILAYER_MATH
@@ -67,7 +67,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 9ade18932b6c5f9408ef7e0d04c86369, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _ClearCoatFallback:
@@ -311,7 +311,7 @@ Material:
         m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _Matcap:
-        m_Texture: {fileID: 2800000, guid: 612476841a11fb94ca01633cc01282df, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3e5c458f086955147b31f6fc5f0e118a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Matcap0NormalMap:
@@ -818,7 +818,7 @@ Material:
     - _CenterOutDissolveMode: 1
     - _CenterOutDissolveNormals: 0
     - _CenterOutDissolvePower: 1
-    - _ClearCoatBRDF: 0
+    - _ClearCoatBRDF: 1
     - _ClearCoatForceFallback: 0
     - _ClearCoatGSAAEnabled: 1
     - _ClearCoatGSAAThreshold: 0.1
@@ -835,20 +835,20 @@ Material:
     - _ClearCoatMaskInvert: 0
     - _ClearCoatNormalSelect: 0
     - _ClearCoatReflectionMaskInvert: 0
-    - _ClearCoatReflectionStrength: 1
+    - _ClearCoatReflectionStrength: 0.593
     - _ClearCoatReflectionStrengthGlobalMask: 0
     - _ClearCoatReflectionStrengthGlobalMaskBlendType: 2
     - _ClearCoatReflectionTintThemeIndex: 0
-    - _ClearCoatSmoothness: 1
+    - _ClearCoatSmoothness: 0.638
     - _ClearCoatSmoothnessGlobalMask: 0
     - _ClearCoatSmoothnessGlobalMaskBlendType: 2
     - _ClearCoatSmoothnessMapInvert: 0
     - _ClearCoatSpecularMaskInvert: 0
-    - _ClearCoatSpecularStrength: 1
+    - _ClearCoatSpecularStrength: 0.734
     - _ClearCoatSpecularStrengthGlobalMask: 0
     - _ClearCoatSpecularStrengthGlobalMaskBlendType: 2
     - _ClearCoatSpecularTintThemeIndex: 0
-    - _ClearCoatStrength: 1
+    - _ClearCoatStrength: 0.713
     - _ClearCoatTPSDepthMaskEnabled: 0
     - _ClearCoatTPSMaskStrength: 1
     - _ClearcoatFresnel: 1
@@ -1047,7 +1047,7 @@ Material:
     - _DepthRimWidth: 0.2
     - _DepthTextureUV: 0
     - _DetailBrightness: 1.14
-    - _DetailEnabled: 1
+    - _DetailEnabled: 0
     - _DetailMaskStochastic: 0
     - _DetailMaskUV: 0
     - _DetailNormalGlobalMask: 0
@@ -1833,7 +1833,7 @@ Material:
     - _Matcap4TPSMaskStrength: 1
     - _Matcap4UVMode: 1
     - _Matcap4UVToBlend: 1
-    - _MatcapAdd: 0.171
+    - _MatcapAdd: 0.236
     - _MatcapAddToLight: 0
     - _MatcapAlphaOverride: 0
     - _MatcapBaseColorMix: 0
@@ -1841,8 +1841,8 @@ Material:
     - _MatcapColorThemeIndex: 0
     - _MatcapEmissionStrength: 0
     - _MatcapEnable: 1
-    - _MatcapHueShift: 0
-    - _MatcapHueShiftEnabled: 0
+    - _MatcapHueShift: 0.392
+    - _MatcapHueShiftEnabled: 1
     - _MatcapHueShiftSpeed: 0
     - _MatcapIntensity: 1
     - _MatcapLightMask: 0
@@ -2769,7 +2769,7 @@ Material:
     - m_start_brdf: 0
     - m_start_brdfadvanced: 0
     - m_start_brdfglobalmask: 0
-    - m_start_clearCoat: 0
+    - m_start_clearCoat: 1
     - m_start_clearcoatadvanced: 0
     - m_start_clearcoatglobalmask: 0
     - m_start_depthFX: 0
@@ -2918,7 +2918,7 @@ Material:
     - _ClearCoatSpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClippingMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _ClothMetallicSmoothnessMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+    - _Color: {r: 0.5835738, g: 0.6226415, b: 0, a: 1}
     - _CubeMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _CubeMapMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _CubeMapRotation: {r: 0, g: 0, b: 0, a: 0}
