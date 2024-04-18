@@ -8,24 +8,24 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: glass
-  m_Shader: {fileID: 4800000, guid: 76a3501b6f96f874abe72562d44fcceb, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0962f7b93c5ff444885d8aa8b539e6de, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - MOCHIE_PBR
   - POI_CLEARCOAT
   - VIGNETTE_MASKED
+  - _LIGHTCOMPLETION_ON
   - _LIGHTINGMODE_FLAT
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
   - _STOCHASTICMODE_DELIOT_HEITZ
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -60,6 +60,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BacklightColorTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseColortex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -379,6 +383,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -503,6 +511,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SurfaceClolrtex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _TPS_BakedMesh:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -548,6 +560,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VoronoiNoise:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _alpha:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -819,6 +835,7 @@ Material:
     - _CenterOutDissolveMode: 1
     - _CenterOutDissolveNormals: 0
     - _CenterOutDissolvePower: 1
+    - _ChromaticAberration: 1
     - _ClearCoatBRDF: 1
     - _ClearCoatForceFallback: 0
     - _ClearCoatGSAAEnabled: 1
@@ -859,6 +876,8 @@ Material:
     - _ClothMetallicSmoothnessMapUV: 0
     - _ClothReflectance: 0.5
     - _ClothSmoothness: 0.5
+    - _ColoeLevel: 0.453
+    - _ColorLoop: 1
     - _ColorMask: 15
     - _ColorThemeIndex: 0
     - _ContinuousDissolve: 0
@@ -1102,6 +1121,7 @@ Material:
     - _DissolveToTextureUV: 0
     - _DissolveType: 1
     - _DissolveUseVertexColors: 0
+    - _Distortion: 1.93
     - _DistortionFlowTexture1UV: 0
     - _DistortionFlowTextureUV: 0
     - _DistortionMaskChannel: 0
@@ -1593,6 +1613,7 @@ Material:
     - _GlobalThemeValue1: 0
     - _GlobalThemeValue2: 0
     - _GlobalThemeValue3: 0
+    - _Gloss: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -1647,6 +1668,7 @@ Material:
     - _Layer2Size: 0
     - _Layer2Strength: 0
     - _Length: 0
+    - _LightCompletion: 1
     - _LightDataAOGlobalMaskBlendTypeR: 2
     - _LightDataAOGlobalMaskR: 0
     - _LightDataAOStrengthA: 0
@@ -1950,6 +1972,7 @@ Material:
     - _ParallaxInternalMinDepth: 0
     - _ParallaxInternalMinFade: 1
     - _ParallaxUV: 0
+    - _PasutelColor: 0.505
     - _PathALAutoCorrelator: 0
     - _PathALAutoCorrelatorA: 0
     - _PathALAutoCorrelatorB: 0
@@ -2025,6 +2048,7 @@ Material:
     - _RedTextureUV: 0
     - _RefSpecFresnel: 1
     - _RenderingReduceClipDistance: 0
+    - _Repetition: 20
     - _RgbAlphaGlobalMaskBlendType: 2
     - _RgbAlphaGlobalMaskChannel: 0
     - _RgbAlphaMaskChannel: 3
@@ -2468,6 +2492,7 @@ Material:
     - _VoronoiScale: 5
     - _VoronoiSpace: 0
     - _VoronoiType: 1
+    - _Width: 0
     - _Wriggle: 0
     - _WriggleSpeed: 0.28
     - _ZTest: 4
@@ -2906,6 +2931,7 @@ Material:
     - _BackFaceTexturePan: {r: 0, g: 0, b: 0, a: 0}
     - _BacklightColor: {r: 0.85, g: 0.8, b: 0.7, a: 1}
     - _BacklightColorTexPan: {r: 0, g: 0, b: 0, a: 0}
+    - _BasaColor: {r: 1, g: 1, b: 1, a: 1}
     - _BlackLightMasking0Range: {r: 0.1, g: 0.5, b: 0, a: 0}
     - _BlackLightMasking1Range: {r: 0.1, g: 0.5, b: 0, a: 0}
     - _BlackLightMasking2Range: {r: 0.1, g: 0.5, b: 0, a: 0}
@@ -3170,6 +3196,7 @@ Material:
     - _SphericalDissolveCenter: {r: 0, g: 0, b: 0, a: 1}
     - _SssColorBleedAoWeights: {r: 0.4, g: 0.15, b: 0.13, a: 0}
     - _SssTransmissionAbsorption: {r: -8, g: -40, b: -64, a: 0}
+    - _SurfaceClolr: {r: 0, g: 0, b: 0, a: 1}
     - _TPS_PenetratorForward: {r: 0, g: 0, b: 1, a: 0}
     - _TPS_PenetratorRight: {r: 1, g: 0, b: 0, a: 0}
     - _TPS_PenetratorScale: {r: 1, g: 1, b: 1, a: 1}

@@ -8,10 +8,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: red
-  m_Shader: {fileID: 4800000, guid: 2c046c1ade5c6d84e891cb759942737a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 76a3501b6f96f874abe72562d44fcceb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - MOCHIE_PBR
   - POI_MATCAP0
   - VIGNETTE_MASKED
   - _LIGHTINGMODE_REALISTIC
@@ -849,7 +850,7 @@ Material:
     - _ClearCoatSpecularStrengthGlobalMask: 0
     - _ClearCoatSpecularStrengthGlobalMaskBlendType: 2
     - _ClearCoatSpecularTintThemeIndex: 0
-    - _ClearCoatStrength: 1
+    - _ClearCoatStrength: 0.231
     - _ClearCoatTPSDepthMaskEnabled: 0
     - _ClearCoatTPSMaskStrength: 1
     - _ClearcoatFresnel: 1
@@ -1872,7 +1873,7 @@ Material:
     - _MirrorColorThemeIndex: 0
     - _MirrorTextureBlendType: 0
     - _MirrorTextureUV: 0
-    - _MochieBRDF: 0
+    - _MochieBRDF: 1
     - _MochieForceFallback: 0
     - _MochieGSAAEnabled: 1
     - _MochieLitFallback: 1
@@ -1886,19 +1887,19 @@ Material:
     - _MochieMetallicMapsStochastic: 0
     - _MochieMetallicMapsUV: 0
     - _MochieMetallicMasksUV: 0
-    - _MochieMetallicMultiplier: 0
+    - _MochieMetallicMultiplier: 0.04
     - _MochieReflectionMaskInvert: 0
-    - _MochieReflectionStrength: 1
+    - _MochieReflectionStrength: 0.392
     - _MochieReflectionStrengthGlobalMask: 0
     - _MochieReflectionStrengthGlobalMaskBlendType: 2
     - _MochieReflectionTintThemeIndex: 0
     - _MochieRoughnessMapInvert: 0
-    - _MochieRoughnessMultiplier: 1
+    - _MochieRoughnessMultiplier: 0.537
     - _MochieRoughnessMultiplier2: 1
     - _MochieSmoothnessGlobalMask: 0
     - _MochieSmoothnessGlobalMaskBlendType: 2
     - _MochieSpecularMaskInvert: 0
-    - _MochieSpecularStrength: 1
+    - _MochieSpecularStrength: 0.361
     - _MochieSpecularStrength2: 1
     - _MochieSpecularStrengthGlobalMask: 0
     - _MochieSpecularStrengthGlobalMaskBlendType: 2
@@ -2675,7 +2676,7 @@ Material:
     - m_modifierCategory: 0
     - m_postprocessing: 0
     - m_renderingCategory: 0
-    - m_specialFXCategory: 0
+    - m_specialFXCategory: 1
     - m_start_ALDecalSpectrum: 0
     - m_start_ALVolumeColor: 0
     - m_start_Alpha: 0
@@ -2740,7 +2741,7 @@ Material:
     - m_start_Matcap3: 0
     - m_start_Matcap4: 0
     - m_start_PathAudioLink: 0
-    - m_start_PoiLightData: 1
+    - m_start_PoiLightData: 0
     - m_start_PoiShading: 1
     - m_start_RGBAColors: 0
     - m_start_RGBMask: 0
@@ -2770,7 +2771,7 @@ Material:
     - m_start_backlight: 0
     - m_start_bakedLighting: 0
     - m_start_blending: 0
-    - m_start_brdf: 0
+    - m_start_brdf: 1
     - m_start_brdfadvanced: 0
     - m_start_brdfglobalmask: 0
     - m_start_clearCoat: 0
@@ -2787,7 +2788,7 @@ Material:
     - m_start_flipBook: 0
     - m_start_glitter: 0
     - m_start_internalparallax: 0
-    - m_start_matcap: 1
+    - m_start_matcap: 0
     - m_start_mirrorOptions: 0
     - m_start_normalCorrect: 0
     - m_start_parallax: 0
