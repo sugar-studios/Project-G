@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _EMISSION
   - _LIGHTINGMODE_FLAT
   - _RIM2STYLE_POIYOMI
   - _RIMSTYLE_POIYOMI
@@ -20,9 +21,9 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2000
   stringTagMap:
-    RenderType: Transparent
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -601,7 +602,7 @@ Material:
     - _AddBlendOpAlpha: 0
     - _AddDstBlend: 1
     - _AddDstBlendAlpha: 1
-    - _AddSrcBlend: 5
+    - _AddSrcBlend: 1
     - _AddSrcBlendAlpha: 0
     - _Add_Antipodean_Rim2Light: 0
     - _Add_Antipodean_RimLight: 0
@@ -1108,7 +1109,7 @@ Material:
     - _DistortionStrength1AudioLinkBand: 0
     - _DistortionStrengthAudioLinkBand: 0
     - _DistortionUvToDistort: 0
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _DstBlendAlpha: 1
     - _EmissionAL0Enabled: 0
     - _EmissionAL0MultipliersBand: 0
@@ -1126,7 +1127,7 @@ Material:
     - _EmissionBaseColorAsMap1: 0
     - _EmissionBaseColorAsMap2: 0
     - _EmissionBaseColorAsMap3: 0
-    - _EmissionBlinkingEnabled: 0
+    - _EmissionBlinkingEnabled: 1
     - _EmissionBlinkingEnabled1: 0
     - _EmissionBlinkingEnabled2: 0
     - _EmissionBlinkingEnabled3: 0
@@ -1182,7 +1183,7 @@ Material:
     - _EmissionMaskInvert2: 0
     - _EmissionMaskInvert3: 0
     - _EmissionMaskUV: 0
-    - _EmissionReplace0: 0
+    - _EmissionReplace0: 1
     - _EmissionReplace1: 0
     - _EmissionReplace2: 0
     - _EmissionReplace3: 0
@@ -1198,11 +1199,11 @@ Material:
     - _EmissionScrollingVertexColor1: 0
     - _EmissionScrollingVertexColor2: 0
     - _EmissionScrollingVertexColor3: 0
-    - _EmissionStrength: 1
+    - _EmissionStrength: 0.4
     - _EmissionStrength1: 0
     - _EmissionStrength2: 0
     - _EmissionStrength3: 0
-    - _EmissiveBlink_Max: 1
+    - _EmissiveBlink_Max: 1.76
     - _EmissiveBlink_Max1: 1
     - _EmissiveBlink_Max2: 1
     - _EmissiveBlink_Max3: 1
@@ -1235,7 +1236,7 @@ Material:
     - _EnableDissolveAudioLink: 0
     - _EnableDistortion: 0
     - _EnableDistortionAudioLink: 0
-    - _EnableEmission: 0
+    - _EnableEmission: 1
     - _EnableEmission1: 0
     - _EnableEmission2: 0
     - _EnableEmission3: 0
@@ -1899,7 +1900,7 @@ Material:
     - _MochieSpecularStrengthGlobalMask: 0
     - _MochieSpecularStrengthGlobalMaskBlendType: 2
     - _MochieSpecularTintThemeIndex: 0
-    - _Mode: 2
+    - _Mode: 0
     - _ModelAngleMax: 90
     - _ModelAngleMin: 45
     - _MultilayerMathBlurMapUV: 0
@@ -2219,7 +2220,7 @@ Material:
     - _SphericalDissolveRadius: 1.5
     - _Squeeze: 0
     - _SqueezeDist: 0
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _SssBumpBlur: 0.7
     - _SssScale: 1
@@ -2468,7 +2469,7 @@ Material:
     - _Wriggle: 0
     - _WriggleSpeed: 0.28
     - _ZTest: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     - _glitterFrequencyLinearEmissive: 20
     - footer_discord: 0
     - footer_github: 0
@@ -2916,7 +2917,7 @@ Material:
     - _ClearCoatSpecularTint: {r: 1, g: 1, b: 1, a: 1}
     - _ClippingMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _ClothMetallicSmoothnessMapPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0, g: 0.2720263, b: 0.6132076, a: 0.64705884}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _CubeMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _CubeMapMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _CubeMapRotation: {r: 0, g: 0, b: 0, a: 0}
