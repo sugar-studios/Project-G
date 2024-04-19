@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MainRoadTruck
+  - Main Road
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,6 @@ TagManager:
   - Player
   - Item
   - Buildings
-  - 
-  - 
   - 
   - 
   - 
