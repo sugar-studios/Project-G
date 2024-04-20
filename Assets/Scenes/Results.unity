@@ -1845,7 +1845,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 794429214}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 815342245}
+        m_TargetAssemblyTypeName: ProjectG.Results.ResultsManager, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &794429214
 MonoBehaviour:
   m_ObjectHideFlags: 0
