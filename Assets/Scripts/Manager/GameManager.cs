@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using ProjectG.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using ProjectG.Player;
+using UnityEditor.SearchService;
 
 namespace ProjectG.Manger
 {
@@ -20,6 +20,7 @@ namespace ProjectG.Manger
         public GameObject[] exitPoints;
         public GameObject Transition;
         public GameObject gameOver;
+        public GameObject loadScreen;
         public UnityEngine.UI.Slider loadingBar;
 
 
@@ -43,6 +44,8 @@ namespace ProjectG.Manger
 
         void Start()
         {
+            UnityEngine.Cursor.visible = false;
+
             gameOver.SetActive(false);
 
             exitBiestroTrigger = biestro13.transform.GetChild(1).gameObject;
@@ -219,8 +222,6 @@ namespace ProjectG.Manger
             birdMeter.value = -100;
         }
 
-
-
         IEnumerator LoadAsync(string sceneName)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
@@ -236,11 +237,28 @@ namespace ProjectG.Manger
 
         public void GameOver()
         {
+            StartCoroutine(GameOverCoroutine());
+        }
+
+        private IEnumerator GameOverCoroutine()
+        {
             player.GetComponent<PlayerMovement>().enabled = false;
             player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
             player.GetComponent<PlayerGraphics>().enabled = false;
             gameOver.SetActive(true);
+
+            yield return new WaitForSeconds(2f); // Wait for 2 seconds
+
+            StartLoadScene(); // Call StartLoadScene after waiting
         }
+
+        public void StartLoadScene(string scene = "Results")
+        {
+            gameOver.SetActive(false);
+            loadScreen.SetActive(true);
+            StartCoroutine(LoadAsync(scene));
+        }
+
     }
 }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 namespace ProjectG
 {
@@ -29,6 +30,16 @@ namespace ProjectG
             burgerBanner.SetActive(false);
             burgerMenu.SetActive(false);
             burgerButtons.SetActive(false);
+            Cursor.visible = true;
+        }
+
+        private void FixedUpdate()
+        {
+            if (Input.GetKeyUp(KeyCode.Escape)) 
+            {
+                Scene currentScene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(currentScene.name);
+            }
         }
 
         public void LoadLevel(string scene)
