@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using ProjectG.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using ProjectG.Player;
 
 namespace ProjectG.Manger
 {
@@ -232,5 +233,14 @@ namespace ProjectG.Manger
                 yield return null;
             }
         }
+
+        public void GameOver()
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
+            player.GetComponent<PlayerGraphics>().enabled = false;
+            gameOver.SetActive(true);
+        }
     }
 }
+
