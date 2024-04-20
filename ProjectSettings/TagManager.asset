@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainRoadTruck
   - Main Road
+  - ResultsManager
   layers:
   - Default
   - TransparentFX
