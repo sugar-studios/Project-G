@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using ProjectG.UI;
 using UnityEngine.SceneManagement;
 using ProjectG.Player;
-using UnityEditor.SearchService;
 
 namespace ProjectG.Manger
 {
@@ -57,8 +56,6 @@ namespace ProjectG.Manger
             player.SetActive(false);
             player.transform.position = biestroSpawn.position;
             player.SetActive(true);
-
-            Debug.Log(biestroSpawn.position);
 
             mealDeliverTrigger.GetComponent<Collider>().enabled = false;
             exitBiestroTrigger.SetActive(false);
