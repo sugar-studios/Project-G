@@ -246,7 +246,7 @@ namespace ProjectG.Manger
             player.GetComponent<PlayerGraphics>().enabled = false;
             gameOver.SetActive(true);
 
-            yield return new WaitForSeconds(2f); // Wait for 2 seconds
+            yield return new WaitForSeconds(4f); // Wait for 2 seconds
 
             StartLoadScene(); // Call StartLoadScene after waiting
         }

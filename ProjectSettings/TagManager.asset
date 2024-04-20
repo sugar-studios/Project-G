@@ -7,6 +7,7 @@ TagManager:
   - MainRoadTruck
   - Main Road
   - ResultsManager
+  - AudioSettings
   layers:
   - Default
   - TransparentFX
