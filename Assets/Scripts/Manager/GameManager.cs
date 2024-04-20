@@ -54,7 +54,9 @@ namespace ProjectG.Manger
 
             biestroSpawn = biestro13.transform.GetChild(2);
 
+            player.SetActive(false);
             player.transform.position = biestroSpawn.position;
+            player.SetActive(true);
 
             Debug.Log(biestroSpawn.position);
 
