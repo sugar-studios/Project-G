@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ProjectG.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 namespace ProjectG.Manger
 {
@@ -16,6 +18,9 @@ namespace ProjectG.Manger
         public Transform[] mainSpawnPoints;
         public GameObject[] exitPoints;
         public GameObject Transition;
+        public GameObject gameOver;
+        public UnityEngine.UI.Slider loadingBar;
+
 
         public MeterGauge birdMeter;
 
@@ -37,6 +42,8 @@ namespace ProjectG.Manger
 
         void Start()
         {
+            gameOver.SetActive(false);
+
             exitBiestroTrigger = biestro13.transform.GetChild(1).gameObject;
             mealReceiveTrigger = biestro13.transform.GetChild(0).gameObject;
             mealDeliverTrigger = adminOffice.transform.GetChild(0).gameObject;
@@ -174,10 +181,10 @@ namespace ProjectG.Manger
 
         public void UpdateStamina(float num)
         {
-            Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
+            UnityEngine.UI.Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<UnityEngine.UI.Slider>();
             slider.value = num;
 
-            Image sliderFill = slider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+            UnityEngine.UI.Image sliderFill = slider.transform.GetChild(1).GetChild(0).GetComponent<UnityEngine.UI.Image>();
 
             Color green = new Color(15f / 255, 108f / 255, 2f / 255);
             Color yellow = Color.yellow;
@@ -201,7 +208,7 @@ namespace ProjectG.Manger
 
         public void SetMaxStamina(float num, float num2)
         {
-            Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
+            UnityEngine.UI.Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<UnityEngine.UI.Slider>();
             slider.maxValue = num;
             slider.minValue = num2;
         }
@@ -209,6 +216,21 @@ namespace ProjectG.Manger
         void ResetBirdTimer()
         {
             birdMeter.value = -100;
+        }
+
+
+
+        IEnumerator LoadAsync(string sceneName)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / .9f);
+                loadingBar.value = progress;
+
+                yield return null;
+            }
         }
     }
 }

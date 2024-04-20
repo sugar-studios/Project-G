@@ -74,6 +74,7 @@ namespace ProjectG.Manger
                 truckFire = true;
                 explo.SetActive(false);
                 explo2.SetActive(false);
+
             }
         }
     }
