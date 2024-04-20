@@ -26,20 +26,20 @@ namespace ProjectG
         // Start is called before the first frame update
         void Start()
         {
-            burgerTitle.SetActive(true);
-            burgerBanner.SetActive(false);
-            burgerMenu.SetActive(false);
-            burgerButtons.SetActive(false);
-            Cursor.visible = true;
-        }
-
-        private void FixedUpdate()
-        {
-            if (Input.GetKeyUp(KeyCode.Escape)) 
+            try
             {
-                Scene currentScene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(currentScene.name);
+                burgerTitle.SetActive(true);
+                burgerBanner.SetActive(false);
+                burgerMenu.SetActive(false);
+                burgerButtons.SetActive(false);
             }
+            catch
+            {
+                Debug.Log("ERROR: missing basically everything!");
+            }
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         }
 
         public void LoadLevel(string scene)
@@ -60,12 +60,6 @@ namespace ProjectG
 
                 yield return null;
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }
