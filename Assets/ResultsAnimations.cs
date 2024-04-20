@@ -31,5 +31,11 @@ namespace ProjectG.Results
             yield return new WaitForSeconds(time);
             obj.SetActive(true);
         }
+
+        public void PlaySound(int soundIndex)
+        {
+            rManager.GetComponent<AudioSource>().clip = rManager.sfx[soundIndex];
+            rManager.GetComponent<AudioSource>().Play();
+        }
     }
 }

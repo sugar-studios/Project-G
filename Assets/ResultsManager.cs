@@ -18,6 +18,8 @@ namespace ProjectG
         public GameObject resultsScreen;
         public GameObject loadingScreen;
 
+        public AudioClip[] sfx;
+
         public Slider progressBar;
 
         // Start is called before the first frame update
@@ -31,6 +33,8 @@ namespace ProjectG
 
         public void LoadLevel(string scene)
         { 
+            resultsScreen.SetActive(false);
+            loadingScreen.SetActive(true);
             StartCoroutine(LoadAsync(scene));
         }
 
@@ -40,7 +44,8 @@ namespace ProjectG
 
             while (!operation.isDone)
             {
-                progressBar.value = operation.progress;
+                float progress = Mathf.Clamp01(operation.progress / .9f);
+                progressBar.value = progress;
 
                 yield return null;
             }
