@@ -17,6 +17,7 @@ namespace ProjectG.Audio
     };
 
         public ResolutionSettings rS;
+        public GameObject codeText;
         private int currentIndex = 0;
 
         public bool codeActive = false;
@@ -56,6 +57,8 @@ namespace ProjectG.Audio
 
         void ActivateCheat()
         {
+            codeText.SetActive(true);
+            StartCoroutine(ExampleCoroutine());
             Debug.Log("Konami Code activated!");
             if (resIndex >= 0 && resIndex < resolutions.Length)
             {
@@ -75,6 +78,11 @@ namespace ProjectG.Audio
             }
         }
 
+        IEnumerator ExampleCoroutine()
+        {
+            yield return new WaitForSeconds(2);
+            codeText.SetActive(false);
+        }
 
     }
 
