@@ -13,8 +13,8 @@ namespace ProjectG.Enemies.Enemy
        
         public void shoot()
         {
-            particle1.gameObject.SetActive(true);
-            particle2.gameObject.SetActive(true);
+            particle1.gameObject.SetActive(false);
+            particle2.gameObject.SetActive(false);
 
             StartCoroutine(turnOffParticles());
         }
@@ -26,8 +26,8 @@ namespace ProjectG.Enemies.Enemy
             yield return new WaitForSeconds(1);
 
             //After we have waited 5 seconds print the time again.
-            particle1.gameObject.SetActive(false);
-            particle2.gameObject.SetActive(false);
+            particle1.gameObject.SetActive(true);
+            particle2.gameObject.SetActive(true);
 
         }
     }

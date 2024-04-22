@@ -10,9 +10,9 @@ namespace ProjectG.Enemies.Enemy
     {
         private PlayerDetection PlayerDetection;
         private NavMeshAgent navMeshAgent;
-        public float roamingDistance;
         public float roamingRange;
         public taserShoot taser;
+        public Animator guardAnimator;
 
         private float timeBetweenShoots;
 
@@ -21,11 +21,15 @@ namespace ProjectG.Enemies.Enemy
             navMeshAgent = GetComponent<NavMeshAgent>();
             PlayerDetection = GetComponent<PlayerDetection>();
         }
-
+        private void setAnimator()
+        {
+            guardAnimator.SetFloat("velocityY", navMeshAgent.velocity.y);
+            guardAnimator.SetFloat("velocityX", navMeshAgent.velocity.x);
+        }
         private void Update()
         {
 
-           
+            setAnimator();
             if(PlayerDetection.seePlayer && PlayerDetection.inRange)
             {
                 FaceTarget(PlayerDetection.player.position);
@@ -42,11 +46,13 @@ namespace ProjectG.Enemies.Enemy
                     navMeshAgent.SetDestination(desiredPosition);
                 }
 
-                if (timeBetweenShoots > 3)
+                if (timeBetweenShoots > 1 && navMeshAgent.remainingDistance < 0.4f)
                 {
+                    guardAnimator.SetFloat("shooting", 1);
+
                     attackPlayer();
                 }
-                
+
             }
             else if (PlayerDetection.seePlayer)
             {
@@ -55,15 +61,33 @@ namespace ProjectG.Enemies.Enemy
                 Vector3 desiredPosition = PlayerDetection.player.position + directionToPlayer.normalized * 7;
 
                 navMeshAgent.SetDestination(desiredPosition);
+                guardAnimator.SetFloat("shooting", 0);
+
             }
             else if (PlayerDetection.inHearing)
             {
+                guardAnimator.SetFloat("shooting", 0);
+
                 HeardPlayer();
             }
-
             else
             {
+                guardAnimator.SetFloat("shooting", 0);
+
                 roaming();
+            }
+
+            if (guardAnimator.GetFloat("shooting") == 1)
+            {
+                taser.particle1.gameObject.SetActive(true);
+                taser.particle2.gameObject.SetActive(true);
+
+            }
+            else
+            {
+                taser.particle1.gameObject.SetActive(false);
+                taser.particle2.gameObject.SetActive(false);
+
             }
         }
 
@@ -93,8 +117,11 @@ namespace ProjectG.Enemies.Enemy
             if (PlayerDetection.inRange)
             {
                 //reduce playerHP
-            }
-            taser.shoot();
+            }            //taser.shoot();
+
+
+
+
             timeBetweenShoots = 0;
 
 
