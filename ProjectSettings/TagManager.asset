@@ -8,6 +8,7 @@ TagManager:
   - Main Road
   - ResultsManager
   - AudioSettings
+  - AudioManager
   layers:
   - Default
   - TransparentFX
