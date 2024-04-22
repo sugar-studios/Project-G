@@ -7,7 +7,7 @@ namespace ProjectG.Player
     public class PlayerMovement : MonoBehaviour
     {
         public GameObject playerGraphics;
-        public Transform camera;
+        public Transform gameCamera;
         public GameManager manager;
 
         public float crouchSpeed = 5f;
@@ -46,9 +46,6 @@ namespace ProjectG.Player
 
         private void Start()
         {
-            Scene currentScene = SceneManager.GetActiveScene();
-            GameObject[] rootObjects = currentScene.GetRootGameObjects();
-            manager = rootObjects[0].GetComponent<GameManager>();
             manager.SetMaxStamina(maxStamina, 0f);
 
             controller = GetComponent<CharacterController>();
@@ -160,7 +157,7 @@ namespace ProjectG.Player
 
             if (direction.magnitude >= 0.1f)
             {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + gameCamera.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(playerGraphics.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 playerGraphics.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
