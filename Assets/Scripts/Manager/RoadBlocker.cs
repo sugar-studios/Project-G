@@ -11,6 +11,7 @@ namespace ProjectG.Manger
         public GameObject player;
         public GameObject explo;
         public GameObject explo2;
+        public GameManager gManager;
         public float explosionForce = 7500f;
         public float truckSpeed = 50f;
         public GameObject CrashSound;
@@ -74,6 +75,9 @@ namespace ProjectG.Manger
                 truckFire = true;
                 explo.SetActive(false);
                 explo2.SetActive(false);
+
+                gManager.GameOver();
+
             }
         }
     }

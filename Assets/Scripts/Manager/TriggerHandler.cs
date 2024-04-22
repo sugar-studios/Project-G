@@ -11,7 +11,6 @@ namespace ProjectG.Manger
         private void Start()
         {
             RoadBlocker = GameObject.FindWithTag("Main Road").GetComponent<RoadBlocker>();
-            Debug.Log(GameObject.FindWithTag("Main Road").name);
         }
 
         [SerializeField] bool enableStay = false;
@@ -27,12 +26,10 @@ namespace ProjectG.Manger
             }
             if (other.CompareTag("Player") && this.gameObject.tag == "Main Road")
             {
-                Debug.Log("Hit Road");
                 RoadBlocker.MainRoadTriggerEnter();
             }
             if (other.CompareTag("Player") && this.gameObject.tag == "MainRoadTruck")
             {
-                Debug.Log("Hit Car");
                 RoadBlocker.MainRoadTruckTriggerEnter();
             }
         }

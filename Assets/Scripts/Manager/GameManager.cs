@@ -3,6 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ProjectG.UI;
+using UnityEngine.SceneManagement;
+using ProjectG.Player;
 
 namespace ProjectG.Manger
 {
@@ -16,6 +18,10 @@ namespace ProjectG.Manger
         public Transform[] mainSpawnPoints;
         public GameObject[] exitPoints;
         public GameObject Transition;
+        public GameObject gameOver;
+        public GameObject loadScreen;
+        public UnityEngine.UI.Slider loadingBar;
+
 
         public MeterGauge birdMeter;
 
@@ -37,15 +43,19 @@ namespace ProjectG.Manger
 
         void Start()
         {
+            UnityEngine.Cursor.visible = false;
+
+            gameOver.SetActive(false);
+
             exitBiestroTrigger = biestro13.transform.GetChild(1).gameObject;
             mealReceiveTrigger = biestro13.transform.GetChild(0).gameObject;
             mealDeliverTrigger = adminOffice.transform.GetChild(0).gameObject;
 
             biestroSpawn = biestro13.transform.GetChild(2);
 
+            player.SetActive(false);
             player.transform.position = biestroSpawn.position;
-
-            Debug.Log(biestroSpawn.position);
+            player.SetActive(true);
 
             mealDeliverTrigger.GetComponent<Collider>().enabled = false;
             exitBiestroTrigger.SetActive(false);
@@ -174,10 +184,10 @@ namespace ProjectG.Manger
 
         public void UpdateStamina(float num)
         {
-            Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
+            UnityEngine.UI.Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<UnityEngine.UI.Slider>();
             slider.value = num;
 
-            Image sliderFill = slider.transform.GetChild(1).GetChild(0).GetComponent<Image>();
+            UnityEngine.UI.Image sliderFill = slider.transform.GetChild(1).GetChild(0).GetComponent<UnityEngine.UI.Image>();
 
             Color green = new Color(15f / 255, 108f / 255, 2f / 255);
             Color yellow = Color.yellow;
@@ -201,7 +211,7 @@ namespace ProjectG.Manger
 
         public void SetMaxStamina(float num, float num2)
         {
-            Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<Slider>();
+            UnityEngine.UI.Slider slider = GameUI.transform.GetChild(3).GetChild(0).GetComponent<UnityEngine.UI.Slider>();
             slider.maxValue = num;
             slider.minValue = num2;
         }
@@ -210,5 +220,44 @@ namespace ProjectG.Manger
         {
             birdMeter.value = -100;
         }
+
+        IEnumerator LoadAsync(string sceneName)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+            while (!operation.isDone)
+            {
+                float progress = Mathf.Clamp01(operation.progress / .9f);
+                loadingBar.value = progress;
+
+                yield return null;
+            }
+        }
+
+        public void GameOver()
+        {
+            StartCoroutine(GameOverCoroutine());
+        }
+
+        private IEnumerator GameOverCoroutine()
+        {
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
+            player.GetComponent<PlayerGraphics>().enabled = false;
+            gameOver.SetActive(true);
+
+            yield return new WaitForSeconds(4f); // Wait for 2 seconds
+
+            StartLoadScene(); // Call StartLoadScene after waiting
+        }
+
+        public void StartLoadScene(string scene = "Results")
+        {
+            gameOver.SetActive(false);
+            loadScreen.SetActive(true);
+            StartCoroutine(LoadAsync(scene));
+        }
+
     }
 }
+
