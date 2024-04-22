@@ -130,7 +130,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 10
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 240
@@ -183,7 +183,7 @@ MonoBehaviour:
   overrideHeardingOff: 0
   overrideSeePlayer: 0
   inRange: 0
-  enemyPlayerRange: {x: 3, y: 20}
+  enemyPlayerRange: {x: 3, y: 40}
   player: {fileID: 0}
 --- !u!114 &4999884794129627018
 MonoBehaviour:
