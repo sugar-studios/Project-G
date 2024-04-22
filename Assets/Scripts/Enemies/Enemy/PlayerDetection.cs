@@ -74,7 +74,7 @@ namespace ProjectG.Enemies.Enemy
                 seePlayer = false;
             }
         }
-
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             enemyToPlayer = player.position - transform.position;
@@ -90,5 +90,6 @@ namespace ProjectG.Enemies.Enemy
             Handles.Label(transform.position, $"angle: {angle}");
 
         }
+#endif
     }
 }
