@@ -3301,6 +3301,15 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: Camera Snap
+    clip: {fileID: 8300000, guid: b5f090923469a5443bd6a887707450da, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &443443617
 Transform:
   m_ObjectHideFlags: 0
@@ -5566,7 +5575,7 @@ GameObject:
   - component: {fileID: 762891863}
   - component: {fileID: 762891862}
   - component: {fileID: 762891861}
-  - component: {fileID: 762891860}
+  - component: {fileID: 762891865}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5594,18 +5603,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.3199463, y: 0.6571045}
   m_SizeDelta: {x: -2.2400208, y: -2.0780945}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &762891860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 762891858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e87079514e96c5e4f87ea4786e62511c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &762891861
 Animator:
   serializedVersion: 5
@@ -5721,6 +5718,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 762891858}
   m_CullTransparentMesh: 1
+--- !u!114 &762891865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762891858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ab356702843174a9822efa2f5338a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &763255027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8004,6 +8013,7 @@ MonoBehaviour:
   burgerBanner: {fileID: 0}
   burgerMenu: {fileID: 0}
   burgerTitle: {fileID: 0}
+  resultsBackground: {fileID: 0}
   burgerButtons: {fileID: 0}
   resultsScreen: {fileID: 1141496870}
   loadingScreen: {fileID: 683632195}
@@ -8014,6 +8024,7 @@ MonoBehaviour:
   - {fileID: 1967542099}
   - {fileID: 776361431}
   progressBar: {fileID: 538068435}
+  rotSpeed: 30
 --- !u!4 &1103081163
 Transform:
   m_ObjectHideFlags: 0
