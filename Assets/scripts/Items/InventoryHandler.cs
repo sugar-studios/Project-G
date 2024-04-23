@@ -45,7 +45,15 @@ namespace ProjectG.Items
 
         public void updateObject()
         {
-            Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
+            if (itemRoot.transform.childCount > 0)
+            {
+                Destroy(itemRoot.transform.GetChild(0).gameObject);
+            }
+
+            if (playersItems[currentItemIndex] != null)
+            {
+                Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
+            }
         }
     }
 }
