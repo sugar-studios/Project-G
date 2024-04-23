@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using ProjectG.Manger;
 
-namespace ProjectG.Player
+namespace ProjectG.Debugging
 {
-    public class PlayerMovement : MonoBehaviour
+    public class DEBUGtestMove : MonoBehaviour
     {
         public GameObject playerGraphics;
         public Transform gameCamera;
-        public GameManager manager;
 
         public float crouchSpeed = 5f;
         public float speed = 10f;
@@ -21,7 +19,7 @@ namespace ProjectG.Player
         public Transform groundCheck;
         public float crouchScale = 0.5f;
         public float scaleTransitionSpeed = 5f;
-        public float playerHealth = 100f;
+
         public float playerVelo;
 
         [SerializeField] private float currentStamina;
@@ -46,8 +44,6 @@ namespace ProjectG.Player
 
         private void Start()
         {
-            manager.SetMaxStamina(maxStamina, 0f);
-
             controller = GetComponent<CharacterController>();
             standingScale = playerGraphics.transform.localScale;
             moveSpeed = speed;
@@ -116,8 +112,6 @@ namespace ProjectG.Player
                     currentStamina = Mathf.Min(currentStamina, maxStamina);
                 }
             }
-
-            manager.UpdateStamina(currentStamina);
 
             if (currentStamina <= 0 && !isSpeedReduced)
             {
