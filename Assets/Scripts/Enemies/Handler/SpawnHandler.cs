@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace ProjectG.Enemies.Handler
@@ -16,36 +18,19 @@ namespace ProjectG.Enemies.Handler
         public LayerMask groundMask;
         public GameObject guardPrefab;
         public GameObject player;
+        public NavMeshSurface surface;
 
         private void Start()
         {
             SpawnInitialEnemies();
         }
 
-        public Vector3 GetSpawnPoint()
-        {
-            while (true)
-            {
-                float x = Random.Range(-spawnBounds.x, spawnBounds.x);
-                float z = Random.Range(-spawnBounds.y, spawnBounds.y);
-
-                RaycastHit hit;
-
-                if (Physics.Raycast(new Vector3(x, transform.position.y, z), Vector3.down, out hit, 200, groundMask))
-                {
-                    if (Vector3.Distance(hit.point, player.transform.position) > 50)
-                    {
-                        return hit.point;
-                    }
-                }
-            }
-        }
 
         public void SpawnInitialEnemies()
         {
             for (int i = 0; i < initialEnemyCount; i++)
             {
-                SpawnEnemy(GetSpawnPoint());
+                SpawnEnemy(RandomPointOnNavMesh());
             }
         }
 
@@ -53,6 +38,20 @@ namespace ProjectG.Enemies.Handler
         {
             Instantiate(guardPrefab, spawnPoint, Quaternion.identity, transform);
             totalEnemies = transform.childCount;
+        }
+
+        public Vector3 RandomPointOnNavMesh()
+        {
+            NavMeshTriangulation navMeshData = NavMesh.CalculateTriangulation();
+
+            int randomIndex = Random.Range(0, navMeshData.indices.Length - 3); // Random index for triangle
+            int triangleIndex = randomIndex / 3; // Get the triangle index
+            Vector3 point = Vector3.Lerp(navMeshData.vertices[navMeshData.indices[randomIndex]],
+                                         navMeshData.vertices[navMeshData.indices[randomIndex + 1]],
+                                         Random.value); // Random point within the triangle
+            point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[randomIndex + 2]], Random.value); // Another random point within the triangle
+
+            return point;
         }
 
 #if UNITY_EDITOR
@@ -67,7 +66,7 @@ namespace ProjectG.Enemies.Handler
 
                 if (GUILayout.Button("Spawn Enemy"))
                 {
-                    spawner.SpawnEnemy(spawner.GetSpawnPoint());
+                    spawner.SpawnEnemy(spawner.RandomPointOnNavMesh());
                 }
             }
         }
