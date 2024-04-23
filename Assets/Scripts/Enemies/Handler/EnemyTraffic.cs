@@ -36,7 +36,7 @@ namespace ProjectG.Enemies.Handler
 
             if (GUILayout.Button("Spawn Enemy"))
             {
-                spawner.SpawnEnemy(spawner.GetSpawnPoint());
+                spawner.SpawnEnemy(spawner.RandomPointOnNavMesh());
             }
         }
     }
