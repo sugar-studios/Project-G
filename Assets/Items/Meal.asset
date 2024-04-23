@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Meal
   description: Get to admin as fast as possible
-  icon: {fileID: 21300000, guid: 04251ccb56fcff048b7f701ac665e019, type: 3}
+  icon: {fileID: 2800000, guid: 04251ccb56fcff048b7f701ac665e019, type: 3}
   model: {fileID: 8815978900550120315, guid: 440b75fd42ecb5f41b94162dfa6b7593, type: 3}
