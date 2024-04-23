@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using ProjectG.Manger;
+using UnityEngine.UI;
 
 namespace ProjectG.Player
 {
@@ -22,6 +23,7 @@ namespace ProjectG.Player
         public float crouchScale = 0.5f;
         public float scaleTransitionSpeed = 5f;
 
+        public Slider healthSlider;
         public float playerHealth;
         public float playerVelo;
 
@@ -47,6 +49,7 @@ namespace ProjectG.Player
 
         private void Start()
         {
+            healthSlider.value = playerHealth;
             manager.SetMaxStamina(maxStamina, 0f);
 
             controller = GetComponent<CharacterController>();
@@ -173,6 +176,12 @@ namespace ProjectG.Player
         {
             playerVelocity.y += gravityValue * Time.fixedDeltaTime;
             controller.Move(playerVelocity * Time.fixedDeltaTime);
+        }
+
+        public void updateHealth()
+        {
+            healthSlider.value = playerHealth;
+
         }
     }
 }

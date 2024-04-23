@@ -1,3 +1,4 @@
+using ProjectG.Player;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -51,6 +52,8 @@ namespace ProjectG.Enemies.Enemy
                     guardAnimator.SetFloat("shooting", 1);
 
                     attackPlayer();
+                    PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
+                    PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
                 }
 
             }
