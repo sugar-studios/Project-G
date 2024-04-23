@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using ProjectG.Player;
+using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
     public TMP_Text totalScoreText;
     public TMP_Text scoreText;
+    public PlayerMovement pM;
     public GameObject pause;
+    public Slider healthBar;
     private Coroutine typingCoroutine;
 
     public void UpdateScore(int score)
@@ -20,6 +24,11 @@ public class GameUIManager : MonoBehaviour
         pause.SetActive(true);
         UnityEngine.Cursor.visible = true;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void Update()
+    {
+        healthBar.value = (int)pM.playerHealth;
     }
 
     public void ClosePauseMenu()

@@ -13,6 +13,7 @@ namespace ProjectG.Results
         public GameObject burgerBanner;
         public GameObject burgerMenu;
         public GameObject burgerTitle;
+        public GameObject resultsBackground;
         public GameObject burgerButtons;
 
         public GameObject resultsScreen;
@@ -21,6 +22,8 @@ namespace ProjectG.Results
         public GameObject[] Screens;
 
         public Slider progressBar;
+
+        public int rotSpeed = 30;
 
         // Start is called before the first frame update
         void Start()
@@ -35,6 +38,15 @@ namespace ProjectG.Results
             catch
             {
                 Debug.Log("ERROR: missing basically everything!");
+            }
+            try
+            {
+                resultsBackground = GameObject.FindGameObjectWithTag("ResultsBackground");
+            }
+            catch
+            {
+                resultsBackground = null;
+                Debug.Log("ERROR: missing bg");
             }
 
             Cursor.visible = true;
@@ -78,6 +90,16 @@ namespace ProjectG.Results
                 Screens[i].SetActive(false);
             }
             Screen.SetActive(true);
+        }
+
+        private void Update()
+        {
+            if(resultsBackground != null) 
+            {
+                float rotationAmount = rotSpeed * Time.deltaTime;
+
+                resultsBackground.transform.Rotate(Vector3.forward, rotationAmount);
+            }
         }
     }
 }

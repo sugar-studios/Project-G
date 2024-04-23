@@ -9,6 +9,7 @@ TagManager:
   - ResultsManager
   - AudioSettings
   - AudioManager
+  - ResultsBackground
   layers:
   - Default
   - TransparentFX

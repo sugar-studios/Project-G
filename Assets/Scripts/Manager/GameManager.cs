@@ -22,6 +22,9 @@ namespace ProjectG.Manger
         public GameObject loadScreen;
         public UnityEngine.UI.Slider loadingBar;
 
+        public float totalTime = 180f; // Total time in seconds (3 minutes)
+        private float timeRemaining;
+        public TMP_Text countdownText;
 
         public MeterGauge birdMeter;
 
@@ -69,6 +72,7 @@ namespace ProjectG.Manger
 
             isInBiestro = true;
             unpauseBirds();
+            StartCountdown();
         }
 
         private void Update()
@@ -82,6 +86,10 @@ namespace ProjectG.Manger
             {
                 UIManager.ClosePauseMenu();
                 menuOPen= false;
+            }
+            if (player.GetComponent<PlayerMovement>().playerHealth <= 0)
+            {
+                GameOver();
             }
         }
 
@@ -130,6 +138,36 @@ namespace ProjectG.Manger
             exitBiestroTrigger.SetActive(true);
         }
 
+        public void StartCountdown()
+        {
+            timeRemaining = totalTime;
+            InvokeRepeating("UpdateCountdown", 0f, 1f); 
+        }
+
+        void UpdateCountdown()
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= 1f;
+                UpdateCountdownText();
+            }
+            else
+            {
+                timeRemaining = 0;
+                Debug.Log("Time's up!");
+                GameOver();
+                CancelInvoke("UpdateCountdown"); 
+            }
+        }
+
+        void UpdateCountdownText()
+        {
+            int minutes = Mathf.FloorToInt(timeRemaining / 60f);
+            int seconds = Mathf.FloorToInt(timeRemaining % 60f);
+
+            countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+
         void HandleMealDelivered()
         {
             UIManager.ClearAndStopTyping(console);
@@ -138,8 +176,8 @@ namespace ProjectG.Manger
             turnOffAllExits();
             exitPoints[Random.Range(0, exitPoints.Length)].SetActive(true);
 
-            score++;
-            UIManager.UpdateScore(score);
+            //score++;
+           // UIManager.UpdateScore(score);
 
             isReceiveTriggerActive = true;
 
