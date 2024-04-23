@@ -40,10 +40,12 @@ namespace ProjectG.Manger
         private TextMeshProUGUI console;
 
         private bool isReceiveTriggerActive = true;
+        bool menuOPen = false;
 
         void Start()
         {
             UnityEngine.Cursor.visible = false;
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
             gameOver.SetActive(false);
 
@@ -67,6 +69,20 @@ namespace ProjectG.Manger
 
             isInBiestro = true;
             unpauseBirds();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape) && !menuOPen)
+            { 
+                UIManager.OpenPauseMenu();
+                menuOPen = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape) && menuOPen)
+            {
+                UIManager.ClosePauseMenu();
+                menuOPen= false;
+            }
         }
 
         void unpauseBirds()

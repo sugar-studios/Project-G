@@ -20,8 +20,6 @@ namespace ProjectG.Results
 
         public GameObject[] Screens;
 
-        public AudioClip[] sfx;
-
         public Slider progressBar;
 
         // Start is called before the first frame update
@@ -61,6 +59,15 @@ namespace ProjectG.Results
 
                 yield return null;
             }
+        }
+
+        public void ExitApplication()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false; // This stops play mode in the editor
+            #else
+                Application.Quit(); // This exits the application when not in editor
+            #endif
         }
 
 

@@ -21,7 +21,7 @@ namespace ProjectG.Player
         public Transform groundCheck;
         public float crouchScale = 0.5f;
         public float scaleTransitionSpeed = 5f;
-        public float playerHealth = 100f;
+
         public float playerVelo;
 
         [SerializeField] private float currentStamina;

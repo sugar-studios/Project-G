@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ProjectG.Player
 {
@@ -14,17 +15,16 @@ namespace ProjectG.Player
         private float sp;
 
 
-        // Start is called before the first frame update
-        void Start()
-        {
 
-        }
 
         // Update is called once per frame
         void Update()
         {
-            modelAnim.SetFloat("Speed", pm.playerVelo);
-            itemAnim.SetFloat("Speed", pm.playerVelo);
+            if (SceneManager.GetActiveScene().name == "Game Scene")
+            { 
+                modelAnim.SetFloat("Speed", pm.playerVelo);
+                itemAnim.SetFloat("Speed", pm.playerVelo);
+            }
         }
 
         public void PlayerHit()
