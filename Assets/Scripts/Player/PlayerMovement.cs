@@ -22,6 +22,7 @@ namespace ProjectG.Player
         public float crouchScale = 0.5f;
         public float scaleTransitionSpeed = 5f;
 
+        public float playerHealth;
         public float playerVelo;
 
         [SerializeField] private float currentStamina;
