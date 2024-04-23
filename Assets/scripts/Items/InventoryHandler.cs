@@ -1,6 +1,9 @@
+using ProjectG.Enemies.Handler;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 namespace ProjectG.Items
@@ -9,12 +12,19 @@ namespace ProjectG.Items
     {
         public RawImage[] slots = new RawImage[4];
         public Item[] playersItems;
-
         public KeyCode[] slotCodes = new KeyCode[4];
-
         public int currentItemIndex;
-
         public GameObject itemRoot;
+
+        public int numberOfItems;
+        public NavMeshSurface surface;
+        public Item[] allItems;
+        public Transform allItemRoot;
+
+        private void Start()
+        {
+            spawnItems();
+        }
 
         private void Update()
         {
@@ -65,6 +75,17 @@ namespace ProjectG.Items
 
             Image currentImage = image.parent.parent.GetComponent<Image>();
             currentImage.color = new Color(1, 1, 1, 0.75f);
-          }
+        }
+
+        private void spawnItems()
+        {
+            SpawnHandler spawner = new SpawnHandler();
+            spawner.surface = surface;
+
+            for (int i = 0; i < numberOfItems; i++)
+            {
+                Instantiate(allItems[Random.Range(0, allItems.Length)].model, spawner.RandomPointOnNavMesh(), Quaternion.identity ,allItemRoot);
+            }
+        }
     }
 }
