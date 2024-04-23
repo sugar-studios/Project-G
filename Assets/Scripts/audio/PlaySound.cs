@@ -12,13 +12,20 @@ namespace ProjectG.Audio
         // Start is called before the first frame update
         void Start()
         {
+            try
+            {
             aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            }
+            catch { aM = null; }
         }
 
         public void sfx(string name)
-        { 
-
-            aM.Play(name);
+        {
+            if (aM != null)
+            { 
+                aM.Play(name);
+            }
+            
         }
     }
 }

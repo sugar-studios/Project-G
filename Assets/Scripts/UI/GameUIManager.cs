@@ -7,11 +7,32 @@ public class GameUIManager : MonoBehaviour
 {
     public TMP_Text totalScoreText;
     public TMP_Text scoreText;
+    public GameObject pause;
     private Coroutine typingCoroutine;
 
     public void UpdateScore(int score)
     {
         totalScoreText.text = score.ToString();
+    }
+
+    public void OpenPauseMenu()
+    { 
+        pause.SetActive(true);
+        UnityEngine.Cursor.visible = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void ClosePauseMenu()
+    {
+        pause.SetActive(false);
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+    }
+
+    public void LeaveGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
     }
 
     public void TypeText(TMP_Text textBox, string textToType, float displayTime)
