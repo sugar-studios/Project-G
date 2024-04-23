@@ -23,8 +23,8 @@ namespace ProjectG.Items
                 if (Input.GetKeyDown(slotCodes[i]))
                 {
                     currentItemIndex = i;
-
                     updateObject();
+                    updateCurrentItem(slots[i].transform);
                 }
             }
         }
@@ -55,5 +55,16 @@ namespace ProjectG.Items
                 Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
             }
         }
+
+        private void updateCurrentItem(Transform image)
+        {
+            for (int i = 0; i < slots.Length; i++)
+            {
+                slots[i].transform.parent.parent.GetComponent<Image>().color = new Color(1, 1, 1, 0.4f);
+            }
+
+            Image currentImage = image.parent.parent.GetComponent<Image>();
+            currentImage.color = new Color(1, 1, 1, 0.75f);
+          }
     }
 }
