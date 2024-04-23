@@ -1,12 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu( fileName = "New Item", menuName = "Item")]
-public class Item : ScriptableObject
+namespace ProjectG.Items
 {
-    public string name;
-    public string description;
-    public Sprite icon;
-    public GameObject model;
+
+    [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+    public class Item : ScriptableObject
+    {
+        public string name;
+        public string description;
+        public Texture icon;
+        public GameObject model;
 
 
+    }
 }
