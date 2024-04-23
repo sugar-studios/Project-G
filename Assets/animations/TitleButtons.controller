@@ -430,8 +430,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySound
-    data: 
+    functionName: sfx
+    data: Meduim Click
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 2
@@ -1233,8 +1233,8 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySound
-    data: 
+    functionName: sfx
+    data: Heavy Click
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 5

@@ -29,11 +29,23 @@ namespace ProjectG.Audio
                 DontDestroyOnLoad(gameObject);
             }
 
+            // Create AudioSource components for songs
             foreach (Sound s in songs)
             {
                 s.source = gameObject.AddComponent<AudioSource>();
                 s.source.clip = s.clip;
                 s.source.loop = s.loop;
+                s.source.volume = s.volume;
+                s.source.outputAudioMixerGroup = mixerGroup;
+            }
+
+            // Create AudioSource components for sounds
+            foreach (Sound s in sounds)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.loop = s.loop;
+                s.source.volume = s.volume;
                 s.source.outputAudioMixerGroup = mixerGroup;
             }
 
@@ -48,6 +60,7 @@ namespace ProjectG.Audio
 
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
+
 
         // Method to handle scene loaded event
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -75,29 +88,66 @@ namespace ProjectG.Audio
 
         public void Play(string sound)
         {
-            Sound s = Array.Find(songs, item => item.name == sound);
-            if (s == null)
+            // Check if the sound is in the songs array
+            Sound song = Array.Find(songs, item => item.name == sound);
+            if (song != null)
             {
-                Debug.LogWarning("Sound: " + sound + " not found!");
+                PlaySong(song);
                 return;
             }
 
+            // Check if the sound is in the sounds array
+            Sound sfx = Array.Find(sounds, item => item.name == sound);
+            if (sfx != null)
+            {
+                PlaySound(sfx);
+                return;
+            }
+
+            // Log that the sound doesn't exist
+            Debug.LogWarning("Sound: " + sound + " doesn't exist!");
+        }
+
+        private void PlaySong(Sound song)
+        {
+            // Your existing code for playing a song
             if (settings == null)
             {
-                s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
+                song.source.volume = song.volume * (1f + UnityEngine.Random.Range(-song.volumeVariance / 2f, song.volumeVariance / 2f));
             }
             else
             {
-                s.source.volume = s.volume * settings.volume;
+                song.source.volume = song.volume * settings.volume;
             }
 
-            s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
+            song.source.pitch = song.pitch * (1f + UnityEngine.Random.Range(-song.pitchVariance / 2f, song.pitchVariance / 2f));
 
-            s.source.Play();
+            song.source.Play();
 
             // Add the audio source to the list of active audio sources
-            activeAudioSources.Add(s.source);
+            activeAudioSources.Add(song.source);
         }
+
+        private void PlaySound(Sound sound)
+        {
+            // Your existing code for playing a sound
+            if (settings == null)
+            {
+                sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
+            }
+            else
+            {
+                sound.source.volume = sound.volume * settings.volume;
+            }
+
+            sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
+
+            sound.source.Play();
+
+            // Add the audio source to the list of active audio sources
+            activeAudioSources.Add(sound.source);
+        }
+
 
 
         public void StopAllSounds()
