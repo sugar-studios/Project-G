@@ -11,6 +11,8 @@ namespace ProjectG.Items
         public Texture icon;
         public GameObject model;
 
+        public bool usingItem;
+        public string itemUseMethod;
 
     }
 }

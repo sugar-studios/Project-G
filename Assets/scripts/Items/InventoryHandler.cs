@@ -1,4 +1,7 @@
+using ProjectG.Debugging;
+using ProjectG.Enemies;
 using ProjectG.Enemies.Handler;
+using ProjectG.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -21,13 +24,21 @@ namespace ProjectG.Items
         public Item[] allItems;
         public Transform allItemRoot;
 
+        public MeterGauge BirdAttack;
+
         private void Start()
         {
+            currentItemIndex = 0;
             spawnItems();
+            updateIcons();
         }
 
         private void Update()
         {
+            //dont touch this
+            PlayerStatesTester.PlayerNoiseRadius = Mathf.Lerp(PlayerStatesTester.PlayerNoiseRadius, 30, Time.deltaTime);
+            //Debug.Log(PlayerStatesTester.PlayerNoiseRadius);
+
             for (int i = 0; i < slotCodes.Length; i++)
             {
                 if (Input.GetKeyDown(slotCodes[i]))
@@ -37,13 +48,27 @@ namespace ProjectG.Items
                     updateCurrentItem(slots[i].transform);
                 }
             }
+
+            if (Input.GetAxis("Fire1") == 1 && playersItems[currentItemIndex].usingItem)
+            {
+                Debug.Log("fire");
+                GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
+                playersItems[currentItemIndex] = null;
+                updateIcons();
+            }
         }
 
         public void updateIcons()
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].texture = playersItems[i].icon;
+                if (playersItems[i] != null)
+                {
+                    slots[i].texture = playersItems[i].icon;
+                }
+                else{
+                    slots[i].texture = null;
+                }
             }
         }
 

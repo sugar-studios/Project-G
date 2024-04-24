@@ -10,7 +10,10 @@ namespace ProjectG.UI
     {
         [SerializeField]
         [Range(-100, 0)]
-        public int value = 0;
+        public float value = 0;
+
+        public bool turnOffAttack;
+
         public GameObject fillArea;
         public RawImage fillImage; // Ensure this is a RawImage component in the Unity Editor
         public BirdAttack birdAttackScript; // Assign the BirdAttack component in the Unity Editor
@@ -53,8 +56,13 @@ namespace ProjectG.UI
                     yield return null;
                 }
 
-                // Dynamically calculate the value based on elapsed time
-                value = (int)Mathf.Lerp(0, -100, (Time.time - startTime) / fillDuration);
+                //the pause made want to kurt cobain myself
+                if (!paused)
+                {
+                    // Dynamically calculate the value based on elapsed time
+                    value -= Time.deltaTime * 5.55f;
+                }
+
                 SetYPosition(value);
                 yield return null;
             }
@@ -70,7 +78,10 @@ namespace ProjectG.UI
             SetYPosition(-100);
 
             // Activate BirdAttack
-            birdAttackScript.gameObject.SetActive(true);
+            if (!turnOffAttack)
+            {
+                birdAttackScript.gameObject.SetActive(true);
+            }
         }
 
         private IEnumerator FadeTo(RawImage image, Color targetColor, float duration)

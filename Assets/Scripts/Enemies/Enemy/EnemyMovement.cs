@@ -10,7 +10,7 @@ namespace ProjectG.Enemies.Enemy
     public class EnemyMovement : MonoBehaviour
     {
         private PlayerDetection PlayerDetection;
-        private NavMeshAgent navMeshAgent;
+        public NavMeshAgent navMeshAgent;
         public float roamingRange;
         public taserShoot taser;
         public Animator guardAnimator;
@@ -109,7 +109,7 @@ namespace ProjectG.Enemies.Enemy
         }
         private void HeardPlayer()
         {
-            if (PlayerDetection.inHearing && !PlayerDetection.seePlayer)
+            if (PlayerDetection.inHearing)
             {
                 navMeshAgent.SetDestination(PlayerDetection.player.position);
                 //PlayerDetection.overrideHeardingOff;

@@ -1,3 +1,5 @@
+using ProjectG.Debugging;
+using ProjectG.Enemies.Enemy;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -14,7 +16,6 @@ namespace ProjectG.Enemies.Handler
         public int totalEnemies;
         public bool alerted;
         public int initialEnemyCount = 5;
-        public Vector2 spawnBounds;
         public LayerMask groundMask;
         public GameObject guardPrefab;
         public GameObject player;
@@ -53,6 +54,21 @@ namespace ProjectG.Enemies.Handler
 
             return point;
         }
+
+        public void checkNearby()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                if (Vector3.Distance(player.transform.position, transform.GetChild(i).position) < PlayerStatesTester.PlayerNoiseRadius)
+                {
+                    //Debug.Log(transform.GetChild(i).name);
+
+                    transform.GetChild(i).GetComponent<PlayerDetection>().inHearing = true;
+                   
+                }
+            }
+        }
+
 
 #if UNITY_EDITOR
         [UnityEditor.CustomEditor(typeof(SpawnHandler))]
