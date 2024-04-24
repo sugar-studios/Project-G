@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using ProjectG.Enemies;
+using ProjectG.Audio;
 
 namespace ProjectG.UI
 {
@@ -13,6 +14,7 @@ namespace ProjectG.UI
         public GameObject fillArea;
         public RawImage fillImage; // Ensure this is a RawImage component in the Unity Editor
         public BirdAttack birdAttackScript; // Assign the BirdAttack component in the Unity Editor
+        public PlaySound sound;
 
         public float fillDuration = 18f; // Customizable fill-up duration
 
@@ -73,6 +75,7 @@ namespace ProjectG.UI
 
         private IEnumerator FadeTo(RawImage image, Color targetColor, float duration)
         {
+            sound.sfx("Bird Alarm");
             Color startColor = image.color;
             for (float t = 0; t < 1; t += Time.deltaTime / duration)
             {

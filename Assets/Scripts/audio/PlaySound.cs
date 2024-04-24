@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using ProjectG.Player;
 
 namespace ProjectG.Audio
 {
@@ -32,44 +33,49 @@ namespace ProjectG.Audio
             }
         }
 
-        public void FootStep()
+        public void FootStep(PlayerMovement pM )
         {
-            if (aM == null)
+            pM = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+            if ( pM.isGrounded)
             {
-                Debug.LogWarning("AudioManager not found!");
-                return;
-            }
-
-            string[] steps = new string[aM.sounds.Length];
-            for (int i = 0; i < aM.sounds.Length; i++)
-            {
-                steps[i] = aM.sounds[i].name;
-            }
-
-            // Create a list to hold valid steps
-            var validSteps = new System.Collections.Generic.List<string>();
-
-            // Iterate through the array
-            foreach (string step in steps)
-            {
-                // Check if the step starts with "step"
-                if (step.StartsWith("step", StringComparison.OrdinalIgnoreCase))
+                if (aM == null)
                 {
-                    // If it does, add it to the list of valid steps
-                    validSteps.Add(step);
+                    Debug.LogWarning("AudioManager not found!");
+                    return;
+                }
+
+                string[] steps = new string[aM.sounds.Length];
+                for (int i = 0; i < aM.sounds.Length; i++)
+                {
+                    steps[i] = aM.sounds[i].name;
+                }
+
+                // Create a list to hold valid steps
+                var validSteps = new System.Collections.Generic.List<string>();
+
+                // Iterate through the array
+                foreach (string step in steps)
+                {
+                    // Check if the step starts with "step"
+                    if (step.StartsWith("step", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // If it does, add it to the list of valid steps
+                        validSteps.Add(step);
+                    }
+                }
+
+                // If there are valid steps, pick one randomly
+                if (validSteps.Count > 0)
+                {
+                    int randomIndex = UnityEngine.Random.Range(0, validSteps.Count);
+                    sfx(validSteps[randomIndex]);
+                }
+                else
+                {
+                    Debug.LogWarning("No valid steps found.");
                 }
             }
-
-            // If there are valid steps, pick one randomly
-            if (validSteps.Count > 0)
-            {
-                int randomIndex = UnityEngine.Random.Range(0, validSteps.Count);
-                sfx(validSteps[randomIndex]);
-            }
-            else
-            {
-                Debug.LogWarning("No valid steps found.");
-            }
+           
         }
     }
 }

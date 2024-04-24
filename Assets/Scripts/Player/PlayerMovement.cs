@@ -37,7 +37,7 @@ namespace ProjectG.Player
         private CharacterController controller;
         private float turnSmoothVelocity;
         private Vector3 playerVelocity;
-        private bool isGrounded;
+        public bool isGrounded;
         private bool shouldJump;
         private bool isCrouching;
         private Vector3 standingScale;

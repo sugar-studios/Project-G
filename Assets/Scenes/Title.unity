@@ -3194,7 +3194,7 @@ MonoBehaviour:
   songs:
   - name: Normal Chase1
     clip: {fileID: 8300000, guid: 62a50895b8072c042b44a1f7d4c8a8fe, type: 3}
-    volume: 0.2
+    volume: 0.05
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3203,7 +3203,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase2
     clip: {fileID: 8300000, guid: e25d73a9e629c474b8394a095be44c18, type: 3}
-    volume: 0.2
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3212,7 +3212,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase3
     clip: {fileID: 8300000, guid: 9444e41513d238b46a698458e11dc645, type: 3}
-    volume: 0.01
+    volume: 0.00001
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3221,7 +3221,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase4
     clip: {fileID: 8300000, guid: 0cf3f89f7edcdaa4aa2bce885a0c4abd, type: 3}
-    volume: 0.2
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3230,7 +3230,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Title
     clip: {fileID: 8300000, guid: 4f9b25f74d6b57a4a8fd9fd375e5f431, type: 3}
-    volume: 0.2
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3357,6 +3357,60 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Jump
     clip: {fileID: 8300000, guid: 6021c5f70cc0d614587b166ae7537eb8, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Bird Alarm
+    clip: {fileID: 8300000, guid: 34af4ff94480be149996ccaf85735c22, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Bird Attack
+    clip: {fileID: 8300000, guid: a0828066205b5654fa0e95cbdbb7f2fb, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Get Food
+    clip: {fileID: 8300000, guid: aa8cb3ef2fcd86644834a944975029aa, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Give Food
+    clip: {fileID: 8300000, guid: a51e6ac0fa4834a41ab15f2e0649e411, type: 3}
+    volume: 0.25
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Exit EVIT
+    clip: {fileID: 8300000, guid: aa4e37447da5e88409b7afb6acad24e4, type: 3}
+    volume: 0.5
+    volumeVariance: 0.3
+    pitch: 1
+    pitchVariance: 0.4
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Exit B
+    clip: {fileID: 8300000, guid: eee377b0028a6b14d81d93f6ecd22b4b, type: 3}
     volume: 0.75
     volumeVariance: 0
     pitch: 1

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 using ProjectG.UI;
 using UnityEngine.SceneManagement;
 using ProjectG.Player;
+using ProjectG.Audio;
+using ProjectG.Results;
 
 namespace ProjectG.Manger
 {
     public class GameManager : MonoBehaviour
     {
         public GameObject player;
+        public float mealsDel = 0f;
         public GameObject map;
         public GameObject biestro13;
         public GameObject adminOffice;
@@ -19,16 +22,19 @@ namespace ProjectG.Manger
         public GameObject[] exitPoints;
         public GameObject Transition;
         public GameObject gameOver;
+        public PlaySound sound;
+        public bool DeleiveringMeal=false;
         public GameObject loadScreen;
         public UnityEngine.UI.Slider loadingBar;
 
         public float totalTime = 180f; // Total time in seconds (3 minutes)
         private float timeRemaining;
+        public resultsData rD;
         public TMP_Text countdownText;
 
         public MeterGauge birdMeter;
 
-        public int score = 0;
+        public float score = 0.00f;
 
         public bool isInBiestro = true;
 
@@ -40,6 +46,11 @@ namespace ProjectG.Manger
         private GameObject mealReceiveTrigger;
         private GameObject mealDeliverTrigger;
 
+
+        public float value = 0.00f;
+        private float decreaseAmount = 0.5f;
+        private float decreaseInterval = 1f; // Decrease every 1 second
+
         private TextMeshProUGUI console;
 
         private bool isReceiveTriggerActive = true;
@@ -49,6 +60,8 @@ namespace ProjectG.Manger
         {
             UnityEngine.Cursor.visible = false;
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
+            rD = GameObject.FindGameObjectWithTag("ResultData").GetComponent<resultsData>();
 
             gameOver.SetActive(false);
 
@@ -68,7 +81,8 @@ namespace ProjectG.Manger
             console = GameUI.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
             UIManager.TypeText(console, "Administrion ordered their lunch! Go!", 2.5f);
 
-            UIManager.UpdateScore(score);
+            UIManager.UpdateTotalScore(score);
+            UIManager.UpdateScore(value);
 
             isInBiestro = true;
             unpauseBirds();
@@ -103,18 +117,33 @@ namespace ProjectG.Manger
         {
             if (triggerName == mealReceiveTrigger.name && isReceiveTriggerActive)
             {
+                sound.sfx("Get Food");
                 HandleMealReceived();
+                value = 51.50f;
+                DeleiveringMeal = true;
+                InvokeRepeating("DecreaseValue", 0f, decreaseInterval);
             }
             else if (triggerName == mealDeliverTrigger.name && !isReceiveTriggerActive)
             {
+                sound.sfx("Give Food");
+                DeleiveringMeal = false;
+                CancelInvoke("DecreaseValue");
+                score += value;
+                value = 0f;
+                mealsDel++;
+                UIManager.UpdateScore(value);
+                UIManager.UpdateTotalScore(score);
+                CancelInvoke("DecreaseValue");
                 HandleMealDelivered();
             }
             else if (triggerName == exitBiestroTrigger.name && !isReceiveTriggerActive)
             {
+                sound.sfx("Exit B");
                 HandleExitBiestro();
             }
             else if (triggerName.StartsWith("returnPoint"))
             {
+                sound.sfx("Exit EVIT");
                 SendPlayerToBiestro();
                 turnOffAllExits();
             }
@@ -175,9 +204,6 @@ namespace ProjectG.Manger
 
             turnOffAllExits();
             exitPoints[Random.Range(0, exitPoints.Length)].SetActive(true);
-
-            //score++;
-           // UIManager.UpdateScore(score);
 
             isReceiveTriggerActive = true;
 
@@ -288,13 +314,39 @@ namespace ProjectG.Manger
             }
         }
 
-        public void GameOver()
+        void LogData()
         {
+            if (player.GetComponent<PlayerMovement>().playerHealth <= 0)
+            { rD.health = 0f; }
+            else
+            {
+                rD.health = player.GetComponent<PlayerMovement>().playerHealth;
+            }
+
+            rD.tip = score;
+            rD.mealsDelivered = mealsDel;
+        }
+
+
+        public void GameOver(bool hitByCar = false)
+        {
+            if (hitByCar)
+            {
+                rD.health = 0f;
+                rD.tip = score;
+                rD.mealsDelivered = mealsDel;
+            }
+            else
+            { 
+                LogData();
+            }
+
             StartCoroutine(GameOverCoroutine());
         }
 
         private IEnumerator GameOverCoroutine()
         {
+            LogData();
             player.GetComponent<PlayerMovement>().enabled = false;
             player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
             player.GetComponent<PlayerGraphics>().enabled = false;
@@ -309,7 +361,22 @@ namespace ProjectG.Manger
         {
             gameOver.SetActive(false);
             loadScreen.SetActive(true);
-            StartCoroutine(LoadAsync(scene));
+            SceneManager.LoadScene(scene);
+        }
+
+        void DecreaseValue()
+        {
+            // Decrease the value
+            value -= decreaseAmount;
+            UIManager.UpdateScore(value);
+
+            // Check if the value has reached or gone below zero
+            if (value <= 1f)
+            {
+                // If it has, stop the decreasing process
+                value = 1f;
+                CancelInvoke("DecreaseValue");
+            }
         }
 
     }
