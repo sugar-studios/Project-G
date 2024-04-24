@@ -36,6 +36,8 @@ namespace ProjectG.Manger
 
         public float score = 0.00f;
 
+        private bool loggedResults=false;
+
         public bool isInBiestro = true;
 
         public GameUIManager UIManager;
@@ -60,6 +62,8 @@ namespace ProjectG.Manger
         {
             UnityEngine.Cursor.visible = false;
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
+            loggedResults = false;
 
             rD = GameObject.FindGameObjectWithTag("ResultData").GetComponent<resultsData>();
 
@@ -316,15 +320,26 @@ namespace ProjectG.Manger
 
         void LogData()
         {
-            if (player.GetComponent<PlayerMovement>().playerHealth <= 0)
-            { rD.health = 0f; }
-            else
+            if (!loggedResults)
             {
-                rD.health = player.GetComponent<PlayerMovement>().playerHealth;
-            }
+                if (player.GetComponent<PlayerMovement>().playerHealth <= 0)
+                {
+                    rD.health = 0f;
+                }
+                else if (player.GetComponent<PlayerMovement>().playerHealth > 0)
+                {
+                    rD.health = player.GetComponent<PlayerMovement>().playerHealth;
+                }
+                else
+                {
+                    rD.health = 100f;
+                }
 
-            rD.tip = score;
-            rD.mealsDelivered = mealsDel;
+                rD.tip = score;
+                rD.mealsDelivered = mealsDel;
+
+                loggedResults = true;
+            }
         }
 
 
@@ -335,18 +350,20 @@ namespace ProjectG.Manger
                 rD.health = 0f;
                 rD.tip = score;
                 rD.mealsDelivered = mealsDel;
+                loggedResults = true;
             }
             else
             { 
                 LogData();
             }
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<CharacterController>().enabled = false;
 
             StartCoroutine(GameOverCoroutine());
         }
 
         private IEnumerator GameOverCoroutine()
         {
-            LogData();
             player.GetComponent<PlayerMovement>().enabled = false;
             player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
             player.GetComponent<PlayerGraphics>().enabled = false;
