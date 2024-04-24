@@ -10,7 +10,7 @@ namespace ProjectG.Items
         public string description;
         public Texture icon;
         public GameObject model;
-
+        public string itemUseMethod;
 
     }
 }
