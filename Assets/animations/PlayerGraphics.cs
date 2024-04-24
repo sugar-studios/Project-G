@@ -1,3 +1,4 @@
+using ProjectG.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace ProjectG.Player
     public class PlayerGraphics : MonoBehaviour
     {
         public PlayerMovement pm;
+
+        public PlaySound pS;
 
         public Animator modelAnim;
         public Animator itemAnim;

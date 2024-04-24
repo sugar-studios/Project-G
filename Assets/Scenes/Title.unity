@@ -3310,6 +3310,60 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: Whislte
+    clip: {fileID: 8300000, guid: 5b3176f949d66e74bae5a920f15189cb, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Bell
+    clip: {fileID: 8300000, guid: 22ec46d5c562b3e4894be52d622ad753, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Step1
+    clip: {fileID: 8300000, guid: 04ddf57ff4952e94d880dc2fd420b489, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Step2
+    clip: {fileID: 8300000, guid: d49d36736580da6429b43f24a1743c2a, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Step3
+    clip: {fileID: 8300000, guid: df2782ede55e2004ea3a1abc0c237fae, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 6021c5f70cc0d614587b166ae7537eb8, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &443443617
 Transform:
   m_ObjectHideFlags: 0
