@@ -54,6 +54,7 @@ namespace ProjectG.UI
                     yield return null;
                 }
 
+                //the pause made want to kurt cobain myself
                 if (!paused)
                 {
                     // Dynamically calculate the value based on elapsed time
