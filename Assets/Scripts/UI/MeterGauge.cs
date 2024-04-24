@@ -56,7 +56,7 @@ namespace ProjectG.UI
                     yield return null;
                 }
 
-                //the pause made want to kurt cobain myself
+                //the pause made want to kurt cobain myself, lurp can kill itself
                 if (!paused)
                 {
                     // Dynamically calculate the value based on elapsed time

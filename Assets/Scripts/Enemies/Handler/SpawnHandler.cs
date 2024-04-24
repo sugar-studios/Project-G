@@ -32,6 +32,8 @@ namespace ProjectG.Enemies.Handler
             for (int i = 0; i < initialEnemyCount; i++)
             {
                 SpawnEnemy(RandomPointOnNavMesh());
+
+
             }
         }
 
@@ -39,6 +41,20 @@ namespace ProjectG.Enemies.Handler
         {
             Instantiate(guardPrefab, spawnPoint, Quaternion.identity, transform);
             totalEnemies = transform.childCount;
+        }
+
+        Vector3 ValidatePoint(Vector3 point)
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(point, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                return hit.position;
+            }
+            else
+            {
+                // If the point is not valid, return a fallback point (e.g., the player's current position)
+                return transform.position;
+            }
         }
 
         public Vector3 RandomPointOnNavMesh()
@@ -52,7 +68,11 @@ namespace ProjectG.Enemies.Handler
                                          Random.value); // Random point within the triangle
             point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[randomIndex + 2]], Random.value); // Another random point within the triangle
 
-            return point;
+            Vector3 validPoint = ValidatePoint(point);
+            Debug.Log("Random Point: " + point);
+            Debug.Log("Valid Point: " + validPoint);
+            return ValidatePoint(point);
+            //return point;
         }
 
         public void checkNearby()
