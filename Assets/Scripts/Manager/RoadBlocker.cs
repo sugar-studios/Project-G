@@ -76,7 +76,7 @@ namespace ProjectG.Manger
                 explo.SetActive(false);
                 explo2.SetActive(false);
 
-                gManager.GameOver();
+                gManager.GameOver(true);
 
             }
         }

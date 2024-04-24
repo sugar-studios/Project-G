@@ -199,7 +199,7 @@ namespace ProjectG.Audio
             {
                 if (settings.perferredSong == "")
                 {
-                    Sound[] normalSongs = new Sound[songs.Length];
+                    Sound[] normalSongs = new Sound[4];
                     int normIndex = 0;
                     for (int i = 0; i < songs.Length; i++)
                     {
@@ -209,8 +209,8 @@ namespace ProjectG.Audio
                             normIndex++;
                         }
                     }
-                    normIndex = UnityEngine.Random.Range(0, songs.Length);
-                    Play(songs[normIndex].name);
+                    Play(normalSongs[UnityEngine.Random.Range(0, normalSongs.Length)].name);
+                    
                 }
                 else
                 {

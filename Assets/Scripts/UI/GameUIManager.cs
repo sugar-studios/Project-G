@@ -11,12 +11,16 @@ public class GameUIManager : MonoBehaviour
     public TMP_Text scoreText;
     public PlayerMovement pM;
     public GameObject pause;
-    public Slider healthBar;
     private Coroutine typingCoroutine;
 
-    public void UpdateScore(int score)
+    public void UpdateScore(float score)
     {
-        totalScoreText.text = score.ToString();
+        scoreText.text = "$"+score.ToString("F2");
+    }
+
+    public void UpdateTotalScore(float score)
+    {
+        totalScoreText.text = "$"+score.ToString("F2");
     }
 
     public void OpenPauseMenu()
@@ -24,11 +28,6 @@ public class GameUIManager : MonoBehaviour
         pause.SetActive(true);
         UnityEngine.Cursor.visible = true;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
-    }
-
-    private void Update()
-    {
-        healthBar.value = (int)pM.playerHealth;
     }
 
     public void ClosePauseMenu()
@@ -40,7 +39,11 @@ public class GameUIManager : MonoBehaviour
 
     public void LeaveGame()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // This stops play mode in the editor
+#else
+            Application.Quit(); // This exits the application when not in editor
+#endif
         Debug.Log("Quit Game");
     }
 

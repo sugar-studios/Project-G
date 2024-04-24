@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using ProjectG.UI;
+using ProjectG.Manger;
+using ProjectG.Player;
+using ProjectG.Audio;
 
 namespace ProjectG.Enemies
 {
@@ -9,6 +12,9 @@ namespace ProjectG.Enemies
         public bool interrupt = false;
         private int score = 20;
         public MeterGauge meterGaugeScript;
+        public GameManager gM;
+        public PlaySound sound;
+        public PlayerMovement pM;
 
         private void OnEnable()
         {
@@ -17,8 +23,6 @@ namespace ProjectG.Enemies
 
         public void Activate()
         {
-            score = 20;
-            Debug.Log("Initial Score: " + score);
             interrupt = false;
 
             StartCoroutine(MoveAndScore());
@@ -40,11 +44,34 @@ namespace ProjectG.Enemies
 
             if (!interrupt)
             {
-                for (float i = 0; i < 2f; i += 0.25f)
+                sound.sfx("Bird Attack");
+                if (gM.DeleiveringMeal)
                 {
-                    yield return new WaitForSeconds(0.25f);
-                    score -= 2;
-                    Debug.Log("Score after deduction: " + score);
+                    for (float i = 0; i < 2f; i += 0.25f)
+                    {
+                        gM.value -= 2.5f;
+                        if (gM.value < 1)
+                        { 
+                            gM.value = 1;
+                        }
+                        gM.UIManager.UpdateScore(gM.value);
+                        yield return new WaitForSeconds(.25f);
+                    }
+                }
+                else
+                {
+                    float nSpeed = pM.speed;
+                    float SSpeed = pM.sprintSpeed;
+                    float nSpeed2 = pM.speed/4;
+                    float SSpeed2 = pM.sprintSpeed/4;
+                    for (float i = 0; i < 2f; i += 0.25f)
+                    {
+                        yield return new WaitForSeconds(0.25f);
+                        pM.speed = nSpeed2;
+                        pM.sprintSpeed = SSpeed2;
+                    }
+                    pM.speed = nSpeed;
+                    pM.sprintSpeed = SSpeed;
                 }
             }
 
@@ -55,6 +82,8 @@ namespace ProjectG.Enemies
         {
             gameObject.SetActive(false);
             interrupt = false;
+
+
             // Notify MeterGauge to restart its sequence
             meterGaugeScript.RestartSequence();
         }
