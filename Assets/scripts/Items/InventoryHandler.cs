@@ -1,4 +1,7 @@
+using ProjectG.Debugging;
+using ProjectG.Enemies;
 using ProjectG.Enemies.Handler;
+using ProjectG.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -21,6 +24,8 @@ namespace ProjectG.Items
         public Item[] allItems;
         public Transform allItemRoot;
 
+        public MeterGauge BirdAttack;
+
         private void Start()
         {
             currentItemIndex = 0;
@@ -30,6 +35,10 @@ namespace ProjectG.Items
 
         private void Update()
         {
+            //dont touch this
+            PlayerStatesTester.PlayerNoiseRadius = Mathf.Lerp(PlayerStatesTester.PlayerNoiseRadius, 30, Time.deltaTime);
+            //Debug.Log(PlayerStatesTester.PlayerNoiseRadius);
+
             for (int i = 0; i < slotCodes.Length; i++)
             {
                 if (Input.GetKeyDown(slotCodes[i]))
