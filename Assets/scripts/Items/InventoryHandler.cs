@@ -23,7 +23,9 @@ namespace ProjectG.Items
 
         private void Start()
         {
+            currentItemIndex = 0;
             spawnItems();
+            updateIcons();
         }
 
         private void Update()
