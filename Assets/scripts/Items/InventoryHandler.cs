@@ -37,13 +37,27 @@ namespace ProjectG.Items
                     updateCurrentItem(slots[i].transform);
                 }
             }
+
+            if (Input.GetAxis("Fire1") == 1 && playersItems[currentItemIndex].usingItem)
+            {
+                Debug.Log("fire");
+                GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
+                playersItems[currentItemIndex] = null;
+                updateIcons();
+            }
         }
 
         public void updateIcons()
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].texture = playersItems[i].icon;
+                if (playersItems[i] != null)
+                {
+                    slots[i].texture = playersItems[i].icon;
+                }
+                else{
+                    slots[i].texture = null;
+                }
             }
         }
 
