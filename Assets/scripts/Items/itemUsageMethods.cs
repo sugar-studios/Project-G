@@ -40,6 +40,7 @@ namespace ProjectG.Items
             PlayerMovement move = GetComponent<PlayerMovement>();
 
             move.playerHealth = Mathf.Clamp(move.playerHealth + 20, -1, 100);
+            move.updateHealth();
 
         }
 

@@ -12,6 +12,7 @@ TagManager:
   - ResultsBackground
   - ResultData
   - DoorEntryCheck
+  - Item
   layers:
   - Default
   - TransparentFX
