@@ -92,7 +92,7 @@ namespace ProjectG.Results
 
                 // Determine rank based on the score
                 string rankText;
-                if (score >= 600)
+                if (score >= 500)
                     rankText = "S++";
                 else if (score >= 570)
                     rankText = "S+";
@@ -100,35 +100,35 @@ namespace ProjectG.Results
                     rankText = "S";
                 else if (score >= 510)
                     rankText = "S-";
-                else if (score >= 480)
+                else if (score >= 380)
                     rankText = "A+";
-                else if (score >= 450)
+                else if (score >= 350)
                     rankText = "A";
-                else if (score >= 420)
+                else if (score >= 320)
                     rankText = "A-";
-                else if (score >= 390)
+                else if (score >= 290)
                     rankText = "B+";
-                else if (score >= 360)
+                else if (score >= 260)
                     rankText = "B";
-                else if (score >= 330)
+                else if (score >= 230)
                     rankText = "B-";
-                else if (score >= 300)
+                else if (score >= 200)
                     rankText = "C+";
-                else if (score >= 270)
+                else if (score >= 170)
                     rankText = "C";
-                else if (score >= 240)
+                else if (score >= 140)
                     rankText = "C-";
-                else if (score >= 210)
+                else if (score >= 110)
                     rankText = "D+";
                 else if (score >= 180)
                     rankText = "D";
-                else if (score >= 150)
-                    rankText = "D-";
-                else if (score >= 120)
-                    rankText = "F+";
                 else if (score >= 90)
-                    rankText = "F";
+                    rankText = "D-";
                 else if (score >= 60)
+                    rankText = "F+";
+                else if (score >= 30)
+                    rankText = "F";
+                else if (score >= 20)
                     rankText = "F-";
                 else
                     rankText = "F--";

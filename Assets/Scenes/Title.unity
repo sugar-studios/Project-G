@@ -3325,12 +3325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0738e7b45aa22294e9df10202b2a089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: 5a6527fb911f72940a5f33133401e06f, type: 2}
   settings: {fileID: 0}
   songs:
   - name: Normal Chase1
     clip: {fileID: 8300000, guid: 62a50895b8072c042b44a1f7d4c8a8fe, type: 3}
-    volume: 0.05
+    volume: 0.2
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3339,7 +3339,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase2
     clip: {fileID: 8300000, guid: e25d73a9e629c474b8394a095be44c18, type: 3}
-    volume: 0.1
+    volume: 0.2
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3348,7 +3348,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase3
     clip: {fileID: 8300000, guid: 9444e41513d238b46a698458e11dc645, type: 3}
-    volume: 0.00001
+    volume: 0.1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3366,7 +3366,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Title
     clip: {fileID: 8300000, guid: 4f9b25f74d6b57a4a8fd9fd375e5f431, type: 3}
-    volume: 0.1
+    volume: 0.2
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3385,7 +3385,7 @@ MonoBehaviour:
   sounds:
   - name: Meduim Click
     clip: {fileID: 8300000, guid: de46b11de1d64914e8e77bc8b295504d, type: 3}
-    volume: 0.001
+    volume: 0.3
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3412,7 +3412,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Heavy Click
     clip: {fileID: 8300000, guid: 1b0a7b299969d14419f5d9a48799b3e7, type: 3}
-    volume: 0.05
+    volume: 0.5
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3466,7 +3466,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Step1
     clip: {fileID: 8300000, guid: 04ddf57ff4952e94d880dc2fd420b489, type: 3}
-    volume: 0.75
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3475,7 +3475,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Step2
     clip: {fileID: 8300000, guid: d49d36736580da6429b43f24a1743c2a, type: 3}
-    volume: 0.75
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3484,7 +3484,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Step3
     clip: {fileID: 8300000, guid: df2782ede55e2004ea3a1abc0c237fae, type: 3}
-    volume: 0.75
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3542,6 +3542,24 @@ MonoBehaviour:
     volumeVariance: 0.3
     pitch: 1
     pitchVariance: 0.4
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Taser
+    clip: {fileID: 8300000, guid: c3135cce678f3e94bb8b06b1d72266e8, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Player Hit
+    clip: {fileID: 8300000, guid: a6a53d0ddeb3e174394525c49c5c2c0a, type: 3}
+    volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
@@ -13576,7 +13594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1687364659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15897,7 +15915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1967542100
 RectTransform:
   m_ObjectHideFlags: 0

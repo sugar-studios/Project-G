@@ -1,3 +1,4 @@
+using ProjectG.Audio;
 using ProjectG.Player;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,12 +16,18 @@ namespace ProjectG.Enemies.Enemy
         public taserShoot taser;
         public Animator guardAnimator;
 
+
+        private AudioManager aM;
+
         private float timeBetweenShoots;
 
         private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             PlayerDetection = GetComponent<PlayerDetection>();
+
+            aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            Debug.Log(aM);
         }
         private void setAnimator()
         {
@@ -54,6 +61,7 @@ namespace ProjectG.Enemies.Enemy
                     attackPlayer();
                     PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
                     PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
+                    aM.Play("Player Hit");
                 }
 
             }
@@ -119,8 +127,8 @@ namespace ProjectG.Enemies.Enemy
         {
             if (PlayerDetection.inRange)
             {
-                //reduce playerHP
-            }            //taser.shoot();
+                aM.Play("Taser");
+            }           
 
 
 

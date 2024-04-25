@@ -27,7 +27,7 @@ namespace ProjectG.Player
         public float playerHealth;
         public float playerVelo;
 
-        [SerializeField] private float currentStamina;
+        public float currentStamina;
         public float maxStamina = 100f;
         private float staminaDepletionRate = 10f;
         private float staminaRegainRate = 5f;
