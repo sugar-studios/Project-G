@@ -109,7 +109,16 @@ namespace ProjectG.Items
 
             for (int i = 0; i < numberOfItems; i++)
             {
-                Instantiate(allItems[Random.Range(0, allItems.Length)].model, spawner.RandomPointOnNavMesh(), Quaternion.identity ,allItemRoot);
+                Vector3 point = new Vector3();
+
+                if (spawner.RandomPoint(spawner.randomPoint(), spawner.range, out point))
+                {
+                    Instantiate(allItems[Random.Range(0, allItems.Length)].model, point, Quaternion.identity ,allItemRoot);
+                }
+                else
+                {
+                    Debug.Log("not valid point, press again");
+                }
             }
         }
     }

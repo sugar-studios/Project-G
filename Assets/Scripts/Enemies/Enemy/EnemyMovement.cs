@@ -17,7 +17,7 @@ namespace ProjectG.Enemies.Enemy
 
         private float timeBetweenShoots;
 
-        private void Start()
+        private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             PlayerDetection = GetComponent<PlayerDetection>();
