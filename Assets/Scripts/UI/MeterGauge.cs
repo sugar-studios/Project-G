@@ -48,7 +48,7 @@ namespace ProjectG.UI
         public IEnumerator AnimateMeterAndPulse()
         {
             float startTime = Time.time;
-            while (Time.time < startTime + fillDuration)
+            while (-100 <= value)
             {
                 // Check if paused, if paused, wait until unpaused
                 while (paused)
@@ -81,6 +81,7 @@ namespace ProjectG.UI
             if (!turnOffAttack)
             {
                 birdAttackScript.gameObject.SetActive(true);
+                value = 0;
             }
         }
 
