@@ -249,6 +249,7 @@ namespace ProjectG.Manger
             player.SetActive(true);
             player.GetComponent<PlayerMovement>().speed = 10;
             player.GetComponent<PlayerMovement>().sprintSpeed = 25;
+            player.GetComponent<PlayerMovement>().currentStamina = player.GetComponent<PlayerMovement>().maxStamina;
         }
 
         void turnOffAllExits()

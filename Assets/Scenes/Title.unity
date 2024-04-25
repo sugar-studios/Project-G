@@ -3325,7 +3325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0738e7b45aa22294e9df10202b2a089e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 24300002, guid: 5a6527fb911f72940a5f33133401e06f, type: 2}
   settings: {fileID: 0}
   songs:
   - name: Normal Chase1
