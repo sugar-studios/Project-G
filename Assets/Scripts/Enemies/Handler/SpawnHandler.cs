@@ -58,7 +58,7 @@ namespace ProjectG.Enemies.Handler
             point.x = Random.Range(-spawnBounds.x, spawnBounds.x);
             point.z = Random.Range(-spawnBounds.y,  spawnBounds.y);
 
-            return Vector3.zero;
+            return point;
         }
         
         public float range = 15.0f;
