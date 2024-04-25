@@ -26,8 +26,15 @@ namespace ProjectG.Enemies.Enemy
             navMeshAgent = GetComponent<NavMeshAgent>();
             PlayerDetection = GetComponent<PlayerDetection>();
 
-            aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-            Debug.Log(aM);
+            try
+            { 
+               aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); 
+            }
+            catch
+            {
+                aM = null;
+            }
+            
         }
         private void setAnimator()
         {
@@ -61,7 +68,10 @@ namespace ProjectG.Enemies.Enemy
                     attackPlayer();
                     PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
                     PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
-                    aM.Play("Player Hit");
+                    if (aM != null)
+                    {
+                        aM.Play("Player Hit");
+                    }
                 }
 
             }
@@ -127,7 +137,10 @@ namespace ProjectG.Enemies.Enemy
         {
             if (PlayerDetection.inRange)
             {
-                aM.Play("Taser");
+                if (aM != null)
+                {
+                    aM.Play("Taser");
+                }
             }           
 
 
