@@ -69,8 +69,6 @@ namespace ProjectG.Enemies.Handler
             point = Vector3.Lerp(point, navMeshData.vertices[navMeshData.indices[randomIndex + 2]], Random.value); // Another random point within the triangle
 
             Vector3 validPoint = ValidatePoint(point);
-            Debug.Log("Random Point: " + point);
-            Debug.Log("Valid Point: " + validPoint);
             return ValidatePoint(point);
             //return point;
         }

@@ -3502,7 +3502,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Bird Alarm
     clip: {fileID: 8300000, guid: eaca1e1ae768f35498f853ac1bc0c3bb, type: 3}
-    volume: 1
+    volume: 0.65
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3566,6 +3566,15 @@ MonoBehaviour:
   - name: Exit B
     clip: {fileID: 8300000, guid: eee377b0028a6b14d81d93f6ecd22b4b, type: 3}
     volume: 0.75
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Error
+    clip: {fileID: 8300000, guid: 02ba0e4a047cec24192dcf097114ffe3, type: 3}
+    volume: 1
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -6309,7 +6318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rS: {fileID: 1012784780}
   codeText: {fileID: 607449285}
-  codeActive: 0
+  codeActive: 1
 --- !u!1001 &781240703
 PrefabInstance:
   m_ObjectHideFlags: 0
