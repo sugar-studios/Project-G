@@ -67,9 +67,10 @@ namespace ProjectG.UI
                 yield return null;
             }
 
-            // Pulse effect
+            sound.sfx("Bird Alarm");
             for (int i = 0; i < 3; i++)
             {
+
                 yield return StartCoroutine(FadeTo(fillImage, new Color(1, 1, 1, 0), 0.25f));
                 SetYPosition(0);
                 yield return StartCoroutine(FadeTo(fillImage, new Color(1, 1, 1, 49 / 255f), 0.25f));
@@ -86,7 +87,6 @@ namespace ProjectG.UI
 
         private IEnumerator FadeTo(RawImage image, Color targetColor, float duration)
         {
-            sound.sfx("Bird Alarm");
             Color startColor = image.color;
             for (float t = 0; t < 1; t += Time.deltaTime / duration)
             {

@@ -110,17 +110,21 @@ namespace ProjectG.Audio
 
         private void PlaySong(Sound song)
         {
+            
             // Your existing code for playing a song
             if (settings == null)
             {
-                song.source.volume = song.volume * (1f + UnityEngine.Random.Range(-song.volumeVariance / 2f, song.volumeVariance / 2f));
+                Debug.Log("true");
+                song.source.volume = song.volume;
             }
             else
             {
+                Debug.Log("false");
                 song.source.volume = song.volume * settings.volume;
             }
 
-            song.source.pitch = song.pitch * (1f + UnityEngine.Random.Range(-song.pitchVariance / 2f, song.pitchVariance / 2f));
+            song.source.pitch = 1;
+
 
             song.source.Play();
 
@@ -130,18 +134,18 @@ namespace ProjectG.Audio
 
         private void PlaySound(Sound sound)
         {
-            // Your existing code for playing a sound
             if (settings == null)
             {
-                sound.source.volume = sound.volume * (1f + UnityEngine.Random.Range(-sound.volumeVariance / 2f, sound.volumeVariance / 2f));
+                sound.source.volume = sound.source.volume;
             }
             else
             {
-                sound.source.volume = sound.volume * settings.volume;
+                sound.source.volume *= settings.volume;
             }
 
             sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
 
+          
             sound.source.Play();
 
             // Add the audio source to the list of active audio sources
@@ -181,10 +185,27 @@ namespace ProjectG.Audio
             {
                 if (settings != null)
                 {
-                    audioSource.volume = settings.volume;
+                    // Find the corresponding Sound object for the audioSource
+                    Sound sound = Array.Find(sounds, item => item.source == audioSource);
+                    if (sound != null)
+                    {
+                        // Update the volume of the audio source based on settings.volume and sound.volume
+                        audioSource.volume = sound.volume * settings.volume;
+                    }
+                    else
+                    {
+                        // If not found in sounds, try to find it in songs
+                        Sound song = Array.Find(songs, item => item.source == audioSource);
+                        if (song != null)
+                        {
+                            // Update the volume of the audio source based on settings.volume and song.volume
+                            audioSource.volume = song.volume * settings.volume;
+                        }
+                    }
                 }
             }
         }
+
 
         private void Update()
         {

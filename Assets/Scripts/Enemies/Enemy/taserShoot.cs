@@ -1,3 +1,4 @@
+using ProjectG.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,7 +11,6 @@ namespace ProjectG.Enemies.Enemy
         public ParticleSystem particle1;
         public ParticleSystem particle2;
 
-       
         public void shoot()
         {
             particle1.gameObject.SetActive(false);
