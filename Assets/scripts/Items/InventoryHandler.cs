@@ -41,6 +41,26 @@ namespace ProjectG.Items
 
         }
 
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.tag == "Item")
+            {
+                playersItems[currentItemIndex] = other.gameObject.GetComponent<itemPickupContainer>().item;
+            }
+            Debug.Log(other.gameObject.name);
+
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Item")
+            {
+                recievedItem(other.GetComponent<itemPickupContainer>().item);
+                Destroy(other.gameObject);
+            }
+            Debug.Log(other.name + other.tag);
+        }
+
         private void Update()
         {
             //dont touch this

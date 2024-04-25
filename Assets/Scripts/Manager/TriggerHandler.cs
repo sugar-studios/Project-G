@@ -1,4 +1,5 @@
 using ProjectG;
+using ProjectG.Items;
 using UnityEngine;
 
 namespace ProjectG.Manger
