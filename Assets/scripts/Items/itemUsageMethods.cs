@@ -35,6 +35,14 @@ namespace ProjectG.Items
 
         }
 
+        public void regenHealth()
+        {
+            PlayerMovement move = GetComponent<PlayerMovement>();
+
+            move.playerHealth = Mathf.Clamp(move.playerHealth + 20, -1, 100);
+
+        }
+
         IEnumerator turnOffBirds(float duration)
         {
             // do something before

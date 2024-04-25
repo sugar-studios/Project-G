@@ -23,6 +23,9 @@ namespace ProjectG.Items
         public NavMeshSurface surface;
         public Item[] allItems;
         public Transform allItemRoot;
+        public Texture2D alphaTexture;
+        public Transform miniItemRoot;
+        public GameObject miniItemPrefab;
 
         public MeterGauge BirdAttack;
 
@@ -31,6 +34,11 @@ namespace ProjectG.Items
             currentItemIndex = 0;
             spawnItems();
             updateIcons();
+        }
+        private void Awake()
+        {
+            updateIcons();
+
         }
 
         private void Update()
@@ -49,12 +57,15 @@ namespace ProjectG.Items
                 }
             }
 
-            if (Input.GetAxis("Fire1") == 1 && playersItems[currentItemIndex].usingItem)
+            if (Input.GetAxis("Fire1") == 1 && playersItems[currentItemIndex] != null)
             {
-                Debug.Log("fire");
-                GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
-                playersItems[currentItemIndex] = null;
-                updateIcons();
+                if (playersItems[currentItemIndex].usingItem)
+                {
+                    Debug.Log("fire");
+                    GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
+                    playersItems[currentItemIndex] = null;
+                    updateIcons();
+                }
             }
         }
 
@@ -67,7 +78,7 @@ namespace ProjectG.Items
                     slots[i].texture = playersItems[i].icon;
                 }
                 else{
-                    slots[i].texture = null;
+                    slots[i].texture = alphaTexture;
                 }
             }
         }
@@ -87,7 +98,10 @@ namespace ProjectG.Items
 
             if (playersItems[currentItemIndex] != null)
             {
-                Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
+                if (playersItems[currentItemIndex].model != null)
+                {
+                    Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
+                }
             }
         }
 
@@ -109,15 +123,20 @@ namespace ProjectG.Items
 
             for (int i = 0; i < numberOfItems; i++)
             {
-                Vector3 point = new Vector3();
+                Vector3 point;
+                spawner.spawnBounds.x = 200;
+                spawner.spawnBounds.y = 100;
 
                 if (spawner.RandomPoint(spawner.randomPoint(), spawner.range, out point))
                 {
+                    Vector3 itemPoint = point / 100;
                     Instantiate(allItems[Random.Range(0, allItems.Length)].model, point, Quaternion.identity ,allItemRoot);
+                    Instantiate(miniItemPrefab, itemPoint, Quaternion.identity, miniItemRoot);
+
                 }
                 else
                 {
-                    Debug.Log("not valid point, press again");
+                    Debug.Log("not valid point, item not spawning");
                 }
             }
         }

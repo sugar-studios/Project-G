@@ -61,14 +61,14 @@ namespace ProjectG.Enemies.Handler
             return point;
         }
         
-        public float range = 15.0f;
+        public float range = 5.0f;
         public bool RandomPoint(Vector3 center, float range, out Vector3 result)
         {
             for (int i = 0; i < 30; i++)
             {
                 Vector3 randomPoint = center + Random.insideUnitSphere * range;
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas))
                 {
                     result = hit.position;
                     return true;
