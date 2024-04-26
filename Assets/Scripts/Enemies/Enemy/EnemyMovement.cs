@@ -17,9 +17,7 @@ namespace ProjectG.Enemies.Enemy
         public Animator guardAnimator;
         public string chase = "none";
 
-
         private AudioManager aM;
-
         private float timeBetweenShoots;
 
         private void Awake()
@@ -28,15 +26,15 @@ namespace ProjectG.Enemies.Enemy
             PlayerDetection = GetComponent<PlayerDetection>();
 
             try
-            { 
-               aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>(); 
+            {
+                aM = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
             }
             catch
             {
                 aM = null;
             }
-            
         }
+
         private void setAnimator()
         {
             guardAnimator.SetFloat("velocityY", navMeshAgent.velocity.y);
@@ -47,112 +45,98 @@ namespace ProjectG.Enemies.Enemy
         {
             setAnimator();
         }
+
         private void Update()
         {
-            setAnimator() ;
-            if(PlayerDetection.seePlayer && PlayerDetection.inRange)
+            setAnimator();
+
+            if (PlayerDetection.playerInSightTrigger && PlayerDetection.seePlayer)
             {
                 FaceTarget(PlayerDetection.player.position);
-                timeBetweenShoots += Time.deltaTime;
-
-                // Calculate the direction vector from the player to the agent
-                Vector3 directionToPlayer = transform.position - PlayerDetection.player.position;
-                directionToPlayer.y = 0f; // Ignore vertical difference
-
-                // If the agent is too close to the player, set the destination to a point away from the player
-                if (directionToPlayer.magnitude < 7)
-                {
-                    Vector3 desiredPosition = PlayerDetection.player.position + directionToPlayer.normalized * 7;
-                    navMeshAgent.SetDestination(desiredPosition);
-                }
-
-                if (timeBetweenShoots > 1 && navMeshAgent.remainingDistance < 0.4f)
-                {
-                    guardAnimator.SetFloat("shooting", 1);
-
-                    attackPlayer();
-                    PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
-                    PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
-                    if (aM != null)
-                    {
-                        aM.Play("Player Hit");
-                    }
-                }
-
-            }
-            else if (PlayerDetection.seePlayer)
-            {
-                Vector3 directionToPlayer = transform.position - PlayerDetection.player.position;
-
-                Vector3 desiredPosition = PlayerDetection.player.position + directionToPlayer.normalized * 7;
-
-                navMeshAgent.SetDestination(desiredPosition);
-                guardAnimator.SetFloat("shooting", 0);
-
+                ChasePlayer();
             }
             else if (PlayerDetection.inHearing)
             {
-                guardAnimator.SetFloat("shooting", 0);
-
                 HeardPlayer();
             }
-            else
+            else if (!PlayerDetection.seePlayer && chase != "none")
             {
-                guardAnimator.SetFloat("shooting", 0);
-
-                roaming();
-            }
-
-            if (guardAnimator.GetFloat("shooting") == 1)
-            {
-                taser.particle1.gameObject.SetActive(true);
-                taser.particle2.gameObject.SetActive(true);
-
+                StartCoroutine(LostSightOfPlayer());
             }
             else
             {
-                taser.particle1.gameObject.SetActive(false);
-                taser.particle2.gameObject.SetActive(false);
-
+                Roam();
             }
+
+            taser.particle1.gameObject.SetActive(guardAnimator.GetFloat("shooting") == 1);
+            taser.particle2.gameObject.SetActive(guardAnimator.GetFloat("shooting") == 1);
         }
 
-        private void roaming()
+        private IEnumerator LostSightOfPlayer()
         {
-            if (!PlayerDetection.seePlayer)
+            yield return new WaitForSeconds(3);
+            chase = "none";
+            Roam();
+        }
+
+
+        private void Roam()
+        {
+            if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance < 0.5f)
             {
-                if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance < 0.5f)
+                Vector3 randomPosition = Random.insideUnitSphere * roamingRange;
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(transform.position + randomPosition, out hit, roamingRange, NavMesh.AllAreas))
                 {
-                    Vector3 randomPosition = Random.insideUnitSphere * roamingRange;
-                    NavMeshHit hit;
-                    NavMesh.SamplePosition(transform.position + randomPosition, out hit, roamingRange, NavMesh.AllAreas);
                     navMeshAgent.SetDestination(hit.position);
                 }
             }
         }
+
         private void HeardPlayer()
         {
-            if (PlayerDetection.inHearing)
-            {
-                Debug.Log("Go to player!");
-                Debug.Log(PlayerDetection.player.position);
-                navMeshAgent.SetDestination(PlayerDetection.player.position);
-                PlayerDetection.OverrideHearingOff();
-            }
+            navMeshAgent.SetDestination(PlayerDetection.player.position);
+            PlayerDetection.OverrideHearingOff();
         }
-        private void attackPlayer()
+
+        private void ChasePlayer()
         {
-            if (PlayerDetection.inRange)
+            // Face the player
+            FaceTarget(PlayerDetection.player.position);
+
+            // Set the destination to the player's position
+            navMeshAgent.SetDestination(PlayerDetection.player.position);
+
+            // If close enough and ready to shoot
+            if (Vector3.Distance(transform.position, PlayerDetection.player.position) < 7)
             {
-                if (aM != null)
+                if (timeBetweenShoots > 1 && navMeshAgent.remainingDistance < 0.4f)
                 {
-                    aM.Play("Taser");
+                    guardAnimator.SetFloat("shooting", 1);
+                    AttackPlayer();
                 }
-            }           
+                else
+                {
+                    guardAnimator.SetFloat("shooting", 0);
+                }
+            }
+            else
+            {
+                guardAnimator.SetFloat("shooting", 0);
+            }
 
+            timeBetweenShoots += Time.deltaTime;
+        }
 
-
-
+        private void AttackPlayer()
+        {
+            PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
+            PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
+            if (aM != null)
+            {
+                aM.Play("Player Hit");
+                aM.Play("Taser");
+            }
             timeBetweenShoots = 0;
         }
 

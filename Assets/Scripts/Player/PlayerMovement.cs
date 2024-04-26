@@ -44,6 +44,8 @@ namespace ProjectG.Player
         private bool shouldJump;
         private bool isCrouching;
         private Vector3 standingScale;
+        private Vector3 moveDirection;
+
         private float moveSpeed;
 
         private bool isSpeedReduced = false;
@@ -105,7 +107,8 @@ namespace ProjectG.Player
                 controller.height = 2;
                 staminaRegainRate = 5f;
 
-                if (Input.GetKey(KeyCode.LeftShift) && !isCrouching && currentStamina > 0)
+                // Check if sprint key is pressed and player is moving
+                if (Input.GetKey(KeyCode.LeftShift) && moveDirection.magnitude > 0.1f && !isCrouching && currentStamina > 0)
                 {
                     moveSpeed = sprintSpeed;
                     currentStamina -= staminaDepletionRate * Time.deltaTime;
@@ -154,6 +157,7 @@ namespace ProjectG.Player
             }
         }
 
+
         private void FixedUpdate()
         {
             if (shouldJump)
@@ -169,20 +173,22 @@ namespace ProjectG.Player
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
-            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+            moveDirection = new Vector3(horizontal, 0f, vertical).normalized; // Update the class-level variable directly
 
-            if (direction.magnitude >= 0.1f)
+            if (moveDirection.magnitude >= 0.1f) // Use the class-level variable here
             {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + gameCamera.eulerAngles.y;
+                float targetAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg + gameCamera.eulerAngles.y;
                 float angle = Mathf.SmoothDampAngle(playerGraphics.transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 playerGraphics.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
             }
-            playerVelo = Mathf.Sqrt(Mathf.Pow(horizontal, 2) + Mathf.Pow(vertical, 2)) * moveSpeed;
-
+            playerVelo = moveDirection.magnitude * moveSpeed; // Ensure this uses the class-level variable
         }
+
+
+
 
         void ApplyGravity()
         {
@@ -199,7 +205,7 @@ namespace ProjectG.Player
         void UpdateNoiseScale()
         {
             Vector3 scale;
-            if (!isGrounded && moveSpeed !=sprintSpeed)
+            if (!isGrounded && playerVelo !>= (sprintSpeed - 5))
             {
                 noiseIntesnity = 1.75f;
                 scale = new Vector3(75, 75, 75);
@@ -209,14 +215,14 @@ namespace ProjectG.Player
                 noiseIntesnity = .5f;
                 scale = new Vector3(30, 30, 30);
             }
-            else if (moveSpeed == sprintSpeed)
+            else if (playerVelo >= (sprintSpeed -5))
             {
                 noiseIntesnity = 2.25f;
                 scale = new Vector3(90, 90, 90);
             }
             else if (playerVelo == 0)
             {
-                noiseIntesnity = .5f;
+                noiseIntesnity = .1f;
                 scale = new Vector3(15, 15, 15);
             }
             else

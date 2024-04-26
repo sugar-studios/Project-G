@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 78.39991, y: 78.39991, z: 78.39991}
+  m_LocalScale: {x: 83.25287, y: 83.25287, z: 83.25287}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5447658687875351750}
@@ -115,7 +115,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2284566544886279158}
   - component: {fileID: 933951840162816981}
-  - component: {fileID: 4543851054502067609}
   m_Layer: 12
   m_Name: Ears
   m_TagString: Enemy
@@ -161,18 +160,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &4543851054502067609
-MonoBehaviour:
+--- !u!1 &6164898872864033525
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362719967579160552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0898ff1b03dcb34abdcbb896995514e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4054306043630870354}
+  m_Layer: 12
+  m_Name: EnemyOrgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4054306043630870354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6164898872864033525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6065884278248046505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8009427248159093725
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +294,7 @@ MonoBehaviour:
   overrideSeePlayer: 0
   overrideInRange: 0
   inRange: 0
+  playerInSightTrigger: 0
   enemyPlayerRange: {x: 0, y: 20}
   player: {fileID: 0}
 --- !u!114 &4999884794129627018
@@ -664,6 +683,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b6c4f756ffad3746a81189a9d279a72, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 4054306043630870354}
     - targetCorrespondingSourceObject: {fileID: -2916741891282405652, guid: 5b6c4f756ffad3746a81189a9d279a72, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7276849395743015848}
@@ -702,7 +724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 14.25
+      value: 10.487573
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -710,11 +732,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4763
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31.939
+      value: 23.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -757,6 +779,10 @@ PrefabInstance:
       value: VisionCone
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       propertyPath: m_TagString
       value: EnemyVision
       objectReference: {fileID: 0}
@@ -766,7 +792,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7447270294651765239}
+      addedObject: {fileID: 6177618274008341671}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3474791009354202125}
   m_SourcePrefab: {fileID: 100100000, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
 --- !u!4 &7250969821071822112 stripped
 Transform:
@@ -778,7 +807,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
   m_PrefabInstance: {fileID: 7145567601545784011}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7447270294651765239
+--- !u!114 &6177618274008341671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -787,8 +816,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 8064625380119549850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcedce1519ea8f34c82da23c06f62c64, type: 3}
+  m_Script: {fileID: 11500000, guid: c0898ff1b03dcb34abdcbb896995514e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManager: {fileID: 0}
-  enableStay: 0
+  playerDetection: {fileID: 6973762983029916441}
+  enemyOrigin: {fileID: 4054306043630870354}
+  playerOrigin: {fileID: 0}
+  excludedLayers:
+    serializedVersion: 2
+    m_Bits: 15294
+--- !u!64 &3474791009354202125
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064625380119549850}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3613567641014311022, guid: a036de0571f245946bd5c09c507c3af5, type: 3}
