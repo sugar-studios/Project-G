@@ -102,6 +102,7 @@ namespace ProjectG.Items
                     }
                     updateIcons();
                 }
+                updateIcons();
             }
         }
 
