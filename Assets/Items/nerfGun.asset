@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273cd1a503297e74e9bfb6318ff1e0ac, type: 3}
+  m_Name: nerfGun
+  m_EditorClassIdentifier: 
+  name: nerf gun
+  description: shot the guard to slow them down
+  icon: {fileID: 2800000, guid: 5dd578c2ae5e5954aabf9973a1f9ca53, type: 3}
+  model: {fileID: 7437918911859233430, guid: fd38c984f0b42d640a9ad1c61e9d5d51, type: 3}
+  usingItem: 1
+  reuseable: 1
+  itemUseMethod: UseNerfGun

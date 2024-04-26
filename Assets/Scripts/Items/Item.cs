@@ -12,6 +12,7 @@ namespace ProjectG.Items
         public GameObject model;
 
         public bool usingItem;
+        public bool reuseable;
         public string itemUseMethod;
 
     }

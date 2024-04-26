@@ -16,6 +16,7 @@ namespace ProjectG.Enemies.Enemy
         public taserShoot taser;
         public Animator guardAnimator;
         public string chase = "none";
+        public bool stunned;
 
 
         private AudioManager aM;
@@ -103,7 +104,7 @@ namespace ProjectG.Enemies.Enemy
                 roaming();
             }
 
-            if (guardAnimator.GetFloat("shooting") == 1)
+            if (guardAnimator.GetFloat("shooting") == 1 && !stunned)
             {
                 taser.particle1.gameObject.SetActive(true);
                 taser.particle2.gameObject.SetActive(true);

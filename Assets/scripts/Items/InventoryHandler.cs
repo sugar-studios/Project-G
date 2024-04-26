@@ -26,6 +26,7 @@ namespace ProjectG.Items
         public Texture2D alphaTexture;
         public Transform miniItemRoot;
         public GameObject miniItemPrefab;
+        public GameObject cross;
 
         public MeterGauge BirdAttack;
 
@@ -73,6 +74,17 @@ namespace ProjectG.Items
                 {
                     currentItemIndex = i;
                     updateObject();
+
+                    //check if gun
+                    if (playersItems[currentItemIndex] == allItems[2])
+                    {
+                        cross.SetActive(true);
+                    }
+                    else
+                    {
+                        cross.SetActive(false);
+                    }
+
                     updateCurrentItem(slots[i].transform);
                 }
             }
@@ -81,9 +93,13 @@ namespace ProjectG.Items
             {
                 if (playersItems[currentItemIndex].usingItem)
                 {
-                    Debug.Log("fire");
                     GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
-                    playersItems[currentItemIndex] = null;
+
+                    if (!playersItems[currentItemIndex].reuseable)
+                    {
+                        playersItems[currentItemIndex] = null;
+                        Destroy(itemRoot.transform.GetChild(0).gameObject);
+                    }
                     updateIcons();
                 }
             }
