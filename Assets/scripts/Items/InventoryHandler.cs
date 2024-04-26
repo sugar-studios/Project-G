@@ -47,7 +47,7 @@ namespace ProjectG.Items
             {
                 playersItems[currentItemIndex] = other.gameObject.GetComponent<itemPickupContainer>().item;
             }
-            Debug.Log(other.gameObject.name);
+            //Debug.Log(other.gameObject.name);
 
         }
 
@@ -58,7 +58,7 @@ namespace ProjectG.Items
                 recievedItem(other.GetComponent<itemPickupContainer>().item);
                 Destroy(other.gameObject);
             }
-            Debug.Log(other.name + other.tag);
+            //Debug.Log(other.name + other.tag);
         }
 
         private void Update()

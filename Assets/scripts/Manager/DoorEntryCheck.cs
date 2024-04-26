@@ -23,6 +23,7 @@ namespace ProjectG.Manager
                 no();
                 return;
             }
+            pS.sfx("Exit B");
             gM.value -= 5;
             Enter = '1';
             pM.playerHealth += 10;
@@ -34,6 +35,11 @@ namespace ProjectG.Manager
         public void no()
         {
             Enter = '2';
+        }
+
+        private void Awake()
+        {
+            gameObject.SetActive(false);
         }
 
 
