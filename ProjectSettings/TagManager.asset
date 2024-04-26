@@ -18,6 +18,8 @@ TagManager:
   - GameManagerTag
   - Enemy
   - PlayerOrgin
+  - EnemyEars
+  - PlayerRangeDetect
   layers:
   - Default
   - TransparentFX

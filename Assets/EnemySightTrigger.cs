@@ -2,7 +2,7 @@ using ProjectG.Enemies.Enemy;
 using System.Collections;
 using UnityEngine;
 
-namespace ProjectG.Enemy
+namespace ProjectG.Enemies.Enemy
 {
     public class EnemySightTrigger : MonoBehaviour
     {
@@ -56,11 +56,10 @@ namespace ProjectG.Enemy
                 if (hit.collider.CompareTag("Player"))
                 {
                     playerDetection.overrideSeePlayer = true;
-                    Debug.Log("Player seen");
                 }
                 else
                 {
-                    Debug.Log("obstructed object: " + hit.collider.gameObject.name);
+                    Debug.Log(hit.collider.gameObject.name);
                     playerDetection.overrideSeePlayer = false;
                 }
             }

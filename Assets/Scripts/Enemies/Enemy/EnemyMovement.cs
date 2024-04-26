@@ -13,9 +13,11 @@ namespace ProjectG.Enemies.Enemy
         private PlayerDetection PlayerDetection;
         public NavMeshAgent navMeshAgent;
         public float roamingRange;
+        public float attackRange = 5f; // Adjustable range for attacking
         public taserShoot taser;
         public Animator guardAnimator;
         public string chase = "none";
+        public bool gaurdIsStunned = false;
 
         private AudioManager aM;
         private float timeBetweenShoots;
@@ -50,27 +52,39 @@ namespace ProjectG.Enemies.Enemy
         {
             setAnimator();
 
-            if (PlayerDetection.playerInSightTrigger && PlayerDetection.seePlayer)
+            if (!gaurdIsStunned)
             {
-                FaceTarget(PlayerDetection.player.position);
-                ChasePlayer();
-            }
-            else if (PlayerDetection.inHearing)
-            {
-                HeardPlayer();
-            }
-            else if (!PlayerDetection.seePlayer && chase != "none")
-            {
-                StartCoroutine(LostSightOfPlayer());
-            }
-            else
-            {
-                Roam();
+                if (PlayerDetection.inRange) // Check if the player is in range
+                {
+                    FaceTarget(PlayerDetection.player.position);
+                    if (PlayerDetection.seePlayer)
+                    {
+                        AttemptAttack();
+                    }
+                }
+                else if (PlayerDetection.playerInSightTrigger && PlayerDetection.seePlayer)
+                {
+                    FaceTarget(PlayerDetection.player.position);
+                    ChasePlayer(); // Continue chasing if the player is seen
+                }
+                else if (PlayerDetection.inHearing)
+                {
+                    HeardPlayer();
+                }
+                else if (!PlayerDetection.seePlayer && chase != "none")
+                {
+                    StartCoroutine(LostSightOfPlayer());
+                }
+                else
+                {
+                    Roam();
+                }
             }
 
             taser.particle1.gameObject.SetActive(guardAnimator.GetFloat("shooting") == 1);
             taser.particle2.gameObject.SetActive(guardAnimator.GetFloat("shooting") == 1);
         }
+
 
         private IEnumerator LostSightOfPlayer()
         {
@@ -78,7 +92,6 @@ namespace ProjectG.Enemies.Enemy
             chase = "none";
             Roam();
         }
-
 
         private void Roam()
         {
@@ -106,26 +119,26 @@ namespace ProjectG.Enemies.Enemy
 
             // Set the destination to the player's position
             navMeshAgent.SetDestination(PlayerDetection.player.position);
+        }
 
-            // If close enough and ready to shoot
-            if (Vector3.Distance(transform.position, PlayerDetection.player.position) < 7)
+        private void AttemptAttack()
+        {
+            if (PlayerDetection.inRange)
             {
+                // Initiate attack if the player is detected within the range
                 if (timeBetweenShoots > 1 && navMeshAgent.remainingDistance < 0.4f)
                 {
+                    //Debug.Log("Attack Player!");
                     guardAnimator.SetFloat("shooting", 1);
                     AttackPlayer();
                 }
-                else
-                {
-                    guardAnimator.SetFloat("shooting", 0);
-                }
+                timeBetweenShoots += Time.deltaTime;
             }
             else
             {
+                timeBetweenShoots = 0;
                 guardAnimator.SetFloat("shooting", 0);
             }
-
-            timeBetweenShoots += Time.deltaTime;
         }
 
         private void AttackPlayer()
@@ -138,6 +151,7 @@ namespace ProjectG.Enemies.Enemy
                 aM.Play("Taser");
             }
             timeBetweenShoots = 0;
+            guardAnimator.SetFloat("shooting", 0);
         }
 
         private void FaceTarget(Vector3 destination)

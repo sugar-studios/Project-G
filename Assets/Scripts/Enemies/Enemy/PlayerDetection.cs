@@ -13,7 +13,6 @@ namespace ProjectG.Enemies.Enemy
         public bool inHearing;
         public bool overrideHeardingOff;
         public bool overrideSeePlayer;
-        public bool overrideInRange;
         public bool inRange;
         public bool playerInSightTrigger; 
 
@@ -33,18 +32,14 @@ namespace ProjectG.Enemies.Enemy
         {
             inHearing = false;
         }
+        public void overrideInRange()
+        {
+            inRange = false;
+        }
 
         private void Update()
         {
-            if (Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y && Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x || overrideInRange)
-            {
-                inRange = true;
-            }
-            else
-            {
-                inRange = false;
-            }
-
+            // Removed inRange control from here to allow trigger-based control
             enemyToPlayer = player.position - transform.position;
             angle = Vector3.Angle(transform.forward, enemyToPlayer);
 
@@ -58,12 +53,22 @@ namespace ProjectG.Enemies.Enemy
             }
 
             seePlayer = overrideSeePlayer;
+
+            // Optionally update inRange based on both distance and override, only if overrideInRange is true
+            /*if (overrideInRange)
+            {
+                inRange = Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y && Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x;
+            }
+            */
+            //Debug.Log(inHearing);
         }
+
 
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
+            /*
             enemyToPlayer = player.position - transform.position;
             angle = Vector3.Angle(transform.forward, enemyToPlayer);
 
@@ -74,6 +79,7 @@ namespace ProjectG.Enemies.Enemy
             Gizmos.DrawRay(line2);
 
             Handles.Label(transform.position, $"angle: {angle}");
+            */
         }
 #endif
     }
