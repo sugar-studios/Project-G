@@ -1,6 +1,7 @@
 using ProjectG.Audio;
 using ProjectG.Manger;
 using ProjectG.Player;
+using ProjectG.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace ProjectG.Manager
         public GameManager gM;
         public PlayerMovement pM;
         public PlaySound pS;
+        public MeterGauge mG;
+
         public void yes()
         {
             float testVal = gM.value;
@@ -29,8 +32,8 @@ namespace ProjectG.Manager
             pM.playerHealth += 10;
             pM.currentStamina += pM.maxStamina *.10f;
             gM.UIManager.UpdateScore(gM.value);
-
-            //remove 15% from bird meter and disable it for 3 seconds
+            mG.value += 20;
+            mG.turnOffAttack = true;
         }
         public void no()
         {
