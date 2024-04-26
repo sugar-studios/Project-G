@@ -29,6 +29,11 @@ namespace ProjectG.Enemies.Enemy
             player = GameObject.Find("PlayerController").transform;
         }
 
+        public void OverrideHearingOff()
+        { 
+            inHearing = false;
+        }
+
         private void Update()
         {
             if (Vector3.Distance(player.position, transform.position) < enemyPlayerRange.y && Vector3.Distance(player.position, transform.position) > enemyPlayerRange.x || overrideInRange)
@@ -42,6 +47,10 @@ namespace ProjectG.Enemies.Enemy
 
             enemyToPlayer = player.position - transform.position;
 
+            /* 
+             * 
+             * LEGACY HEARING
+             * 
             if (overrideHeardingOff)
             {
                 //inHearing = false;
@@ -54,6 +63,7 @@ namespace ProjectG.Enemies.Enemy
             {
                 inHearing = false;
             }
+            */
 
             angle = Vector3.Angle(transform.forward, enemyToPlayer);
 

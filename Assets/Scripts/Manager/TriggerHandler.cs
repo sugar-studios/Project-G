@@ -1,4 +1,5 @@
 using ProjectG;
+using ProjectG.Enemies.Enemy;
 using ProjectG.Items;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace ProjectG.Manger
 
         private void Start()
         {
+            GameManager = GameObject.FindWithTag("GameManagerTag").GetComponent<GameManager>();
             RoadBlocker = GameObject.FindWithTag("Main Road").GetComponent<RoadBlocker>();
         }
 
@@ -32,6 +34,27 @@ namespace ProjectG.Manger
             if (other.CompareTag("Player") && this.gameObject.tag == "MainRoadTruck")
             {
                 RoadBlocker.MainRoadTruckTriggerEnter();
+            }
+            if (other.CompareTag("Player") && this.gameObject.tag == "EnemyVision")
+            {
+                Debug.Log("Seen Player");
+                transform.GetComponentInParent<PlayerDetection>().inView = true;
+            }
+            if (other.CompareTag("PlayerNoise") && this.gameObject.tag == "Enemy")
+            {
+                Debug.Log("Heard Player");
+                transform.GetComponentInParent<PlayerDetection>().inHearing = true;
+            }
+            if (this.gameObject.tag == "Enemy")
+            {
+                Debug.Log(other.gameObject.name);
+            }
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player") && this.gameObject.tag == "EnemyVision")
+            {
+                transform.GetComponentInParent<PlayerDetection>().inView = false;
             }
         }
     }

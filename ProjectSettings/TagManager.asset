@@ -14,6 +14,9 @@ TagManager:
   - DoorEntryCheck
   - Item
   - PlayerNoise
+  - EnemyVision
+  - GameManagerTag
+  - Enemy
   layers:
   - Default
   - TransparentFX

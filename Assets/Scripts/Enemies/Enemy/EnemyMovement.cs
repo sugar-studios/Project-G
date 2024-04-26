@@ -134,8 +134,10 @@ namespace ProjectG.Enemies.Enemy
         {
             if (PlayerDetection.inHearing)
             {
+                Debug.Log("Go to player!");
+                Debug.Log(PlayerDetection.player.position);
                 navMeshAgent.SetDestination(PlayerDetection.player.position);
-                //PlayerDetection.overrideHeardingOff;
+                PlayerDetection.OverrideHearingOff();
             }
         }
         private void attackPlayer()
@@ -152,8 +154,6 @@ namespace ProjectG.Enemies.Enemy
 
 
             timeBetweenShoots = 0;
-
-
         }
 
         private void FaceTarget(Vector3 destination)
