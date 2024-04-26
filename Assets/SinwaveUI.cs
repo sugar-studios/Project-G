@@ -1,27 +1,27 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using ProjectG.Player; // Ensure this namespace is correct and accessible
+using ProjectG.Player; 
 
 namespace ProjectG
 {
     public class SinwaveUI : MonoBehaviour
     {
-        public RectTransform parentPanel; // Parent panel to hold the line segments
-        public GameObject lineSegmentPrefab; // Prefab for line segments
-        public PlayerMovement pM; // Reference to the player movement script
+        public RectTransform parentPanel; 
+        public GameObject lineSegmentPrefab; 
+        public PlayerMovement pM; 
         public int points = 100;
-        public float baseAmplitude = 50; // Base value of amplitude
-        public float baseFrequency = 1; // Base value of frequency
-        public float baseMovementSpeed = 1; // Base value of movement speed
-        public float width = 500; // Width of the wave display area
-        public float xOffset = 0; // Horizontal offset for the wave
-        public float intensity = 1; // Current intensity
-        public float targetIntensity = 1; // Target intensity to smoothly transition to
-        public float intensityTransitionSpeed = .05f; // Speed at which intensity transitions
+        public float baseAmplitude = 50; 
+        public float baseFrequency = 1; 
+        public float baseMovementSpeed = 1;
+        public float width = 500; 
+        public float xOffset = 0; 
+        public float intensity = 1;
+        public float targetIntensity = 1;
+        public float intensityTransitionSpeed = .05f; 
         public bool usePlayerNoise;
 
-        private float phase = 0;  // Variable to track the accumulated phase
+        private float phase = 0;  
         private List<GameObject> lineSegments = new List<GameObject>();
 
         void Start()
@@ -33,10 +33,10 @@ namespace ProjectG
         {
             if (usePlayerNoise)
             {
-                targetIntensity = pM.noiseIntesnity; // Get the noise intensity from the player movement
+                targetIntensity = pM.noiseIntesnity; 
             }
 
-            // Smoothly interpolate intensity towards the target intensity
+            
             intensity = Mathf.Lerp(intensity, targetIntensity, intensityTransitionSpeed * Time.deltaTime);
 
             UpdateWave();
