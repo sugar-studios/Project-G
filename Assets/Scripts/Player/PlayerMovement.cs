@@ -8,6 +8,7 @@ namespace ProjectG.Player
     public class PlayerMovement : MonoBehaviour
     {
         public GameObject playerGraphics;
+        public GameObject noise;
         public Transform gameCamera;
         public GameManager manager;
 
@@ -22,6 +23,8 @@ namespace ProjectG.Player
         public Transform groundCheck;
         public float crouchScale = 0.5f;
         public float scaleTransitionSpeed = 5f;
+
+        public float noiseIntesnity = .5f;
 
         public Slider healthSlider;
         public float playerHealth;
@@ -56,6 +59,7 @@ namespace ProjectG.Player
             standingScale = playerGraphics.transform.localScale;
             moveSpeed = speed;
             currentStamina = maxStamina;
+            UpdateNoiseScale(); // Initial noise scale update
         }
 
         private void Update()
@@ -74,11 +78,13 @@ namespace ProjectG.Player
                 shouldJump = true;
                 currentStamina -= maxStamina * 0.05f;
                 timeSinceLastStaminaDepletion = 0f;
+                UpdateNoiseScale(); // Update noise scale when jumping
             }
 
             if (Input.GetKeyDown(KeyCode.C))
             {
                 isCrouching = !isCrouching;
+                UpdateNoiseScale(); // Update noise scale when toggling crouch
             }
 
             Vector3 targetScale = isCrouching ? new Vector3(1, crouchScale, 1) : Vector3.one;
@@ -87,6 +93,7 @@ namespace ProjectG.Player
                 standingScale.y * targetScale.y,
                 standingScale.z * targetScale.z
             );
+
             if (isCrouching)
             {
                 controller.height = 1;
@@ -103,12 +110,15 @@ namespace ProjectG.Player
                     moveSpeed = sprintSpeed;
                     currentStamina -= staminaDepletionRate * Time.deltaTime;
                     timeSinceLastStaminaDepletion = 0f;
+                    UpdateNoiseScale(); // Update noise scale when sprinting
                 }
                 else
                 {
                     moveSpeed = speed;
+                    UpdateNoiseScale(); // Update noise scale when walking or stopping
                 }
             }
+
             playerGraphics.transform.localScale = Vector3.Lerp(playerGraphics.transform.localScale, scaledTargetScale, Time.deltaTime * scaleTransitionSpeed);
 
             if (isGrounded)
@@ -129,6 +139,7 @@ namespace ProjectG.Player
                 moveSpeed *= 0.5f;
                 speedReductionTimer = speedReductionDuration;
                 currentStamina = 0;
+                UpdateNoiseScale(); // Update noise scale when fatigued
             }
 
             if (isSpeedReduced)
@@ -138,6 +149,7 @@ namespace ProjectG.Player
                 {
                     isSpeedReduced = false;
                     moveSpeed = isCrouching ? crouchSpeed : speed;
+                    UpdateNoiseScale(); // Reset noise scale after speed reduction ends
                 }
             }
         }
@@ -182,6 +194,37 @@ namespace ProjectG.Player
         {
             healthSlider.value = playerHealth;
 
+        }
+
+        void UpdateNoiseScale()
+        {
+            Vector3 scale;
+            if (!isGrounded && moveSpeed !=sprintSpeed)
+            {
+                noiseIntesnity = 1.75f;
+                scale = new Vector3(75, 75, 75);
+            }
+            else if (isCrouching)
+            {
+                noiseIntesnity = .5f;
+                scale = new Vector3(30, 30, 30);
+            }
+            else if (moveSpeed == sprintSpeed)
+            {
+                noiseIntesnity = 2.25f;
+                scale = new Vector3(90, 90, 90);
+            }
+            else if (playerVelo == 0)
+            {
+                noiseIntesnity = .5f;
+                scale = new Vector3(15, 15, 15);
+            }
+            else
+            {
+                noiseIntesnity = 1.5f;
+                scale = new Vector3(60, 60, 60);
+            }
+            noise.transform.localScale = scale;
         }
     }
 }

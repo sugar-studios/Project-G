@@ -15,6 +15,7 @@ namespace ProjectG.Enemies.Enemy
         public float roamingRange;
         public taserShoot taser;
         public Animator guardAnimator;
+        public string chase = "none";
 
 
         private AudioManager aM;
@@ -41,10 +42,14 @@ namespace ProjectG.Enemies.Enemy
             guardAnimator.SetFloat("velocityY", navMeshAgent.velocity.y);
             guardAnimator.SetFloat("velocityX", navMeshAgent.velocity.x);
         }
+
+        private void Start()
+        {
+            setAnimator();
+        }
         private void Update()
         {
-
-            setAnimator();
+            setAnimator() ;
             if(PlayerDetection.seePlayer && PlayerDetection.inRange)
             {
                 FaceTarget(PlayerDetection.player.position);
