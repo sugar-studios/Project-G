@@ -34,11 +34,15 @@ namespace ProjectG.Manger
 
         public MeterGauge birdMeter;
 
+        public bool isPaused;
+
         public float score = 0.00f;
 
         private bool loggedResults=false;
 
         public bool isInBiestro = true;
+
+        private bool start = false;
 
         public GameUIManager UIManager;
 
@@ -90,7 +94,6 @@ namespace ProjectG.Manger
 
             isInBiestro = true;
             unpauseBirds();
-            StartCountdown();
         }
 
         private void Update()
@@ -122,6 +125,11 @@ namespace ProjectG.Manger
             if (triggerName == mealReceiveTrigger.name && isReceiveTriggerActive)
             {
                 sound.sfx("Get Food");
+                if (start == false)
+                {
+                    StartCountdown();
+                    start = true;
+                }
                 HandleMealReceived();
                 value = 51.50f;
                 DeleiveringMeal = true;
@@ -171,14 +179,19 @@ namespace ProjectG.Manger
             exitBiestroTrigger.SetActive(true);
         }
 
+        
+
         public void StartCountdown()
         {
             timeRemaining = totalTime;
             InvokeRepeating("UpdateCountdown", 0f, 1f); 
         }
 
+
         void UpdateCountdown()
         {
+            if (isPaused) return; // Skip countdown update if paused
+
             if (timeRemaining > 0)
             {
                 timeRemaining -= 1f;
@@ -189,8 +202,22 @@ namespace ProjectG.Manger
                 timeRemaining = 0;
                 Debug.Log("Time's up!");
                 GameOver();
-                CancelInvoke("UpdateCountdown"); 
+                CancelInvoke("UpdateCountdown");
             }
+        }
+
+        public void PauseCountdown()
+        {
+            if (!isPaused)
+            {
+                isPaused = true;
+                Invoke("ResumeCountdown", 5f); // Resumes countdown after 5 seconds
+            }
+        }
+
+        void ResumeCountdown()
+        {
+            isPaused = false;
         }
 
         void UpdateCountdownText()
@@ -228,9 +255,6 @@ namespace ProjectG.Manger
             player.SetActive(false);
             player.transform.position = spawnPosition;
 
-            exitBiestroTrigger.SetActive(false);
-            isInBiestro = false;
-
             WaitForVariableToBeTrue(Transition.GetComponent<DeActivateTrans>().sceneLoad);
             player.SetActive(true);
 
@@ -247,6 +271,14 @@ namespace ProjectG.Manger
             unpauseBirds();
             WaitForVariableToBeTrue(Transition.GetComponent<DeActivateTrans>().sceneLoad);
             player.SetActive(true);
+            if (DeleiveringMeal)
+            {
+                exitBiestroTrigger.SetActive(true);
+            }
+            else
+            {
+                exitBiestroTrigger.SetActive(false);
+            }
             player.GetComponent<PlayerMovement>().speed = 10;
             player.GetComponent<PlayerMovement>().sprintSpeed = 25;
             player.GetComponent<PlayerMovement>().currentStamina = player.GetComponent<PlayerMovement>().maxStamina;

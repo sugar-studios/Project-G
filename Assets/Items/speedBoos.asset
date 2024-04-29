@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 273cd1a503297e74e9bfb6318ff1e0ac, type: 3}
+  m_Name: speedBoos
+  m_EditorClassIdentifier: 
+  name: speed
+  description: speed
+  icon: {fileID: 2800000, guid: ecdfa3214ead4924ab0f71d6ad0466d9, type: 3}
+  model: {fileID: 7958860787811349573, guid: c58a835c3df6dab498c28fd7627449a3, type: 3}
+  usingItem: 0
+  reuseable: 0
+  itemUseMethod: useBoost

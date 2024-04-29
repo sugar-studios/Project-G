@@ -2,6 +2,7 @@ using ProjectG.Debugging;
 using ProjectG.Enemies;
 using ProjectG.Enemies.Enemy;
 using ProjectG.Enemies.Handler;
+using ProjectG.Manger;
 using ProjectG.Player;
 using ProjectG.UI;
 using System;
@@ -25,6 +26,62 @@ namespace ProjectG.Items
         public void useTest()
         {
             Debug.Log("use item");
+        }
+
+        public void useWatch()
+        { 
+            GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gm.PauseCountdown();
+        }
+
+        public void usePhone()
+        {
+            GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            gm.SendPlayerToBiestro();
+        }
+
+        public void useJump()
+        {
+            PlayerMovement move = GetComponent<PlayerMovement>();
+
+            move.jumpHeight += 2.5f;
+        }
+        public void useStamin()
+        {
+            PlayerMovement move = GetComponent<PlayerMovement>();
+
+            move.currentStamina += 25;
+            if (move.currentStamina > move.maxStamina)
+            {
+                move.currentStamina = move.maxStamina;
+            }
+        }
+
+        public void useBoost()
+        {
+            StartCoroutine(Boost(10));
+        }
+
+        private IEnumerator Boost(int time)
+        {
+            PlayerMovement move = GetComponent<PlayerMovement>();
+
+            if (move == null) yield break; // Exit if no PlayerMovement component is found
+
+            // Store original speeds
+            float originalSpeed = move.speed;
+            float originalSprintSpeed = move.sprintSpeed;
+
+            // Increase speed
+            move.speed *= 2.5f;
+            move.sprintSpeed *= 2.5f;
+
+            // Wait for 10 seconds
+            yield return new WaitForSeconds(time);
+
+            // Restore original speeds
+            move.speed = originalSpeed;
+            move.sprintSpeed = originalSprintSpeed;
         }
 
         public void panUse()
