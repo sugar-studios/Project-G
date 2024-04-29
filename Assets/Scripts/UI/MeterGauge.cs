@@ -84,6 +84,19 @@ namespace ProjectG.UI
                 birdAttackScript.gameObject.SetActive(true);
                 value = 0;
             }
+            else
+            {
+                birdAttackScript.gameObject.SetActive(false);
+                Wait(3f);
+            }
+        }
+
+
+
+        private IEnumerator Wait(float duration)
+        {
+            yield return new WaitForSeconds(duration);
+            turnOffAttack = false;
         }
 
         private IEnumerator FadeTo(RawImage image, Color targetColor, float duration)
