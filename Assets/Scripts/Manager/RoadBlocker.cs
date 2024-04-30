@@ -8,6 +8,8 @@ namespace ProjectG.Manger
     public class RoadBlocker : MonoBehaviour
     {
         public GameObject truck;
+        public Collider playerBox;
+
         public GameObject player;
         public GameObject explo;
         public GameObject explo2;
@@ -27,7 +29,7 @@ namespace ProjectG.Manger
             truck.SetActive(false);
             moveTruck = false;
             player.GetComponent<PlayerMovement>().enabled = true;
-            player.GetComponent<BoxCollider>().enabled = false;
+            playerBox.enabled = false;
         }
 
         // Update is called once per frame
@@ -48,8 +50,10 @@ namespace ProjectG.Manger
                 roadFire = true;
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
-                player.GetComponent<BoxCollider>().enabled = true;
+                playerBox.enabled = true;
                 player.AddComponent<Rigidbody>();
+                player.GetComponent<Rigidbody>().isKinematic = true;
+                player.GetComponent<Rigidbody>().useGravity = true;
                 moveTruck = true;
                 truck.SetActive(true);
                 roadFire = true;
