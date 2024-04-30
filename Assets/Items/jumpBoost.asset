@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: jumpBoost
   m_EditorClassIdentifier: 
   name: Jump Boost
-  description: Jump Boost
+  description: Makes you jump 50% higher!
   icon: {fileID: 2800000, guid: 435b7d87c72b9ac46a8fb68a84f608f8, type: 3}
   model: {fileID: 2323133169444575264, guid: 1ff48ffb54172b3418982d3e11292946, type: 3}
   usingItem: 0

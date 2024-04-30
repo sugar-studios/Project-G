@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273cd1a503297e74e9bfb6318ff1e0ac, type: 3}
   m_Name: phone
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Phone
+  description: Teleport back to biestro instantly
   icon: {fileID: 2800000, guid: d0899370a6edeb94c878325f1e714ec1, type: 3}
   model: {fileID: 0}
   usingItem: 0
   reuseable: 0
-  itemUseMethod: 
+  itemUseMethod: hmmm

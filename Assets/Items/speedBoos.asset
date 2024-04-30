@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: speedBoos
   m_EditorClassIdentifier: 
   name: speed
-  description: speed
+  description: Gas! Gas! Gas! Step on the gas tonight!
   icon: {fileID: 2800000, guid: ecdfa3214ead4924ab0f71d6ad0466d9, type: 3}
   model: {fileID: 7958860787811349573, guid: c58a835c3df6dab498c28fd7627449a3, type: 3}
   usingItem: 0
