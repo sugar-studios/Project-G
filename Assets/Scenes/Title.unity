@@ -3330,7 +3330,7 @@ MonoBehaviour:
   songs:
   - name: Normal Chase1
     clip: {fileID: 8300000, guid: 62a50895b8072c042b44a1f7d4c8a8fe, type: 3}
-    volume: 0.2
+    volume: 0.4
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3339,7 +3339,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase2
     clip: {fileID: 8300000, guid: e25d73a9e629c474b8394a095be44c18, type: 3}
-    volume: 0.2
+    volume: 0.4
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3348,7 +3348,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase3
     clip: {fileID: 8300000, guid: 9444e41513d238b46a698458e11dc645, type: 3}
-    volume: 0.1
+    volume: 0.25
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3357,7 +3357,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Normal Chase4
     clip: {fileID: 8300000, guid: 0cf3f89f7edcdaa4aa2bce885a0c4abd, type: 3}
-    volume: 0.1
+    volume: 0.25
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -3366,7 +3366,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Title
     clip: {fileID: 8300000, guid: 25bb396cbe109ee45b5a2cbf22e29187, type: 3}
-    volume: 0.2
+    volume: 0.5
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
