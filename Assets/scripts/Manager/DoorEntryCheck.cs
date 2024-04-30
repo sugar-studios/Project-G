@@ -16,6 +16,11 @@ namespace ProjectG.Manager
         public PlaySound pS;
         public MeterGauge mG;
 
+        private void Start()
+        {
+            mG.paused = false;
+        }
+
         public void yes()
         {
             float testVal = gM.value;

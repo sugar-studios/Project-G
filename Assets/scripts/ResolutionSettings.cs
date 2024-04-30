@@ -10,7 +10,7 @@ namespace ProjectG.Settings
         void Start()
         {
       
-            Screen.SetResolution(480, 270, true);
+            Screen.SetResolution(1920, 1080, true);
             int screenWidth = Screen.width;
             int screenHeight = Screen.height;
 

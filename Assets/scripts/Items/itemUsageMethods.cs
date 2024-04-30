@@ -70,6 +70,7 @@ namespace ProjectG.Items
 
         public void useBoost()
         {
+            Debug.Log("Boost");
             ps.sfx("Speed Up");
             StartCoroutine(Boost(10));
         }
@@ -81,6 +82,7 @@ namespace ProjectG.Items
 
         private IEnumerator Boost(int time)
         {
+            Debug.Log("Started courtine");
             PlayerMovement move = GetComponent<PlayerMovement>();
 
             if (move == null) yield break; // Exit if no PlayerMovement component is found
@@ -93,8 +95,12 @@ namespace ProjectG.Items
             move.speed *= 2.5f;
             move.sprintSpeed *= 2.5f;
 
+            Debug.Log("Boosted Speed");
+
             // Wait for 10 seconds
             yield return new WaitForSeconds(time);
+
+            Debug.Log("End Speed boost");
 
             // Restore original speeds
             move.speed = originalSpeed;

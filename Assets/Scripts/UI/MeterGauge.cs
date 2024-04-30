@@ -36,6 +36,7 @@ namespace ProjectG.UI
                 Debug.LogError("BirdAttack script reference is not assigned in MeterGauge script.");
                 return; // Exit if birdAttackScript is not assigned
             }
+            value = 0;
 
             StartCoroutine(AnimateMeterAndPulse());
         }

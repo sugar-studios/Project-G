@@ -152,6 +152,8 @@ namespace ProjectG.Manger
             {
                 sound.sfx("Exit B");
                 HandleExitBiestro();
+                birdMeter.paused = false;
+                birdMeter.value = 0f;
             }
             else if (triggerName.StartsWith("returnPoint"))
             {

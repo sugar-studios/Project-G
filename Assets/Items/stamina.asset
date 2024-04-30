@@ -16,6 +16,6 @@ MonoBehaviour:
   description: instanly refill stamina
   icon: {fileID: 2800000, guid: 5b3ec0894c91a124aad03d471c2d39ea, type: 3}
   model: {fileID: 4966471885759698497, guid: 5cb2a0467177476419985fbb1654f80d, type: 3}
-  usingItem: 0
+  usingItem: 1
   reuseable: 0
   itemUseMethod: useStamin

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 namespace ProjectG.Items
@@ -15,9 +16,12 @@ namespace ProjectG.Items
     {
         public RawImage[] slots = new RawImage[4];
         public Item[] playersItems;
+        public Item blankItem;
         public KeyCode[] slotCodes = new KeyCode[4];
         public int currentItemIndex;
         public GameObject itemRoot;
+        public PostProcessVolume ppv;
+        public ColorGrading ppvcg;
 
         public int numberOfItems;
         public NavMeshSurface surface;
@@ -34,6 +38,7 @@ namespace ProjectG.Items
         {
             currentItemIndex = 0;
             spawnItems();
+            //ppvcg.colorFilter = new Vector3(96f, 96f, 96f)
             updateIcons();
         }
         private void Awake()
@@ -94,11 +99,15 @@ namespace ProjectG.Items
                 if (playersItems[currentItemIndex].usingItem)
                 {
                     GetComponent<itemUsageMethods>().SendMessage(playersItems[currentItemIndex].itemUseMethod);
+                    Debug.Log(playersItems[currentItemIndex].itemUseMethod);
+
 
                     if (!playersItems[currentItemIndex].reuseable)
                     {
                         playersItems[currentItemIndex] = null;
+                        playersItems[currentItemIndex] = blankItem;
                         Destroy(itemRoot.transform.GetChild(0).gameObject);
+                        playersItems[currentItemIndex] = blankItem;
                     }
                     updateIcons();
                 }
@@ -132,7 +141,7 @@ namespace ProjectG.Items
             {
                 Destroy(itemRoot.transform.GetChild(0).gameObject);
             }
-
+            Debug.Log(playersItems[currentItemIndex]);
             if (playersItems[currentItemIndex] != null)
             {
                 if (playersItems[currentItemIndex].model != null)

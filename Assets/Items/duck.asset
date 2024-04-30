@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Does nothing
   icon: {fileID: 2800000, guid: 09f01055ae8d146418957d689743c30b, type: 3}
   model: {fileID: 171116, guid: b14d7bef84ea0fb439c89e9a1cf273e9, type: 3}
-  usingItem: 0
+  usingItem: 1
   reuseable: 1
   itemUseMethod: useDuck
