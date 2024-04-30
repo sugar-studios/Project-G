@@ -18,4 +18,4 @@ MonoBehaviour:
   model: {fileID: 171116, guid: b14d7bef84ea0fb439c89e9a1cf273e9, type: 3}
   usingItem: 0
   reuseable: 1
-  itemUseMethod: 
+  itemUseMethod: useDuck

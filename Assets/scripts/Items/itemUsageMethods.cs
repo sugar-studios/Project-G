@@ -1,3 +1,4 @@
+using ProjectG.Audio;
 using ProjectG.Debugging;
 using ProjectG.Enemies;
 using ProjectG.Enemies.Enemy;
@@ -22,6 +23,13 @@ namespace ProjectG.Items
         public Transform cam;
         public GameObject hitmarker;
 
+        PlaySound ps;
+
+        private void Start()
+        {
+            ps = GetComponent<PlaySound>();
+        }
+
 
         public void useTest()
         {
@@ -31,7 +39,9 @@ namespace ProjectG.Items
         public void useWatch()
         { 
             GameManager gm = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+            ps.sfx("Stop Time");
             gm.PauseCountdown();
+            
         }
 
         public void usePhone()
@@ -43,11 +53,12 @@ namespace ProjectG.Items
         public void useJump()
         {
             PlayerMovement move = GetComponent<PlayerMovement>();
-
+            ps.sfx("Jump");
             move.jumpHeight += 2.5f;
         }
         public void useStamin()
         {
+            ps.sfx("Stamin");
             PlayerMovement move = GetComponent<PlayerMovement>();
 
             move.currentStamina += 25;
@@ -59,7 +70,13 @@ namespace ProjectG.Items
 
         public void useBoost()
         {
+            ps.sfx("Speed Up");
             StartCoroutine(Boost(10));
+        }
+
+        public void useDuck()
+        {
+            ps.sfx("duck");
         }
 
         private IEnumerator Boost(int time)
@@ -87,6 +104,7 @@ namespace ProjectG.Items
         public void panUse()
         {
             Debug.Log("used pan");
+            ps.sfx("Pan");
             PlayerStatesTester.PlayerNoiseRadius += 100;
 
             FindFirstObjectByType<SpawnHandler>().checkNearby();
@@ -101,6 +119,7 @@ namespace ProjectG.Items
 
         public void regenHealth()
         {
+            ps.sfx("Heal");
             PlayerMovement move = GetComponent<PlayerMovement>();
 
             move.playerHealth = Mathf.Clamp(move.playerHealth + 20, -1, 100);
@@ -112,6 +131,7 @@ namespace ProjectG.Items
         {
             if (ableToShoot)
             {
+                ps.sfx("Nerf Shot");
                 Debug.Log("nerf or nothing");
 
                 RaycastHit hit;
@@ -119,6 +139,7 @@ namespace ProjectG.Items
                 if (Physics.Raycast(cam.position, cam.forward, out hit, 70f, enemy))
                 {
                     Debug.Log("hit enemy");
+                    ps.sfx("Nerf");
                     hitmarker.SetActive(true);
                     hit.transform.GetComponent<NavMeshAgent>().speed -= 3;
                     hit.transform.GetComponent<EnemyMovement>().stunned = true;

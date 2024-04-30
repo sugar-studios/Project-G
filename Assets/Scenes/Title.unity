@@ -3365,7 +3365,7 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: Title
-    clip: {fileID: 8300000, guid: 4f9b25f74d6b57a4a8fd9fd375e5f431, type: 3}
+    clip: {fileID: 8300000, guid: 25bb396cbe109ee45b5a2cbf22e29187, type: 3}
     volume: 0.2
     volumeVariance: 0
     pitch: 1
@@ -3374,7 +3374,7 @@ MonoBehaviour:
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
   - name: Results
-    clip: {fileID: 8300000, guid: 97c57502ee476c24a9fbc3252dda1e6c, type: 3}
+    clip: {fileID: 8300000, guid: 679dd837c86e6d64a913255cfa59ac79, type: 3}
     volume: 0.2
     volumeVariance: 0
     pitch: 0.95
@@ -3574,6 +3574,87 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Error
     clip: {fileID: 8300000, guid: 02ba0e4a047cec24192dcf097114ffe3, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Speed Up
+    clip: {fileID: 8300000, guid: ad96031ba04c7f94db012fad3b0d0a0b, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 3bcc3a0b0b6555b49833122ca0ffa29c, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Heal
+    clip: {fileID: 8300000, guid: a8e412dfc46026445aff2f4c78bf1fc9, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Stamin
+    clip: {fileID: 8300000, guid: 11ab50871ef402a4eae121bf138ab190, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Stop Time
+    clip: {fileID: 8300000, guid: 4f4f9db84266e4e44ac6527f626362b0, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Nerf
+    clip: {fileID: 8300000, guid: 5d4b1e1e7c849934e8174516e573fecb, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Pan
+    clip: {fileID: 8300000, guid: 98842e2cf53fc314b8669e58429caaa3, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Nerf Shot
+    clip: {fileID: 8300000, guid: 3efd8d2cb5e62064dbfd80e91e97d3a2, type: 3}
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: duck
+    clip: {fileID: 8300000, guid: 17d882b5d2793ce498773c5183517e56, type: 3}
     volume: 1
     volumeVariance: 0
     pitch: 1
