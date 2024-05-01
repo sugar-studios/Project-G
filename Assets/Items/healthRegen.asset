@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273cd1a503297e74e9bfb6318ff1e0ac, type: 3}
   m_Name: healthRegen
   m_EditorClassIdentifier: 
-  name: healthRegen
+  name: health regen
   description: regenerate 10% health
   icon: {fileID: 2800000, guid: dec51002ae2a07b4b918d849669d84e0, type: 3}
   model: {fileID: 3966544290371830766, guid: a97c11d5b41f6b540ac5a8dc330d0a93, type: 3}
   usingItem: 1
+  reuseable: 0
   itemUseMethod: regenHealth

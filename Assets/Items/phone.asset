@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Phone
   description: Teleport back to biestro instantly
   icon: {fileID: 2800000, guid: d0899370a6edeb94c878325f1e714ec1, type: 3}
-  model: {fileID: 0}
+  model: {fileID: 8375759347866056144, guid: 8e0cf99a421e8ec40941e59099221e79, type: 3}
   usingItem: 0
   reuseable: 0
   itemUseMethod: hmmm
