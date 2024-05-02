@@ -148,7 +148,23 @@ namespace ProjectG.Results
 
         public void LoadLevel(string scene)
         {
-            resultsScreen.SetActive(false);
+            try
+            {
+                resultsScreen.SetActive(false);
+            }
+            catch {
+                try
+                {
+                    for (int i = 0; i < Screens.Length; i++)
+                    {
+                        Screens[i].SetActive(false);
+                    }
+                }
+                catch 
+                {
+                    Debug.LogWarning("This is not good");
+                }
+            }
             loadingScreen.SetActive(true);
             StartCoroutine(LoadAsync(scene));
         }
