@@ -44,6 +44,7 @@ namespace ProjectG.UI
 
         public void UpdateDesc(string txt)
         {
+            ClearModel();
             desc.text = txt;
         }
 
