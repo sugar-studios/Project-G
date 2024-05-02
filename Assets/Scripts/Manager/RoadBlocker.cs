@@ -51,8 +51,11 @@ namespace ProjectG.Manger
                 player.GetComponent<PlayerMovement>().enabled = false;
                 player.transform.GetChild(0).GetChild(1).GetComponent<Animator>().enabled = false;
                 playerBox.enabled = true;
-                player.AddComponent<Rigidbody>();
-                player.GetComponent<Rigidbody>().isKinematic = true;
+                if ( player.GetComponent<Rigidbody>() == null)
+                { 
+                    player.AddComponent<Rigidbody>();
+                }
+                player.GetComponent<Rigidbody>().isKinematic = false;
                 player.GetComponent<Rigidbody>().useGravity = true;
                 moveTruck = true;
                 truck.SetActive(true);
