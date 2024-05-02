@@ -15,6 +15,7 @@ namespace ProjectG.Audio
 
         public static AudioManager instance;
 
+        private Dictionary<string, float> songPositions = new Dictionary<string, float>();
         private List<AudioSource> activeAudioSources = new List<AudioSource>();
 
         void Awake()
@@ -29,7 +30,6 @@ namespace ProjectG.Audio
                 DontDestroyOnLoad(gameObject);
             }
 
-            // Create AudioSource components for songs
             foreach (Sound s in songs)
             {
                 s.source = gameObject.AddComponent<AudioSource>();
@@ -37,9 +37,9 @@ namespace ProjectG.Audio
                 s.source.loop = s.loop;
                 s.source.volume = s.volume;
                 s.source.outputAudioMixerGroup = mixerGroup;
+                songPositions[s.name] = 0f;  // Initialize song position tracking
             }
 
-            // Create AudioSource components for sounds
             foreach (Sound s in sounds)
             {
                 s.source = gameObject.AddComponent<AudioSource>();
@@ -61,22 +61,23 @@ namespace ProjectG.Audio
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-
-        // Method to handle scene loaded event
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             StopAllSounds();
-            if (scene.name == "Game Scene")
+            switch (scene.name)
             {
-                GameSceneMusic();
-            }
-            else if (scene.name == "Title")
-            {
-                TitleMusic();
-            }
-            if (scene.name == "Results")
-            {
-                ResultMusic();
+                case "Game Scene":
+                    GameSceneMusic();
+                    break;
+                case "Title":
+                    TitleMusic();
+                    break;
+                case "Results":
+                    ResultMusic();
+                    break;
+                case "Leaderboard":
+                    LeaderMusic();
+                    break;
             }
         }
 
@@ -85,10 +86,8 @@ namespace ProjectG.Audio
             SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
-
         public void Play(string sound)
         {
-            // Check if the sound is in the songs array
             Sound song = Array.Find(songs, item => item.name == sound);
             if (song != null)
             {
@@ -96,7 +95,6 @@ namespace ProjectG.Audio
                 return;
             }
 
-            // Check if the sound is in the sounds array
             Sound sfx = Array.Find(sounds, item => item.name == sound);
             if (sfx != null)
             {
@@ -104,55 +102,31 @@ namespace ProjectG.Audio
                 return;
             }
 
-            // Log that the sound doesn't exist
             Debug.LogWarning("Sound: " + sound + " doesn't exist!");
         }
 
         private void PlaySong(Sound song)
         {
-            
-            // Your existing code for playing a song
-            if (settings == null)
-            {
-                Debug.Log("true");
-                song.source.volume = song.volume;
-            }
-            else
-            {
-                Debug.Log("false");
-                song.source.volume = song.volume * settings.volume;
-            }
-
+            song.source.volume = settings == null ? song.volume : song.volume * settings.volume;
             song.source.pitch = 1;
 
+            // Check if there's a saved position for this song
+            if (songPositions.ContainsKey(song.name) && songPositions[song.name] > 0f)
+            {
+                song.source.time = songPositions[song.name];
+            }
 
             song.source.Play();
-
-            // Add the audio source to the list of active audio sources
             activeAudioSources.Add(song.source);
         }
 
         private void PlaySound(Sound sound)
         {
-            if (settings == null)
-            {
-                sound.source.volume = sound.source.volume;
-            }
-            else
-            {
-                sound.source.volume *= settings.volume;
-            }
-
+            sound.source.volume = settings == null ? sound.volume : sound.volume * settings.volume;
             sound.source.pitch = sound.pitch * (1f + UnityEngine.Random.Range(-sound.pitchVariance / 2f, sound.pitchVariance / 2f));
-
-          
             sound.source.Play();
-
-            // Add the audio source to the list of active audio sources
             activeAudioSources.Add(sound.source);
         }
-
-
 
         public void StopAllSounds()
         {
@@ -160,15 +134,18 @@ namespace ProjectG.Audio
             {
                 if (audioSource.isPlaying)
                 {
+                    // Save the current position of the song before stopping
+                    Sound song = Array.Find(songs, item => item.source == audioSource);
+                    if (song != null)
+                    {
+                        songPositions[song.name] = audioSource.time;
+                    }
                     audioSource.Stop();
                 }
             }
-
-            // Clear the list of active audio sources
             activeAudioSources.Clear();
         }
 
-        // Method to log every playing sound
         public void LogActiveSounds()
         {
             Debug.Log("Active Sounds:");
@@ -178,27 +155,22 @@ namespace ProjectG.Audio
             }
         }
 
-        // Method to update volume of active audio sources dynamically
         public void UpdateActiveAudioVolume()
         {
             foreach (AudioSource audioSource in activeAudioSources)
             {
                 if (settings != null)
                 {
-                    // Find the corresponding Sound object for the audioSource
                     Sound sound = Array.Find(sounds, item => item.source == audioSource);
                     if (sound != null)
                     {
-                        // Update the volume of the audio source based on settings.volume and sound.volume
                         audioSource.volume = sound.volume * settings.volume;
                     }
                     else
                     {
-                        // If not found in sounds, try to find it in songs
                         Sound song = Array.Find(songs, item => item.source == audioSource);
                         if (song != null)
                         {
-                            // Update the volume of the audio source based on settings.volume and song.volume
                             audioSource.volume = song.volume * settings.volume;
                         }
                     }
@@ -206,52 +178,24 @@ namespace ProjectG.Audio
             }
         }
 
-
-        private void Update()
+        void Update()
         {
             UpdateActiveAudioVolume();
         }
 
-
-
         void GameSceneMusic()
         {
-            if (settings != null)
+            if (settings != null && !string.IsNullOrEmpty(settings.perferredSong))
             {
-                if (settings.perferredSong == "")
+                int index = Array.FindIndex(songs, item => item.name == settings.perferredSong);
+                if (index != -1)
                 {
-                    Sound[] normalSongs = new Sound[4];
-                    int normIndex = 0;
-                    for (int i = 0; i < songs.Length; i++)
-                    {
-                        if (songs[i].name == "Normal Chase1" || songs[i].name == "Normal Chase2" || songs[i].name == "Normal Chase3" || songs[i].name == "Normal Chase4")
-                        {
-                            normalSongs[normIndex] = songs[i];
-                            normIndex++;
-                        }
-                    }
-                    Play(normalSongs[UnityEngine.Random.Range(0, normalSongs.Length)].name);
-                    
-                }
-                else
-                {
-                    int index = 0;
-                    for (int i = 0; i < songs.Length; i++)
-                    {
-                        if (songs[i].name == settings.perferredSong)
-                        {
-                            Debug.Log(i);
-                            Debug.Log(index);
-                            index = i;
-                        }
-                    }
                     Play(songs[index].name);
                 }
             }
             else
             {
-                Play(songs[0].name);
-
+                Play(songs[UnityEngine.Random.Range(0, songs.Length)].name);
             }
         }
 
@@ -260,6 +204,10 @@ namespace ProjectG.Audio
             Play("Title");
         }
 
+        private void LeaderMusic()
+        {
+            Play("Leaderboard");
+        }
 
         private void ResultMusic()
         {

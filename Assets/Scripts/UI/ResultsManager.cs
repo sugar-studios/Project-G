@@ -25,6 +25,8 @@ namespace ProjectG.Results
         public GameObject resultsScreen;
         public GameObject loadingScreen;
 
+        private AudioManager audioManager;
+
         public GameObject[] Screens;
 
         public Slider progressBar;
@@ -48,6 +50,13 @@ namespace ProjectG.Results
             {
                 resultsData = null;
                 Debug.Log("ERROR: missing resultsData");
+            }
+            try
+            {
+                audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+            }
+            catch {
+                Debug.Log("no audio manager");
             }
             try
             {
@@ -172,6 +181,7 @@ namespace ProjectG.Results
         IEnumerator LoadAsync(string sceneName)
         {
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
 
             while (!operation.isDone)
             {
