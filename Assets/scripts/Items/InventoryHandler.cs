@@ -44,6 +44,7 @@ namespace ProjectG.Items
         private void Awake()
         {
             updateIcons();
+            SetupHolder();
 
         }
 
@@ -61,8 +62,15 @@ namespace ProjectG.Items
         {
             if (other.tag == "Item")
             {
-                recievedItem(other.GetComponent<itemPickupContainer>().item);
-                Destroy(other.gameObject);
+                Debug.Log(other.transform.parent.name);
+                Debug.Log(itemRoot.name);
+
+                if (other.transform.parent.name != itemRoot.name)
+                {
+
+                    recievedItem(other.GetComponent<itemPickupContainer>().item);
+                    Destroy(other.gameObject);
+                }
             }
             //Debug.Log(other.name + other.tag);
         }
@@ -106,7 +114,10 @@ namespace ProjectG.Items
                     {
                         playersItems[currentItemIndex] = null;
                         playersItems[currentItemIndex] = blankItem;
-                        Destroy(itemRoot.transform.GetChild(0).gameObject);
+
+                        Debug.Log($"destroyed 2: {itemRoot.transform.GetChild(0).name}");
+                        //Destroy(itemRoot.transform.GetChild(0).gameObject);
+                        turnOffAll();
                         playersItems[currentItemIndex] = blankItem;
                     }
                     updateIcons();
@@ -133,21 +144,67 @@ namespace ProjectG.Items
         {
             playersItems[currentItemIndex] = item;
             updateIcons();
+            updateObject();
         }
 
         public void updateObject()
         {
-            if (itemRoot.transform.childCount > 0)
+            /*
+            if (itemRoot.transform.childCount == 1)
             {
+                Debug.Log($"destroyed: {itemRoot.transform.GetChild(0).name}");
+
                 Destroy(itemRoot.transform.GetChild(0).gameObject);
             }
-            Debug.Log(playersItems[currentItemIndex]);
+            //Debug.Log(playersItems[currentItemIndex]);
             if (playersItems[currentItemIndex] != null)
             {
-                if (playersItems[currentItemIndex].model != null)
+                if (playersItems[currentItemIndex].model != null && itemRoot.transform.childCount != 1)
                 {
+                    Debug.Log("BOOOOM   NEW MODEL");
                     Instantiate(playersItems[currentItemIndex].model, itemRoot.transform);
                 }
+            }*/
+
+            for (int i = 0; i < itemRoot.transform.childCount; i++)
+            {
+
+                if (itemRoot.transform.GetChild(i).GetComponent<itemPickupContainer>().item.name == playersItems[currentItemIndex].name)
+                {
+                    itemRoot.transform.GetChild(i).gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    itemRoot.transform.GetChild(i).gameObject.SetActive(false);
+
+                }
+            }
+
+
+        }
+
+        public void SetupHolder()
+        {
+            for(int i = 0; allItems.Length > i; i++)
+            {
+                if (allItems[i] != null)
+                {
+                    Instantiate(allItems[i].model, itemRoot.transform);
+                }
+                else
+                {
+                    Instantiate(blankItem.model, itemRoot.transform);
+                }
+            }
+
+            turnOffAll();
+        }
+        public void turnOffAll()
+        {
+            for (int i = 0; i < itemRoot.transform.childCount; i++)
+            {
+                itemRoot.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
 
