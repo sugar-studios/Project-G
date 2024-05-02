@@ -32,6 +32,7 @@ namespace ProjectG.Player
 
         public float currentStamina;
         public float maxStamina = 100f;
+        public Animator playerAnimator;
         private float staminaDepletionRate = 10f;
         private float staminaRegainRate = 5f;
         private float staminaRegainDelay = 1.5f;
@@ -45,6 +46,7 @@ namespace ProjectG.Player
         private bool isCrouching;
         private Vector3 standingScale;
         private float moveSpeed;
+        private Vector3 PlayerVelocity;
 
         private bool isSpeedReduced = false;
         private float speedReductionDuration = 2f;
@@ -64,6 +66,9 @@ namespace ProjectG.Player
 
         private void Update()
         {
+            playerAnimator.SetFloat("velocityX", PlayerVelocity.x);
+            playerAnimator.SetFloat("velocityY", PlayerVelocity.z);
+
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask) || controller.isGrounded;
 
             if (isGrounded && playerVelocity.y < 0)
@@ -161,8 +166,31 @@ namespace ProjectG.Player
                 playerVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
                 shouldJump = false;
             }
+            animatePlayer();
 
             ApplyGravity();
+        }
+
+        public void animatePlayer()
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + gameCamera.eulerAngles.y;
+
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                
+                PlayerVelocity = moveDir * moveSpeed;
+
+            }
+            else
+            {
+                PlayerVelocity = Vector3.zero;
+            }
+
         }
 
         void Move()
@@ -179,6 +207,7 @@ namespace ProjectG.Player
 
                 Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+
             }
             playerVelo = Mathf.Sqrt(Mathf.Pow(horizontal, 2) + Mathf.Pow(vertical, 2)) * moveSpeed;
 

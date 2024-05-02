@@ -74,6 +74,7 @@ namespace ProjectG.Enemies.Enemy
                     attackPlayer();
                     PlayerDetection.player.GetComponent<PlayerMovement>().playerHealth -= 5;
                     PlayerDetection.player.GetComponent<PlayerMovement>().updateHealth();
+                    PlayerDetection.player.GetComponent<PlayerMovement>().playerAnimator.SetTrigger("hurt");
                     if (aM != null)
                     {
                         aM.Play("Player Hit");
