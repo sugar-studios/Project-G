@@ -16,7 +16,8 @@ namespace ProjectG.Manager
         [SerializeField]
         private List<TextMeshProUGUI> scores;
 
-        private string publicLeaderboardKey = "946043153a2542a3cba68c5a76d59069e4dea542370ba7e21175ae677a1192e2";
+        private string publicLeaderboardKey = //"946043153a2542a3cba68c5a76d59069e4dea542370ba7e21175ae677a1192e2";
+                                              "40ae65e747285251ce9d29d8635c70a7504fdc74cd748879bbb34b5d5f49787d";
         string[] prohibitedWords;
         private bool updated = false;
 
@@ -33,6 +34,35 @@ namespace ProjectG.Manager
                 instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+
+            GetEntries();
+        }
+
+
+        [ContextMenu("Get Entries")]
+        public void GetEntries()
+        {
+            GameObject entries = GameObject.FindGameObjectWithTag("Entries");
+            if (entries != null)
+            {
+                // Clear the lists to avoid duplicating entries if called multiple times.
+                names.Clear();
+                scores.Clear();
+
+                int childCount = entries.transform.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Transform entryTransform = entries.transform.GetChild(i);
+                    TextMeshProUGUI nameText = entryTransform.GetChild(1).GetComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI scoreText = entryTransform.GetChild(2).GetComponent<TextMeshProUGUI>();
+
+                    if (nameText != null && scoreText != null)
+                    {
+                        names.Add(nameText);
+                        scores.Add(scoreText);
+                    }
+                }
+            }
         }
 
         public void GetLeaderboard()
@@ -41,13 +71,21 @@ namespace ProjectG.Manager
 
             Debug.Log("Go");
             LeaderboardCreator.GetLeaderboard(publicLeaderboardKey, (msg) => 
-            { 
+            {
+                GetEntries();
                 Debug.Log("Going");
                 int loopLength = (msg.Length < 9) ? msg.Length : 9;
                 for (int i = 0; i < loopLength; i++)
                 {
-                    names[i].text = msg[i].Username;
-                    scores[i].text = msg[i].Score.ToString();
+                    try
+                    {
+                        names[i].text = msg[i].Username;
+                    } catch { Debug.Log("No name"); }
+                    try
+                    {
+                        scores[i].text = msg[i].Score.ToString();
+                    }
+                    catch { Debug.Log("No score"); }
                 }
             });
             Debug.Log("Got!");
@@ -75,11 +113,8 @@ namespace ProjectG.Manager
             LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score,
                 ((msg) => 
                 {
-                    //Debug.Log("logging...");
-                    //if (System.Array.IndexOf(prohibitedWords, name) != -1) return;
-                    //username.Substring(0, 12);
-                    //Debug.Log("Logged");
-                    //GetLeaderboard();
+                    Debug.Log("SHABLAMMO");
+                    GetLeaderboard();
                 }));
         }
 

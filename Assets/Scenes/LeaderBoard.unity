@@ -3764,7 +3764,11 @@ MonoBehaviour:
   burgerTitle: {fileID: 0}
   resultsBackground: {fileID: 0}
   burgerButtons: {fileID: 0}
+  userName: {fileID: 0}
   resultsData: {fileID: 0}
+  submitScoreEvent:
+    m_PersistentCalls:
+      m_Calls: []
   resultsScreen: {fileID: 0}
   loadingScreen: {fileID: 683632195}
   Screens:
@@ -3772,6 +3776,7 @@ MonoBehaviour:
   - {fileID: 683632195}
   progressBar: {fileID: 538068435}
   rotSpeed: 30
+  scored: 0
 --- !u!4 &1103081163
 Transform:
   m_ObjectHideFlags: 0
@@ -3895,7 +3900,7 @@ GameObject:
   - component: {fileID: 1123105600}
   m_Layer: 5
   m_Name: Entries
-  m_TagString: Untagged
+  m_TagString: Entries
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5444,28 +5449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5de235a13e3191e4ebcb5f55851bb294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  names:
-  - {fileID: 393287048}
-  - {fileID: 178368371}
-  - {fileID: 704669932}
-  - {fileID: 1960414238}
-  - {fileID: 1956394886}
-  - {fileID: 591945214}
-  - {fileID: 1097189856}
-  - {fileID: 809510539}
-  - {fileID: 2142377012}
-  - {fileID: 1355914626}
-  scores:
-  - {fileID: 1864682263}
-  - {fileID: 592434380}
-  - {fileID: 302104540}
-  - {fileID: 1642903476}
-  - {fileID: 366620544}
-  - {fileID: 1284261516}
-  - {fileID: 1889590575}
-  - {fileID: 1606204106}
-  - {fileID: 601075799}
-  - {fileID: 1171147230}
+  names: []
+  scores: []
 --- !u!4 &1645523771
 Transform:
   m_ObjectHideFlags: 0

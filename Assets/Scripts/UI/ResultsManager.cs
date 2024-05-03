@@ -37,7 +37,7 @@ namespace ProjectG.Results
         public Slider progressBar;
 
         public int rotSpeed = 30;
-        int score = 0;
+        public int score = 0;
         [SerializeField]
         bool scored;
 
@@ -49,19 +49,6 @@ namespace ProjectG.Results
             scored = false;
         }
 
-        public void SubmitScore()
-        {
-            Debug.Log("clicked");
-            if ( score > 0) {
-                Debug.Log("Passed!");
-                    Debug.Log(GameObject.FindGameObjectWithTag("LeaderboardManager"));
-                    Debug.Log(GameObject.FindGameObjectWithTag("LeaderboardManager").GetComponent<Leaderboard>());
-                    lM = GameObject.FindGameObjectWithTag("LeaderboardManager").GetComponent<Leaderboard>();
-                Debug.Log(lM);
-                Debug.Log("text:" +  userName.text);
-                    lM.SetLeaderboardEntry(userName.text, 25);
-            }
-        }
 
         void InitializeUI()
         {
