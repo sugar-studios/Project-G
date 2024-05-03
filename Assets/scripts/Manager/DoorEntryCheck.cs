@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using ProjectG.Audio;
 using ProjectG.Manger;
 using ProjectG.Player;
@@ -59,6 +60,10 @@ namespace ProjectG.Manager
 
         private void OnEnable()
         {
+            //if (gM.isInBiestro) 
+            //{ 
+               // gameObject.SetActive(false );
+            //}
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

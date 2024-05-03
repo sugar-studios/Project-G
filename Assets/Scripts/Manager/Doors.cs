@@ -17,9 +17,11 @@ namespace ProjectG.Manager
 
         private void OnTriggerEnter(Collider other)
         {
-            DECobj.SetActive(true);
+            Debug.Log(this.gameObject.name + " " + other.gameObject.name);
             if (other.CompareTag("Player") && !tempDisable)
             {
+                Debug.Log("collide");
+                DECobj.SetActive(true);
                 isPlayerInTrigger = true;
                 StartCoroutine(HandleDoorEntry(other));
             }
@@ -29,16 +31,11 @@ namespace ProjectG.Manager
         {
             if (other.CompareTag("Player") && tempDisable)
             {
+                Debug.Log(this.gameObject.name + " Leave");
                 isPlayerInTrigger = false;
                 DECobj.SetActive(false);
                 DEC.Enter = '0';
                 StartCoroutine(HandleDoorDisable());
-            }
-            else
-            {
-                isPlayerInTrigger = false;
-                DECobj.SetActive(false);
-                DEC.Enter = '0';
             }
         }
 
