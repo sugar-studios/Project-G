@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using ProjectG.UI;
+using ProjectG.Manager;
 using ProjectG.Audio;
 using TMPro;
+using UnityEngine.Events;
 
 namespace ProjectG.Results
 {
@@ -19,6 +21,8 @@ namespace ProjectG.Results
         public GameObject resultsBackground;
         public GameObject burgerButtons;
 
+        public TMP_InputField userName;
+
         public resultsData resultsData;
         bool menu = false;
 
@@ -26,18 +30,37 @@ namespace ProjectG.Results
         public GameObject loadingScreen;
 
         private AudioManager audioManager;
+        private Leaderboard lM;
 
         public GameObject[] Screens;
 
         public Slider progressBar;
 
         public int rotSpeed = 30;
+        int score = 0;
+        [SerializeField]
+        bool scored;
 
         // Start is called before the first frame update
         void Start()
         {
             InitializeUI();
             CalculateRank();
+            scored = false;
+        }
+
+        public void SubmitScore()
+        {
+            Debug.Log("clicked");
+            if ( score > 0) {
+                Debug.Log("Passed!");
+                    Debug.Log(GameObject.FindGameObjectWithTag("LeaderboardManager"));
+                    Debug.Log(GameObject.FindGameObjectWithTag("LeaderboardManager").GetComponent<Leaderboard>());
+                    lM = GameObject.FindGameObjectWithTag("LeaderboardManager").GetComponent<Leaderboard>();
+                Debug.Log(lM);
+                Debug.Log("text:" +  userName.text);
+                    lM.SetLeaderboardEntry(userName.text, 25);
+            }
         }
 
         void InitializeUI()
@@ -97,7 +120,7 @@ namespace ProjectG.Results
                 int healthLeft = (int)resultsData.health;
 
                 // Calculate a score based on meals delivered, total tip, and health left
-                int score = mealsDelivered * 10 + totalTip + healthLeft;
+                score = mealsDelivered * 10 + totalTip + healthLeft;
 
                 // Determine rank based on the score
                 string rankText;
@@ -144,7 +167,7 @@ namespace ProjectG.Results
 
                 // Set the rank text to the UI element
                 rank.text = rankText;
-
+                scored = true;
             }
         }
 

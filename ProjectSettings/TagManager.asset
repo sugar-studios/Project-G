@@ -15,6 +15,7 @@ TagManager:
   - Item
   - PlayerNoise
   - GameManager
+  - LeaderboardManager
   layers:
   - Default
   - TransparentFX
