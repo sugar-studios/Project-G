@@ -75,9 +75,6 @@ namespace ProjectG.Audio
                 case "Results":
                     ResultMusic();
                     break;
-                case "Leaderboard":
-                    LeaderMusic();
-                    break;
             }
         }
 
@@ -202,11 +199,6 @@ namespace ProjectG.Audio
         private void TitleMusic()
         {
             Play("Title");
-        }
-
-        private void LeaderMusic()
-        {
-            Play("Leaderboard");
         }
 
         private void ResultMusic()
